@@ -1,4 +1,4 @@
-# Ubiqity USG with KPN FTTH, IPTV and IPv6
+# Ubiquity USG with KPN FTTH, IPTV and IPv6
 This repo contains the files you need to succesfully configure the USG with KPN FTTH with IPTV and IPv6 enabled.
 
 1. Place config.gateway.json at the unifi controller (sites/default)
