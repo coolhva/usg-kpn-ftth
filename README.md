@@ -13,7 +13,7 @@ This repo contains the files you need to succesfully configure the USG with KPN 
 4. Place **dhcp6.sh** in */config/scripts/post-config.d/* via SCP
 5. Execute `chmod +x /config/scripts/post-config.d/dhcp6.sh` on the USG
 
-   IPv6 works natively in the USG, the problem with KPN is that the json nesting will go too deep (interface, vlan and pppoe) and the USG will hit a bug ([source](https://community.ubnt.com/t5/UniFi-Routing-Switching/Configuration-commit-errors-IPv6-PPPoE-invalid-prefix-ID-value/td-p/2461935)) when it tries to parse the json. To overcome this, after 2 minutes the USG will execute this script which will configure IPv6 on the PPPoE interface and will remove the task from the taskscheduler.
+   IPv6 works natively in the USG, the problem with KPN is that the json nesting will go to deep (interface, vlan and pppoe) and the USG will hit a bug ([source](https://community.ubnt.com/t5/UniFi-Routing-Switching/Configuration-commit-errors-IPv6-PPPoE-invalid-prefix-ID-value/td-p/2461935)) when it tries to parse the json. To overcome this, after 2 minutes the USG will execute this script which will configure IPv6 on the PPPoE interface and will remove the task from the taskscheduler.
 
 6. The lan network (and portfowarding if needed) needs to be configured in the Unifi controller
 7. Go to the USG in devices in the controller and force provisioning
