@@ -3,7 +3,7 @@ This repo contains the files you need to succesfully configure the USG with KPN 
 
 1. Place **config.gateway.json** at the unifi controller (*sites/default*) via SCP
 
- The config.gateway.json contains the main configuration with the different interfaces which are needed for internet (vlan 6) and IPTV (vlan 4). IPv4 is configured via PPPoE with the kpn/kpn username and password. KPN uses a TAG which is configured in the DSLAM to identify your connection and to give you your "permanent" public IPv4 address.
+   The config.gateway.json contains the main configuration with the different interfaces which are needed for internet (vlan 6) and IPTV (vlan 4). IPv4 is configured via PPPoE with the kpn/kpn username and password. KPN uses a TAG which is configured in the DSLAM to identify your connection and to give you your "permanent" public IPv4 address.
 
 2. Place **dhcp_exit_hook.sh** in */etc/dhcp3/dhclient-exit-hooks.d/* via SCP
 3. Execute `chmod +x /etc/dhcp3/dhclient-exit-hooks.d/dhcp_exit_hook.sh` on the USG
