@@ -18,13 +18,13 @@ This repo contains the files you need to succesfully configure the USG with KPN 
 6. The lan network (and portfowarding if needed) needs to be configured in the Unifi controller
 7. Go to the USG in devices in the controller and force provisioning
 
+Please note that you have to put the scripts back on the USG after you perform a firmware upgrade
+
 After provisioning please reboot the USG. After two minutes IPv6 will be enabled. This can be checked by executing `show interfaces` on the USG.
 
 The PPPOE interface has no "public" IPv6 address because it uses the link local IPv6 address to route traffic to KPN. To see the remote address execute the following command ([source](https://community.ubnt.com/t5/EdgeRouter/EdgeRouter-X-PPPoE-IPv6/td-p/1893221)):
 ```
 show interfaces pppoe pppoe2 log | match "IPV6|LL"
 ```
-
-Please note that you have to put the scripts back on the USG after you perform a firmware upgrade
 
 XS4ALL (a Dutch ISP which uses the KPN platform has more information regarding the technical details), more info can be found [here](https://www.xs4all.nl/service/diensten/internet/installeren/modem-instellen/hoe-kan-ik-een-ander-modem-dan-fritzbox-instellen.htm)
