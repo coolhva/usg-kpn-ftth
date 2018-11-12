@@ -25,4 +25,6 @@ The PPPOE interface has no "public" IPv6 address because it uses the link local 
 show interfaces pppoe pppoe2 log | match "IPV6|LL"
 ```
 
+Please note that you have to put the scripts back on the USG after you perform a firmware upgrade
+
 XS4ALL (a Dutch ISP which uses the KPN platform has more information regarding the technical details), more info can be found [here](https://www.xs4all.nl/service/diensten/internet/installeren/modem-instellen/hoe-kan-ik-een-ander-modem-dan-fritzbox-instellen.htm)
