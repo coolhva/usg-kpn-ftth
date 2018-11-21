@@ -54,13 +54,14 @@
                     "default-route-distance": "1",
                     "name-server": "no-update"
                 },
+                "description": "WAN",
                 "mtu": "1512",
                 "vif": {
                     "4": {
                         "address": [
                             "dhcp"
                         ],
-                        "description": "WAN",
+                        "description": "IPTV",
                         "dhcp-options": {
                             "client-option": [
                                 "send vendor-class-identifier &quot;IPTV_RG&quot;;",
@@ -76,7 +77,6 @@
                         "mtu": "1500"
                     },
                     "6": {
-                        "description": "WAN",
                         "mtu": "1508",
                         "firewall": {
                             "in": {
