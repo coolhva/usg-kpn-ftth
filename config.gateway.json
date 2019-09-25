@@ -7,6 +7,12 @@
                         "path": "/config/scripts/post-config.d/dhcp6.sh"
                     },
                     "interval": "2m"
+                },
+                "postprovisionroutes": {
+                	"executable": {
+                        "path": "/config/scripts/post-config.d/setroutes.sh"
+                    },
+                    "interval": "2m"
                 }
             }
         }
