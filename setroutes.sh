@@ -35,7 +35,7 @@ echo "$ROUTES" | base64 -d > /etc/dhcp3/dhclient-exit-hooks.d/routes
 chmod +x /etc/dhcp3/dhclient-exit-hooks.d/routes
 fi
 
-readonly logFile="/var/log/postprovisioniroutes.log"
+readonly logFile="/var/log/postprovisionroutes.log"
 
 source /opt/vyatta/etc/functions/script-template
 
