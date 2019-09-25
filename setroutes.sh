@@ -33,6 +33,7 @@ EndOfFile
 
 echo "$ROUTES" | base64 -d > /etc/dhcp3/dhclient-exit-hooks.d/routes
 chmod +x /etc/dhcp3/dhclient-exit-hooks.d/routes
+renew dhcp interface eth0.4
 fi
 
 readonly logFile="/var/log/postprovisionroutes.log"
