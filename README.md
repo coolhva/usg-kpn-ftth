@@ -31,3 +31,7 @@ show interfaces pppoe pppoe2 log | match "IPV6|LL"
 ```
 
 XS4ALL (a Dutch ISP which uses the KPN platform has more information regarding the technical details), more info can be found [here](https://www.xs4all.nl/service/diensten/internet/installeren/modem-instellen/hoe-kan-ik-een-ander-modem-dan-fritzbox-instellen.htm)
+
+My unifi WAN settings in the controller are as follows:
+
+![unifiwan](https://raw.githubusercontent.com/coolhva/usg-kpn-ftth/master/unifi_wan.png)
