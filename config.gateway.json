@@ -233,14 +233,5 @@
             "wan": "pppoe2"
         }
 
-    },
-    "vpn": {
-        "ipsec": {
-            "ipsec-interfaces": {
-                "interface": [
-                    "pppoe2"
-                ]
-            }
-        }
     }
 }
