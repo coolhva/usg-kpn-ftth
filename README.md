@@ -34,8 +34,10 @@ XS4ALL (a Dutch ISP which uses the KPN platform has more information regarding t
 
 This config.gateway.json has been tested on the following versions:
 
+```
 UniFi Security Gateway 3P: 4.4.44.5213844
 Unifi Controller: 5.11.46 (Build: atag_5.11.46_12723)
+```
 
 My unifi WAN settings in the controller are as follows:
 
