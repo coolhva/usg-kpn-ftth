@@ -18,7 +18,7 @@ This repo contains the files you need to succesfully configure the USG with KPN 
 6. Place **setroutes.sh** in */config/scripts/post-config.d/* via SCP
 7. Execute `chmod +x /config/scripts/post-config.d/setroutes.sh` on the USG
 
-   After each firmware upgrade the routes file, used by the dhcp client at the exit hook (for the IPTV routes), is removed. To overcome this, after 2 minutes the USG will execute this script which will create the routes file, renews the DHCP lease, and remove the task from the taskscheduler.
+   After each firmware upgrade the routes file, used by the dhcp client at the exit hook (for the IPTV routes), is removed. To overcome this, after 2 minutes the USG will execute this script which will create the routes file, renews the DHCP lease, restart the IGMP Proxy and remove the task from the taskscheduler.
 
 8. The lan network (and portfowarding if needed) needs to be configured in the Unifi controller
 9. Go to the USG in devices in the controller and force provisioning
