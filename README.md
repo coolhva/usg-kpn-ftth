@@ -42,3 +42,9 @@ Unifi Controller: 5.11.46 (Build: atag_5.11.46_12723)
 My unifi WAN settings in the controller are as follows:
 
 ![unifiwan](https://raw.githubusercontent.com/coolhva/usg-kpn-ftth/master/unifi_wan.png)
+
+At GoT I explain a little bit more about the MTU and troubleshooting:
+
+Troubleshooting: https://gathering.tweakers.net/forum/list_message/60188896#60188896  
+MTU and IPv6 workaround: https://gathering.tweakers.net/forum/list_message/57023231#57023231
+
