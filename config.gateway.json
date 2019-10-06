@@ -1,237 +1,231 @@
 {
-    "system": {
-        "task-scheduler": {
-            "task": {
-                "postprovision": {
-                	"executable": {
-                        "path": "/config/scripts/post-config.d/dhcp6.sh"
-                    },
-                    "interval": "2m"
-                },
-                "postprovisionroutes": {
-                	"executable": {
-                        "path": "/config/scripts/post-config.d/setroutes.sh"
-                    },
-                    "interval": "2m"
-                }
-            }
-        }
-    },
-    "firewall": {
-        "ipv6-name": {
-            "WANv6_LOCAL" : {
-                "rule": {
-                    "1": {
-                        "action": "accept",
-                        "description": "Allow ICMPv6",
-                        "log": "enable",
-                        "protocol": "icmpv6"
-                    },
-                    "2": {
-                        "action": "accept",
-                        "description": "DHCPv6",
-                        "destination": {
-                                "port": "546"
-                        },
-                        "protocol": "udp",
-                        "source": {
-                                "port": "547"
-                        }
-                    }
-                }
-            },
-            "WANv6_IN" : {
-                "rule": {
-                    "1": {
-                            "action": "accept",
-                            "description": "Allow ICMPv6",
-                            "log": "enable",
-                            "protocol": "icmpv6"
-                    }
-                }
-            }
-        }
-    },
-    "interfaces": {
-        "ethernet": {
-            "eth0": {
-                "dhcp-options": {
-                    "default-route": "no-update",
-                    "default-route-distance": "1",
-                    "name-server": "no-update"
-                },
-                "description": "WAN",
-                "mtu": "1512",
-                "vif": {
-                    "4": {
-                        "address": [
-                            "dhcp"
-                        ],
-                        "description": "IPTV",
-                        "dhcp-options": {
-                            "client-option": [
-                                "send vendor-class-identifier &quot;IPTV_RG&quot;;",
-                                "request subnet-mask, routers, rfc3442-classless-static-routes;"
-                            ],
-                            "default-route": "no-update",
-                            "default-route-distance": "210",
-                            "name-server": "no-update"
-                        },
-                        "ip": {
-                            "source-validation": "loose"
-                        },
-                        "mtu": "1500"
-                    },
-                    "6": {
-                        "mtu": "1508",
-                        "firewall": {
-                            "in": {
-                                "ipv6-name": "WANv6_IN",
-                                "name": "WAN_IN"
-                            },
-                            "local": {
-                                "ipv6-name": "WANv6_LOCAL",
-                                "name": "WAN_LOCAL"
-                            },
-                            "out": {
-                                "ipv6-name": "WANv6_OUT",
-                                "name": "WAN_OUT"
-                            }
-                        },
-                        "pppoe": {
-                            "2": {
-                                "default-route": "auto",
-                                "firewall": {
-                                    "in": {
-                                        "ipv6-name": "WANv6_IN",
-                                        "name": "WAN_IN"
-                                    },
-                                    "local": {
-                                        "ipv6-name": "WANv6_LOCAL",
-                                        "name": "WAN_LOCAL"
-                                    },
-                                    "out": {
-                                        "ipv6-name": "WANv6_OUT",
-                                        "name": "WAN_OUT"
-                                    }
-                                },
-                                "ipv6": {
-                                    "address": {
-                                        "autoconf": "''"
-                                    },
-                                    "dup-addr-detect-transmits": "1",
-                                    "enable": "''"
-                                },
-                                "mtu": "1500",
-                                "name-server": "auto",
-                                "password": "kpn",
-                                "user-id": "kpn"
-                            }
-                        }
-                    }
-                }
-            },
-            "eth1": {
-                "description": "LAN",
-                "ipv6": {
-                    "address": {
-                        "autoconf": "''"
-                    },
-                    "dup-addr-detect-transmits": "1",
-                    "router-advert": {
-                        "cur-hop-limit": "64",
-                        "link-mtu": "0",
-                        "managed-flag": "true",
-                        "max-interval": "600",
-                        "name-server": [
-                        	"2606:4700:4700::1111",
-                        	"2606:4700:4700::1001"
-                        ],
-                        "other-config-flag": "false",
-                        "prefix": {
-                            "::/64": {
-                                "autonomous-flag": "true",
-                                "on-link-flag": "true",
-                                "valid-lifetime": "2592000"
-                            }
-                        },
-
-                        "radvd-options": "RDNSS 2606:4700:4700::1111 2606:4700:4700::1001 {};",
-                        "reachable-time": "0",
-                        "retrans-timer": "0",
-                        "send-advert": "true"
-                    }
-                }
-            }
-        }
-    },
-    "protocols": {
-        "igmp-proxy": {
-            "interface": {
-                "eth0.4": {
-                    "alt-subnet": [
-                        "0.0.0.0/0"
-                    ],
-                    "role": "upstream",
-                    "threshold": "1"
-                },
-                "eth1": {
-                    "alt-subnet": [
-                        "0.0.0.0/0"
-                    ],
-                    "role": "downstream",
-                    "threshold": "1"
-                }
-            }
-        },
-        "static": {
-            "interface-route6": {
-                "::/0": {
-                    "next-hop-interface": {
-                        "pppoe2": "''"
-                    }
-                }
-            }
-        }
-    },
-    "port-forward": {
-        "wan-interface": "pppoe2"
-    },
-
-    "service": {
-        "dns": {
-            "forwarding": {
-                "except-interface": [
-                    "pppoe2"
-                ]
-            }
-        },
-        "nat": {
-            "rule": {
-                "5000": {
-                    "description": "MASQ corporate_network to IPTV network",
-                    "destination": {
-                        "address": "213.75.112.0/21"
-                    },
-                    "log": "disable",
-                    "outbound-interface": "eth0.4",
-                    "protocol": "all",
-                    "type": "masquerade"
-                },
-                "6001": {
-                    "outbound-interface": "pppoe2"
-                },
-                "6002": {
-                    "outbound-interface": "pppoe2"
-                },
-                "6003": {
-                    "outbound-interface": "pppoe2"
-                }
-            }
-        },
-        "upnp2": {
-            "wan": "pppoe2"
-        }
-
-    }
+	"system": {
+		"task-scheduler": {
+			"task": {
+				"postprovision": {
+					"executable": {
+						"path": "/config/scripts/post-config.d/dhcp6.sh"
+					},
+					"interval": "2m"
+				},
+				"postprovisionroutes": {
+					"executable": {
+						"path": "/config/scripts/post-config.d/setroutes.sh"
+					},
+					"interval": "2m"
+				}
+			}
+		}
+	},
+	"firewall": {
+		"ipv6-name": {
+			"WANv6_LOCAL": {
+				"rule": {
+					"1": {
+						"action": "accept",
+						"description": "Allow ICMPv6",
+						"log": "enable",
+						"protocol": "icmpv6"
+					},
+					"2": {
+						"action": "accept",
+						"description": "DHCPv6",
+						"destination": {
+							"port": "546"
+						},
+						"protocol": "udp",
+						"source": {
+							"port": "547"
+						}
+					}
+				}
+			},
+			"WANv6_IN": {
+				"rule": {
+					"1": {
+						"action": "accept",
+						"description": "Allow ICMPv6",
+						"log": "enable",
+						"protocol": "icmpv6"
+					}
+				}
+			}
+		}
+	},
+	"interfaces": {
+		"ethernet": {
+			"eth0": {
+				"dhcp-options": {
+					"default-route": "no-update",
+					"default-route-distance": "1",
+					"name-server": "no-update"
+				},
+				"description": "WAN",
+				"mtu": "1512",
+				"vif": {
+					"4": {
+						"address": [
+							"dhcp"
+						],
+						"description": "IPTV",
+						"dhcp-options": {
+							"client-option": [
+								"send vendor-class-identifier &quot;IPTV_RG&quot;;",
+								"request subnet-mask, routers, rfc3442-classless-static-routes;"
+							],
+							"default-route": "no-update",
+							"default-route-distance": "210",
+							"name-server": "no-update"
+						},
+						"ip": {
+							"source-validation": "loose"
+						},
+						"mtu": "1500"
+					},
+					"6": {
+						"mtu": "1508",
+						"firewall": {
+							"in": {
+								"ipv6-name": "WANv6_IN",
+								"name": "WAN_IN"
+							},
+							"local": {
+								"ipv6-name": "WANv6_LOCAL",
+								"name": "WAN_LOCAL"
+							},
+							"out": {
+								"ipv6-name": "WANv6_OUT",
+								"name": "WAN_OUT"
+							}
+						},
+						"pppoe": {
+							"2": {
+								"default-route": "auto",
+								"firewall": {
+									"in": {
+										"ipv6-name": "WANv6_IN",
+										"name": "WAN_IN"
+									},
+									"local": {
+										"ipv6-name": "WANv6_LOCAL",
+										"name": "WAN_LOCAL"
+									},
+									"out": {
+										"ipv6-name": "WANv6_OUT",
+										"name": "WAN_OUT"
+									}
+								},
+								"ipv6": {
+									"address": {
+										"autoconf": "''"
+									},
+									"dup-addr-detect-transmits": "1",
+									"enable": "''"
+								},
+								"mtu": "1500",
+								"name-server": "auto",
+								"password": "kpn",
+								"user-id": "kpn"
+							}
+						}
+					}
+				}
+			},
+			"eth1": {
+				"description": "LAN",
+				"ipv6": {
+					"address": {
+						"autoconf": "''"
+					},
+					"dup-addr-detect-transmits": "1",
+					"router-advert": {
+						"cur-hop-limit": "64",
+						"link-mtu": "0",
+						"managed-flag": "true",
+						"max-interval": "600",
+						"name-server": [
+							"2606:4700:4700::1111",
+							"2606:4700:4700::1001"
+						],
+						"other-config-flag": "false",
+						"prefix": {
+							"::/64": {
+								"autonomous-flag": "true",
+								"on-link-flag": "true",
+								"valid-lifetime": "2592000"
+							}
+						},
+						"radvd-options": "RDNSS 2606:4700:4700::1111 2606:4700:4700::1001 {};",
+						"reachable-time": "0",
+						"retrans-timer": "0",
+						"send-advert": "true"
+					}
+				}
+			}
+		}
+	},
+	"protocols": {
+		"igmp-proxy": {
+			"interface": {
+				"eth0.4": {
+					"alt-subnet": [
+						"0.0.0.0/0"
+					],
+					"role": "upstream",
+					"threshold": "1"
+				},
+				"eth1": {
+					"alt-subnet": [
+						"0.0.0.0/0"
+					],
+					"role": "downstream",
+					"threshold": "1"
+				}
+			}
+		},
+		"static": {
+			"interface-route6": {
+				"::/0": {
+					"next-hop-interface": {
+						"pppoe2": "''"
+					}
+				}
+			}
+		}
+	},
+	"port-forward": {
+		"wan-interface": "pppoe2"
+	},
+	"service": {
+		"dns": {
+			"forwarding": {
+				"except-interface": [
+					"pppoe2"
+				]
+			}
+		},
+		"nat": {
+			"rule": {
+				"5000": {
+					"description": "MASQ corporate_network to IPTV network",
+					"destination": {
+						"address": "213.75.112.0/21"
+					},
+					"log": "disable",
+					"outbound-interface": "eth0.4",
+					"protocol": "all",
+					"type": "masquerade"
+				},
+				"6001": {
+					"outbound-interface": "pppoe2"
+				},
+				"6002": {
+					"outbound-interface": "pppoe2"
+				},
+				"6003": {
+					"outbound-interface": "pppoe2"
+				}
+			}
+		}
+	}
 }
