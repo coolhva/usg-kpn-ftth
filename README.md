@@ -1,4 +1,4 @@
-# Ubiquity USG with KPN FTTH, IPTV and IPv6
+# Ubiquiti USG with KPN FTTH, IPTV and IPv6
 This repo contains the files you need to succesfully configure the USG with KPN FTTH with IPTV and IPv6 enabled.
 
 1. Place **config.gateway.json** at the unifi controller (*sites/default*) via SCP
@@ -30,6 +30,42 @@ The PPPOE interface has no "public" IPv6 address because it uses the link local 
 show interfaces pppoe pppoe2 log | match "IPV6|LL"
 ```
 
+## VLANs
+
+If you are using VLANs and have issues with the IPTV having hickups or being frozen you can try to change the config as follows:
+
+At the "igmp-proxy" section replace "eth1" with "eth.{vlan}" where {vlan} would be the VLAN where your decoders are in. 
+
+```
+"eth1.100": {
+    "alt-subnet": [
+        "0.0.0.0/0"
+    ],
+    "role": "downstream",
+    "threshold": "1"
+}
+```
+
+To prevent the IPTV from flooding other network interfaces it's best to explicitly disable the proxy for these interfaces:
+
+```
+"eth1": {
+    "role": "disabled",
+    "threshold": "1"
+},
+"eth1.200": {
+    "role": "disabled",
+    "threshold": "1"
+},
+"eth1.300": {
+    "role": "disabled",
+    "threshold": "1"
+}
+```
+
+An example config of the igmp configuration can be found in the file igmp-proxy.example.json.
+
+
 XS4ALL (a Dutch ISP which uses the KPN platform has more information regarding the technical details), more info can be found [here](https://www.xs4all.nl/service/diensten/internet/installeren/modem-instellen/hoe-kan-ik-een-ander-modem-dan-fritzbox-instellen.htm)
 
 This config.gateway.json has been tested on the following versions:
@@ -39,7 +75,7 @@ UniFi Security Gateway 3P: 4.4.44.5213844
 Unifi Controller: 5.11.46 (Build: atag_5.11.46_12723)
 ```
 
-My unifi WAN settings in the controller are as follows:
+My Unifi WAN settings in the controller are as follows:
 
 ![unifiwan](https://raw.githubusercontent.com/coolhva/usg-kpn-ftth/master/unifi_wan.png)
 
