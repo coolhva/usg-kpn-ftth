@@ -30,6 +30,8 @@ The PPPOE interface has no "public" IPv6 address because it uses the link local 
 show interfaces pppoe pppoe2 log | match "IPV6|LL"
 ```
 
+When you receive an error "Error: must define at least one listen-on interface" for the UPNP2 service either enable UPNP in the controller or remove this section from the JSON. UPNP2 is mostly used by game consoles and to make it work correctly the WAN interface needs to be set to pppoe2 for it to allow to work.
+
 ## VLANs
 
 If you are using VLANs and have issues with the IPTV having hickups or being frozen you can try to change the config as follows:
