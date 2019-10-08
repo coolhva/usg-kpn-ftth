@@ -155,7 +155,6 @@
                                 "valid-lifetime": "2592000"
                             }
                         },
-
                         "radvd-options": "RDNSS 2606:4700:4700::1111 2606:4700:4700::1001 {};",
                         "reachable-time": "0",
                         "retrans-timer": "0",
@@ -197,7 +196,6 @@
     "port-forward": {
         "wan-interface": "pppoe2"
     },
-
     "service": {
         "dns": {
             "forwarding": {
@@ -228,10 +226,6 @@
                     "outbound-interface": "pppoe2"
                 }
             }
-        },
-        "upnp2": {
-            "wan": "pppoe2"
         }
-
     }
 }
