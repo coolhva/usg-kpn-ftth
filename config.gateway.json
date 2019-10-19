@@ -226,9 +226,6 @@
                     "outbound-interface": "pppoe2"
                 }
             }
-        },
-        "upnp2": {	
-            "wan": "pppoe2"	
         }
     }
 }
