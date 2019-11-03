@@ -207,9 +207,9 @@
         "nat": {
             "rule": {
                 "5000": {
-                    "description": "MASQ corporate_network to IPTV network",
+                    "description": "MASQ all traffic to IPTV network",
                     "destination": {
-                        "address": "213.75.112.0/21"
+                        "address": "0.0.0.0/0"
                     },
                     "log": "disable",
                     "outbound-interface": "eth0.4",
