@@ -15,6 +15,12 @@
                     "interval": "2m"
                 }
             }
+        },
+        "offload": {
+            "ipv6": {
+                    "pppoe": "enable",
+                    "vlan": "disable"
+            }
         }
     },
     "firewall": {
