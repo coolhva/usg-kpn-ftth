@@ -63,9 +63,6 @@ To prevent the IPTV from flooding other network interfaces it's best to explicit
 }
 ```
 
-An example config of the igmp configuration can be found in the file igmp-proxy.example.json.
-
-
 XS4ALL (a Dutch ISP which uses the KPN platform has more information regarding the technical details), more info can be found [here](https://www.xs4all.nl/service/diensten/internet/installeren/modem-instellen/hoe-kan-ik-een-ander-modem-dan-fritzbox-instellen.htm)
 
 This config.gateway.json has been tested on the following versions:
