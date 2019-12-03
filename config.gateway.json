@@ -18,6 +18,7 @@
         },
         "offload": {
             "ipv6": {
+                    "forwarding": "enable",
                     "pppoe": "enable",
                     "vlan": "disable"
             }
