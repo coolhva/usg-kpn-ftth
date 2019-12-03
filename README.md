@@ -63,16 +63,13 @@ To prevent the IPTV from flooding other network interfaces it's best to explicit
 }
 ```
 
-An example config of the igmp configuration can be found in the file igmp-proxy.example.json.
-
-
 XS4ALL (a Dutch ISP which uses the KPN platform has more information regarding the technical details), more info can be found [here](https://www.xs4all.nl/service/diensten/internet/installeren/modem-instellen/hoe-kan-ik-een-ander-modem-dan-fritzbox-instellen.htm)
 
 This config.gateway.json has been tested on the following versions:
 
 ```
-UniFi Security Gateway 3P: 4.4.44.5213844
-Unifi Controller: 5.11.46 (Build: atag_5.11.46_12723)
+UniFi Security Gateway 3P: 4.4.44.5213844 and above
+Unifi Controller: 5.11.46 (Build: atag_5.11.46_12723) and above
 ```
 
 My Unifi WAN settings in the controller are as follows:
