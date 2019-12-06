@@ -20,8 +20,13 @@ This repo contains the files you need to succesfully configure the USG with KPN 
 
    After each firmware upgrade the routes file, used by the dhcp client at the exit hook (for the IPTV routes), is removed. To overcome this, after 2 minutes the USG will execute this script which will create the routes file, renews the DHCP lease, restart the IGMP Proxy and remove the task from the taskscheduler.
 
-8. The lan network (and portfowarding if needed) needs to be configured in the Unifi controller
-9. Go to the USG in devices in the controller and force provisioning
+8. Place **optimize.sh** in */config/scripts/post-config.d/* via SCP
+9. Execute `chmod +x /config/scripts/post-config.d/optimize.sh` on the USG
+
+   There are some settings which can cause issues when performed through the json, like MTU. This is handled in this optimize script.
+
+9. The lan network (and portfowarding if needed) needs to be configured in the Unifi controller
+10. Go to the USG in devices in the controller and force provisioning
 
 After provisioning please reboot the USG. After two minutes IPv6 will be enabled. This can be checked by executing `show interfaces` on the USG.
 
