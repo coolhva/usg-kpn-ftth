@@ -17,6 +17,12 @@
             }
         },
         "offload": {
+            "ipv4": {
+                     "forwarding": "enable",
+                     "gre": "enable",
+                     "pppoe": "enable",
+                     "vlan": "enable"
+            },
             "ipv6": {
                     "forwarding": "enable",
                     "pppoe": "enable",
