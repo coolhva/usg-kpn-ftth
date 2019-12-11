@@ -2,12 +2,6 @@
     "system": {
         "task-scheduler": {
             "task": {
-		"postprovisionoptimize": {
-                        "executable": {
-                        "path": "/config/scripts/post-config.d/optimize.sh"
-                    },
-                    "interval": "1m"
-                },
                 "postprovision": {
                 	"executable": {
                         "path": "/config/scripts/post-config.d/dhcp6.sh"
@@ -139,6 +133,7 @@
                                     "dup-addr-detect-transmits": "1",
                                     "enable": "''"
                                 },
+                                "mtu": "1500",
                                 "name-server": "auto",
                                 "password": "kpn",
                                 "user-id": "kpn"
