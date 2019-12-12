@@ -5,8 +5,10 @@ This repo contains the files you need to succesfully configure the USG with KPN 
 
    The config.gateway.json contains the main configuration with the different interfaces which are needed for internet (vlan 6) and IPTV (vlan 4). IPv4 is configured via PPPoE with the kpn/kpn username and password. KPN uses a TAG which is configured in the DSLAM to identify your connection and to give you your "permanent" public IPv4 address.
 
-2. Place **routes** in */etc/dhcp3/dhclient-exit-hooks.d/* via SCP
-3. Execute `sudo chmod +x /etc/dhcp3/dhclient-exit-hooks.d/routes` on the USG
+~~2. Place **routes** in */etc/dhcp3/dhclient-exit-hooks.d/* via SCP~~
+~~3. Execute `sudo chmod +x /etc/dhcp3/dhclient-exit-hooks.d/routes` on the USG~~
+
+  Step 2 and 3 are optional and can be skipped because the file is put in place by the **setroutes.sh** file, which is configured in step 6.
 
    KPN sends static routes via DHCP which the USG does not install by default. This script will install the DHCP routes when a DHCP lease is received. The chmod +x command allows the script to be executed. ([source](https://community.ubnt.com/t5/EdgeRouter/DHCP-CLIENT-OPTION-121-not-updates-routes-table/m-p/2506090/highlight/true#M223160))
 
