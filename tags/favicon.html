@@ -1,5 +1,0 @@
----
-layout: tag
-title: favicon
-tag: favicon
----

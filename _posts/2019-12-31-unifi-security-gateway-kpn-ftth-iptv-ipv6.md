@@ -2,9 +2,9 @@
 title: Unifi Security Gateway (USG) installeren met KPN FTTH inclusief IPTV en IPv6
 date: 2019-12-31 15:00:00 +0100
 categories: [Documentatie, Handleiding]
-tags: [usg,unifi]
+tags: [usg, unifi]
 seo:
-  date_modified: 2019-12-31 15:00:00 +0100
+  date_modified: 2019-12-31 15:01:41 +0100
 ---
 
 ## Inleiding
