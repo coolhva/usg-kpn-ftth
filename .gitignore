@@ -1,2 +1,11 @@
+.*
+*.pyc
 
-.DS_Store
+# jekyll debug
+_site
+
+# Jeykll Gemfile.lock
+Gemfile.lock
+
+# yui-compressor
+*.jar
