@@ -53,7 +53,7 @@ google_analytics:
 
 
 disqus:
-  shortname: 'coolhva'   # Change to your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+  shortname: 'coolhva-usg-kpn'   # Change to your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
   comments: true        # boolean type, the global switch for posts comments.
 
 # The year your website was first run.
