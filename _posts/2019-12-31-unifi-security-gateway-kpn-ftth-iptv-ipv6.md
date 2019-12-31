@@ -16,7 +16,7 @@ In deze handleiding neem ik je mee hoe je een Unifi Security Gateway (USG) recht
 Voordat we daadwerkelijk gaan beginnen is het belangrijk om een aantal zaken voor te bereiden. De volgende hardware is benodigd:
 
 |Type|Merk|Omschrijving
-|:--|:--|:---|
+|:---|:--|:---|
 |Glasvezel NTU|Genexis/MC901|Dit is het kastje (vaak in de meterkast) waar aan de ene kant de glasvezel kabel in gaat en waar een RJ45 aansluiting op zit waar de UTP kabel in zit naar het router toe|
 |USG Router|Unifi|Dit is de Unifi security gateway (USG) dit internet en IPTV verzorgt|
 |Switch|Unifi / anders|De USG zit verbonden met een switch voor je lokale apparaten in je netwerk, deze switch moet wel IGMP ondersteunen vanwege IPTV|
