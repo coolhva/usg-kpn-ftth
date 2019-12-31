@@ -172,3 +172,5 @@ sitemap_exclude:  # Sitemap will exclude the following items.
   - /404.html
   - /redirects.json
   - /search.json
+
+theme: jekyll-theme-midnight
