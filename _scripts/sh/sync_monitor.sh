@@ -14,14 +14,14 @@ if [[ ! -f $1 ]]; then
   exit 0
 fi
 
-src_dir=`dirname $(realpath $1)`
+src_dir=`dirname $(grealpath $1)`
 
-dir_prefix="$(realpath $2)/"
+dir_prefix="$(grealpath $2)/"
 
 related_dir="${src_dir:${#dir_prefix}}"
 
 
-dest="$(realpath $3)/${related_dir}"
+dest="$(grealpath $3)/${related_dir}"
 
 if [[ ! -d "$dest" ]]; then
   mkdir -p "$dest"
@@ -32,6 +32,6 @@ if [[ -f "$1" ]]; then
 fi
 
 if [[ $related_dir == "_posts" ]]; then
-  python $3/_scripts/py/init_all.py
-  python $3/_scripts/py/update_posts_lastmod.py -f "$dest/$(basename $1)" -t fs
+  python3 $3/_scripts/py/init_all.py
+  python3 $3/_scripts/py/update_posts_lastmod.py -f "$dest/$(basename $1)" -t fs
 fi

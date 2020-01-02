@@ -75,7 +75,7 @@ main() {
   init
 
   cd $CONTAINER
-  python _scripts/py/init_all.py
+  python3 _scripts/py/init_all.py
 
   if [[ $realtime = true ]]; then
     fswatch -0 -e "\\$CONTAINER" -e "\.git" ${WORK_DIR} | xargs -0 -I {} bash ./${SYNC_TOOL} {} $WORK_DIR . &
