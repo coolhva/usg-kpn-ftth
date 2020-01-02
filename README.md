@@ -1,6 +1,8 @@
 # Ubiquiti USG with KPN FTTH, IPTV and IPv6
 This repo contains the files you need to succesfully configure the USG with KPN FTTH with IPTV and IPv6 enabled.
 
+Please **[Download](https://github.com/coolhva/usg-kpn-ftth/archive/master.zip)** a zip file with all the files and do not copy and paste the contents because of the UNIX file structure!
+
 1. Place **config.gateway.json** at the unifi controller (*sites/default*) via SCP
 
    The config.gateway.json contains the main configuration with the different interfaces which are needed for internet (vlan 6) and IPTV (vlan 4). IPv4 is configured via PPPoE with the kpn/kpn username and password. KPN uses a TAG which is configured in the DSLAM to identify your connection and to give you your "permanent" public IPv4 address.
