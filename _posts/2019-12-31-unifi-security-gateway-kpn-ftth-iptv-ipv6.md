@@ -15,7 +15,9 @@ In deze handleiding neem ik je mee hoe je een Unifi Security Gateway (USG) recht
 
 Voordat we daadwerkelijk gaan beginnen is het belangrijk om een aantal zaken voor te bereiden.
 
-De volgende hardware is benodigd:
+### Hardware 
+
+De volgende hardware hebben we nodig om deze handleiding te kunnen voltooien.
 
 |Type|Merk|Omschrijving
 |:---|:--|:--|
@@ -25,7 +27,9 @@ De volgende hardware is benodigd:
 |IPTV Setupbox|Arcadyan / ZTE|Het kastje wat aan de ene kant met UTP op je switch zit aangesloten en aan de andere kant met HDMI (of SCART) aan je TV.|
 |Unifi controller|Ubiquiti / anders|Met de controller stel je de USG in, deze kan op een stuk hardware (cloudkey) draaien maar ook op je computer/server/NAS rechstreeks of bijvoorbeeld via docker.|
 
-In deze handleiding ga ik er vanuit dat we Windows 10 gebruiken en dan is de volgende software nodig:
+### Software
+
+In deze handleiding ga ik er vanuit dat we Windows 10 gebruiken waarbij we onderstaande software gaan gebruiken. Graag deze bestanden downloaden zodat ze klaar staan als we gaan beginnen.
 
 |Software|Omschrijving|
 |:---|:--|
@@ -33,7 +37,9 @@ In deze handleiding ga ik er vanuit dat we Windows 10 gebruiken en dan is de vol
 |[WinSCP Portable](https://winscp.net/eng/downloads.php){:target="_blank"}|WinSCP gebruiken we om via Secure Copy Protocol bestanden van onze computer naar de USG en eventueel de controller te krijgen.|
 |[usg-kpn-ftth zip](https://github.com/coolhva/usg-kpn-ftth/archive/master.zip){:target="_blank"}|De inhoud van mijn github repo in zip formaat zodat we alle bestanden in het juiste (UNIX) formaat hebben. Deze gaan we later naar de juiste locaties (USG/Controller) verplaatsen.|
 
-De volgende gegevens zijn benodigd voordat we aan de slag gaan:
+### Gegevens
+
+Onderstaande informatie gaan we gebruiken in deze handleiding.
 
 |Informatie|Omschrijving|
 |:--|:---|
@@ -50,7 +56,7 @@ Om toegang te krijgen tot de USG via SSH moet dit geconfigureerd zijn. In de web
 
 ## Uitgangssituatie
 
-Voordat we beginnen moeten we eerst weten waar we starten. In deze handleiding start we met het volgende:
+Voordat we beginnen moeten we eerst weten waar we starten. In deze handleiding starten we met het volgende:
 
 1. De USG zit met de WAN aansluiting direct aangesloten aan de NTU van KPN met een ethernet (UTP) kabel.
 2. De LAN aansluiting van de USG zit met een ethernet (UTP) kabel verbonden met een switch.  
@@ -67,4 +73,42 @@ In dit geval is het modem de NTU, hieronder een overzicht van de verschillende N
 
 ![ntu](/usg-kpn-ftth/assets/img/usgkpn/ntu.png)
 
-Daarnaast pakken we de twee zip bestanden (winscp en usg-kpn-ftth master.zip) uit zodat we een map met WinSCP, een map met de configuratie bestanden en als laatst putty.exe hebben.
+Als we de bestanden hebben gedownload pakken we de twee zip bestanden (winscp en usg-kpn-ftth master.zip) uit zodat we een map met WinSCP, een map met de configuratie bestanden en als laatst putty.exe hebben.
+
+![files_downloaded](/usg-kpn-ftth/assets/img/usgkpn/files_downloaded.png)
+
+## Gateway.config.json plaatsen
+
+Het eerste configuratie bestand wat we gaan plaatsen is een json bestand waarin een geavanceerde configuratie staat beschreven. Vanwege de complexiteit is dit niet in de webinterface in te stellen. Dit configuratie bestand is bedoeld voor de USG maar we gaan dit bestand plaatsen op de unifi controller. Zodra de unifi controller de USG de configuratie stuurt zal de unifi controller de instellingen van de webinterface samenvoegen met de geavanceerde configuratie en zo de complete configuratie naar de USG sturen.
+
+De unifi controller kan op verschillende manieren aanwezig zijn in je netwerk:
+
+1. Via een stuk hardware van Ubiquity zelf, een zogenoemde Unifi Cloud Key
+2. Via een stuk software wat je op je computer/server installeert (Windows of Linux)
+3. Via een (docker)container kan de controller draaien op een server of bijvoorbeeld op een NAS
+
+De locatie van de gateway.config.json is altijd hetzelfde gezien vanuit de basis locatie, namelijk <code class="highlighter-rouge">&lt;unifi_base&gt;/data/sites/site_ID</code>. In de meeste gevallen is de <code class="highlighter-rouge">site_ID</code> gelijk aan <code class="highlighter-rouge">default</code> maar de waarde kan anders zijn indien je in de controller een site hebt toegevoegd en daar je apparaten in hebt geconfigureerd. In de adresbalk van je browser zie je welke in welke site je zit, in mijn geval is dat <code class="highlighter-rouge">default</code>.
+
+De locatie van <code class="highlighter-rouge">&lt;unifi_base&gt;</code> hangt af waar de controller draait. Ubiquity heeft een [pagina](https://help.ubnt.com/hc/en-us/articles/115004872967) gemaakt waarop ze de verschillende locaties aangeven:
+
+|Type controller|Locatie|
+|:---|:---|
+|UniFi Cloud Key|/usr/lib/unifi|
+|Debian/Ubuntu Linux|/usr/lib/unifi|
+|Windows|%userprofile%/Ubiquiti UniFi|
+|macOS|~/Library/Application Support/UniFi|
+
+In mijn geval maak ik gebruik van een docker container op mijn Synology NAS en kan ik via SSH inloggen op de NAS en naar de juiste map navigeren die aan mijn docker container gekoppeld zit. In het geval van de cloudkey kan je navigeren naar /usr/lib/unifi/data/sites/default/ (vervang default als je een andere site_id gebruikt).
+
+![winscp_controller](/usg-kpn-ftth/assets/img/usgkpn/winscp_controller.png)
+
+
+
+
+
+
+
+
+
+
+
