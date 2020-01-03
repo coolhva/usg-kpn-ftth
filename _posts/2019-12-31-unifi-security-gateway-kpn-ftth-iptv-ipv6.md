@@ -45,6 +45,7 @@ Onderstaande informatie gaan we gebruiken in deze handleiding.
 |:--|:---|
 |URL Controller|Dit is het web adres waarop de unifi controller bereikbaar is, deze is bereikbaar op een IP adres en draait vaak op poort 8443 (HTTPS).|
 |Controller login|De gebruikersnaam en wachtwoord om in te kunnen loggen op de controller.|
+|IP adres USG|We maken met SSH verbinding naar dit IP adres om bestanden te plaatsen en commando's uit te voeren|
 |SSH login gegevens USG|De gebruikersnaam en wachtwoord om via SSH in te kunnen loggen op de USG (zie kopje hieronder).|
 |Toegang tot bestanden controller|Er moet een configuratie geplaatst worden op de controller. Indien je een Unifi Cloud Key hebt kan dat via SSH, de inloggegevens heb je ingesteld tijdens de initiële configuratie van de Cloud Key. Als je een docker container gebruikt die je toegang te hebben tot de data map. In het geval van een server/computer dien je ook toegang te hebben tot de data map.|
 
@@ -77,6 +78,10 @@ Als we de bestanden hebben gedownload pakken we de twee zip bestanden (winscp en
 
 ![files_downloaded](/usg-kpn-ftth/assets/img/usgkpn/files_downloaded.png)
 
+### IGMP snooping aanzetten
+
+Het is belangrijk dat op de switch(es) IGMP snooping aan staat vanwege IPTV. In de unifi controller kan je dat vinden door naar <kbd>settings</kbd> en dan naar <kbd>networks</kbd> te gaan. In het overzicht van de netwerken klik je op <kbd>Edit</kbd> bij het LAN netwerk en vink je <kbd>Enable IGMP snooping</kbd> aan.
+
 ## Gateway.config.json plaatsen
 
 Het eerste configuratie bestand wat we gaan plaatsen is een json bestand waarin een geavanceerde configuratie staat beschreven. Vanwege de complexiteit is dit niet in de webinterface in te stellen. Dit configuratie bestand is bedoeld voor de USG maar we gaan dit bestand plaatsen op de unifi controller. Zodra de unifi controller de USG de configuratie stuurt zal de unifi controller de instellingen van de webinterface samenvoegen met de geavanceerde configuratie en zo de complete configuratie naar de USG sturen.
@@ -87,7 +92,7 @@ De unifi controller kan op verschillende manieren aanwezig zijn in je netwerk:
 2. Via een stuk software wat je op je computer/server installeert (Windows of Linux)
 3. Via een (docker)container kan de controller draaien op een server of bijvoorbeeld op een NAS
 
-De locatie van de gateway.config.json is altijd hetzelfde gezien vanuit de basis locatie, namelijk <code class="highlighter-rouge">&lt;unifi_base&gt;/data/sites/site_ID</code>. In de meeste gevallen is de <code class="highlighter-rouge">site_ID</code> gelijk aan <code class="highlighter-rouge">default</code> maar de waarde kan anders zijn indien je in de controller een site hebt toegevoegd en daar je apparaten in hebt geconfigureerd. In de adresbalk van je browser zie je welke in welke site je zit, in mijn geval is dat <code class="highlighter-rouge">default</code>.
+De locatie van de <kbd>gateway.config.json</kbd> is altijd hetzelfde gezien vanuit de basis locatie, namelijk <code class="highlighter-rouge">&lt;unifi_base&gt;/data/sites/site_ID</code>. In de meeste gevallen is de <code class="highlighter-rouge">site_ID</code> gelijk aan <code class="highlighter-rouge">default</code> maar de waarde kan anders zijn indien je in de controller een site hebt toegevoegd en daar je apparaten in hebt geconfigureerd. In de adresbalk van je browser zie je welke in welke site je zit, in mijn geval is dat <code class="highlighter-rouge">default</code>.
 
 De locatie van <code class="highlighter-rouge">&lt;unifi_base&gt;</code> hangt af waar de controller draait. Ubiquity heeft een [pagina](https://help.ubnt.com/hc/en-us/articles/115004872967) gemaakt waarop ze de verschillende locaties aangeven:
 
@@ -98,12 +103,39 @@ De locatie van <code class="highlighter-rouge">&lt;unifi_base&gt;</code> hangt a
 |Windows|%userprofile%/Ubiquiti UniFi|
 |macOS|~/Library/Application Support/UniFi|
 
-In mijn geval maak ik gebruik van een docker container op mijn Synology NAS en kan ik via SSH inloggen op de NAS en naar de juiste map navigeren die aan mijn docker container gekoppeld zit. In het geval van de cloudkey kan je navigeren naar /usr/lib/unifi/data/sites/default/ (vervang default als je een andere site_id gebruikt).
+In het geval van de cloudkey kan je navigeren naar /usr/lib/unifi/data/sites/default/ (vervang default als je een andere site_id gebruikt). Indien je de controller software lokaal draait (op Windows of Mac) dan kan je <kbd>gateway.config.json</kbd> naar de juiste locatie kopieëren door middel van de verkenner of finder. In mijn geval maak ik gebruik van een docker container op mijn Synology NAS en kan ik via SSH inloggen op de NAS en naar de juiste map navigeren die aan mijn docker container gekoppeld zit.
 
 ![winscp_controller](/usg-kpn-ftth/assets/img/usgkpn/winscp_controller.png)
 
+Ik start door WinSCP.exe te openen en de gegevens van mijn controller in te vullen zodat ik via SSH (SCP) verbinding maak. Indien er een waarschuwing komt over een "unknown server" kan je deze met <kbd>Yes</kbd> beantwoorden, WinSCP waarschuwt je namelijk dat dit de eerste keer is dat je verbinding maakt met dit apparaat.
 
+![winscp_controller_upload](/usg-kpn-ftth/assets/img/usgkpn/winscp_controller_upload.png)
 
+In het rechter venster navigeer ik naar de locatie <code class="highlighter-rouge">&lt;unifi_base&gt;/data/sites/site_ID</code>, in mijn geval is dat /volume1/docker/unifi/data/sites/default, ik heb namelijk de map /volume1/docker/unifi gekoppeld aan de unifi map in de docker container waardoor dit mijn <code class="highlighter-rouge">&lt;unifi_base&gt;</code> locatie is. In het linker venster navigeer ik naar de map waarin ik <kbd>usg-kpn-ftth-master.zip</kbd> heb uitgepakt, selecteer ik het bestand <kbd>gateway.config.json</kbd> en klik ik links boven op <kbd>Upload</kbd>. Hierna klik ik op <kbd>Ok</kbd> en is het bestand <kbd>gateway.config.json</kbd> naar de juiste locatie gekopieërd.
+
+## setroutes.sh en dhcpv6.sh plaatsen
+
+Nadat we de JSON op de controller hebben geplaatst, gaan we nu twee configuratie bestanden op de USG plaatsen. Hiervoor klik ik in WinSCP op de knop <kbd>New Session</kbd> en vul ik de gegevens in van de USG. De eventuele waarschuwing van unkown server beantwoord ik met <kbd>Yes</kbd>. Een popup met een welkomstboodschap verschijnt en hier mag je op <kbd>Continue</kbd> klikken.
+
+![winscp_usg](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg.png)
+
+Nadat de verbinding tot stand is gekomen navigeren we in het rechter venster naar de locatie <code class="highlighter-rouge">/config/scripts/post-config.d</code>. In het linker scherm selecteren we dhcpv6.sh en setroutes.sh en klikken we weer op de knop <kbd>Upload</kbd>. Klik hierna op <kbd>Ok</kbd> en daarna zijn de twee bestanden op de USG geplaatst.
+
+![winscp_usg_upload](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg_upload.png)
+
+Nu moeten we de bestanden uitvoerbaar maken. Dat doen we door de twee bestanden aan de rechterkant te selecteren en daarna met de rechtermuisknop op ze te klikken en voor <kbd>Properties</kbd> te kiezen.
+
+![winscp_usg_select](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg_select.png)
+
+In de eigenschappen van deze twee bestanden mag je een vinkje zetten bij elke <kbd>X</kbd> (bij Octal komt nu 0755 te staan) en daarna op <kbd>Ok</kbd> klikken.
+
+![winscp_usg_chmod](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg_chmod.png)
+
+Nu mag je WinSCP sluiten en in de controller naar <kbd>Devices</kbd> gaan. Klik daarna op de USG, rechts verschijnen de details en dan klik je op het tandwiel icoon. Daarna klik je op <kbd>Manage Device</kbd> en klik je in het kopje Forice Provision op <kbd>Provision</kbd>.
+
+![unifi_controller_force_provision](/usg-kpn-ftth/assets/img/usgkpn/unifi_controller_force_provision.png)
+
+De USG gaat nu herstarten. Na dat internet het doet kan je de IPTV kastjes uitzetten, 10 seconden wachten, en deze weer aanzetten. Als het goed is heb je nu internet, IPTV en IPv6.
 
 
 
