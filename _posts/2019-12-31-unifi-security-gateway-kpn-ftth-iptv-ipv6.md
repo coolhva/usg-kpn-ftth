@@ -137,6 +137,13 @@ Nu mag je WinSCP sluiten en in de controller naar <kbd>Devices</kbd> gaan. Klik 
 
 De USG gaat nu herstarten. Na dat internet het doet kan je de IPTV kastjes uitzetten, 10 seconden wachten, en deze weer aanzetten. Als het goed is heb je nu internet, IPTV en IPv6.
 
+##Meer informatie
+
+Op de volgende links vindt je meer informatie over deze setup en hoe je problemen kan opsporen en verhelpen.
+
+* [Tweakers.net forum problemen opsporen](https://gathering.tweakers.net/forum/list_message/60188454#60188454)
+* [Github Repo met configuratie bestanden](https://github.com/coolhva/usg-kpn-ftth)
+* [Tweakers.net forum MTU en KPN](https://gathering.tweakers.net/forum/list_message/57023231#57023231)
 
 
 
