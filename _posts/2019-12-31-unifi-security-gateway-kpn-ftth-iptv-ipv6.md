@@ -131,7 +131,7 @@ In de eigenschappen van deze twee bestanden mag je een vinkje zetten bij elke <k
 
 ![winscp_usg_chmod](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg_chmod.png)
 
-Nu mag je WinSCP sluiten en in de controller naar <kbd>Devices</kbd> gaan. Klik daarna op de USG, rechts verschijnen de details en dan klik je op het tandwiel icoon. Daarna klik je op <kbd>Manage Device</kbd> en klik je in het kopje Forice Provision op <kbd>Provision</kbd>.
+Nu mag je WinSCP sluiten en in de controller naar <kbd>Devices</kbd> gaan. Klik daarna op de USG, rechts verschijnen de details en dan klik je op het tandwiel icoon. Daarna klik je op <kbd>Manage Device</kbd> en klik je in het kopje Force Provision op <kbd>Provision</kbd>.
 
 ![unifi_controller_force_provision](/usg-kpn-ftth/assets/img/usgkpn/unifi_controller_force_provision.png)
 
