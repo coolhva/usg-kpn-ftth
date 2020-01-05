@@ -4,7 +4,7 @@ date: 2019-12-31 15:00:00 +0100
 categories: [Documentatie, Handleiding]
 tags: [usg, unifi]
 seo:
-  date_modified: 2020-01-03 00:17:54 +0100
+  date_modified: 2020-01-05 00:20:44 +0100
 ---
 
 ## Inleiding
@@ -26,6 +26,8 @@ De volgende hardware hebben we nodig om deze handleiding te kunnen voltooien.
 |Switch|Ubiquiti / anders|De USG zit verbonden met een switch voor je lokale apparaten in je netwerk, deze switch moet wel IGMP ondersteunen vanwege IPTV.|
 |IPTV Setupbox|Arcadyan / ZTE|Het kastje wat aan de ene kant met UTP op je switch zit aangesloten en aan de andere kant met HDMI (of SCART) aan je TV.|
 |Unifi controller|Ubiquiti / anders|Met de controller stel je de USG in, deze kan op een stuk hardware (cloudkey) draaien maar ook op je computer/server/NAS rechstreeks of bijvoorbeeld via docker.|
+
+> ***Let op:*** deze handleiding is bedoeld voor een Ubiquity Unifi Security Gateway 3. Indien je een USG 4 Pro hebt dien je in de gateway.config.json, dhcpv6.sh en setroutes.sh de interfaces aan te passen op de manier waarop je je USG 4 Pro hebt aangesloten. Bij de USG 3 is eth0 WAN en eth1 LAN.
 
 ### Software
 
@@ -112,6 +114,13 @@ Ik start door WinSCP.exe te openen en de gegevens van mijn controller in te vull
 ![winscp_controller_upload](/usg-kpn-ftth/assets/img/usgkpn/winscp_controller_upload.png)
 
 In het rechter venster navigeer ik naar de locatie <code class="highlighter-rouge">&lt;unifi_base&gt;/data/sites/site_ID</code>, in mijn geval is dat /volume1/docker/unifi/data/sites/default, ik heb namelijk de map /volume1/docker/unifi gekoppeld aan de unifi map in de docker container waardoor dit mijn <code class="highlighter-rouge">&lt;unifi_base&gt;</code> locatie is. In het linker venster navigeer ik naar de map waarin ik <kbd>usg-kpn-ftth-master.zip</kbd> heb uitgepakt, selecteer ik het bestand <kbd>gateway.config.json</kbd> en klik ik links boven op <kbd>Upload</kbd>. Hierna klik ik op <kbd>Ok</kbd> en is het bestand <kbd>gateway.config.json</kbd> naar de juiste locatie gekopieërd.
+
+> Indien je op een cloudkey naar de data map navigeert maar daarin geen map sites ziet kan je deze zelf aanmaken. Hiervoor moet je inloggen met putty op de cloudkey en daarna onderstaande commando's uitvoeren.
+```shell
+mkdir -p /usr/lib/unifi/data/sites/default
+chown unifi:unifi /usr/lib/unifi/data/sites/default
+```
+> Daarna is de map aangemaakt en kan je de gateway.config.json er in plaatsen.
 
 ## setroutes.sh en dhcpv6.sh plaatsen
 
