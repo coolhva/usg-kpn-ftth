@@ -18,7 +18,7 @@ Please **[download a zip file](https://github.com/coolhva/usg-kpn-ftth/archive/m
 1. ~~Place **routes** in */etc/dhcp3/dhclient-exit-hooks.d/* via SCP~~
 2. ~~Execute `sudo chmod +x /etc/dhcp3/dhclient-exit-hooks.d/routes` on the USG~~
 
-   Step 2 and 3 are optional and can be skipped because the file is put in place by the **setroutes.sh** file, which is configured in step 6.
+   Step 1 and 2 are optional and can be skipped because the file is put in place by the **setroutes.sh** file, which is configured in step 5.
 
    KPN sends static routes via DHCP which the USG does not install by default. This script will install the DHCP routes when a DHCP lease is received. The chmod +x command allows the script to be executed. ([source](https://community.ubnt.com/t5/EdgeRouter/DHCP-CLIENT-OPTION-121-not-updates-routes-table/m-p/2506090/highlight/true#M223160))
 
