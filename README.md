@@ -3,6 +3,12 @@ This repo contains the files you need to succesfully configure the USG with KPN 
 
 Klik [hier](https://coolhva.github.io/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/) voor een Nederlandse handleiding!
 
+If you have X4ALL you need to enter one additional line just before the line "commit" in dhcp6.sh, otherwise IPv6 will not work:
+
+```
+set interfaces ethernet eth0 vif 6 pppoe 2 dhcpv6-pd prefix-only >> ${logFile}
+```
+
 Please **[download a zip file](https://github.com/coolhva/usg-kpn-ftth/archive/master.zip)** with all the files and do not copy and paste the contents because of the UNIX file structure!
 
 1. Place **config.gateway.json** at the unifi controller (*sites/default*) via SCP
