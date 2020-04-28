@@ -12,6 +12,7 @@ set interfaces ethernet eth0 vif 6 pppoe 2 dhcpv6-pd pd 0 interface eth1 prefix-
 set interfaces ethernet eth0 vif 6 pppoe 2 dhcpv6-pd pd 0 interface eth1 service slaac >> ${logFile}
 set interfaces ethernet eth0 vif 6 pppoe 2 dhcpv6-pd pd 0 prefix-length /48 >> ${logFile}
 set interfaces ethernet eth0 vif 6 pppoe 2 dhcpv6-pd rapid-commit disable >> ${logFile}
+set interfaces ethernet eth0 vif 6 pppoe 2 dhcpv6-pd prefix-only >> ${logFile}
 commit
 exit
 
