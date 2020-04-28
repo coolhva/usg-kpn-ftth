@@ -1,26 +1,20 @@
-# Ubiquiti USG with KPN FTTH, IPTV and IPv6
-This repo contains the files you need to succesfully configure the USG with KPN FTTH with IPTV and IPv6 enabled.
+# Ubiquiti USG with XS4ALL FTTH, IPTV and IPv6
+This repo contains the files you need to succesfully configure the USG with XS4ALL FTTH with IPTV and IPv6 enabled.
 
 Klik [hier](https://coolhva.github.io/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/) voor een Nederlandse handleiding!
 
-If you have X4ALL you need to enter one additional line just before the line "commit" in dhcp6.sh, otherwise IPv6 will not work:
-
-```
-set interfaces ethernet eth0 vif 6 pppoe 2 dhcpv6-pd prefix-only >> ${logFile}
-```
-
-Please **[download a zip file](https://github.com/coolhva/usg-kpn-ftth/archive/master.zip)** with all the files and do not copy and paste the contents because of the UNIX file structure!
+Please **[download a zip file](https://github.com/coolhva/usg-kpn-ftth/archive/xs4all.zip)** with all the files and do not copy and paste the contents because of the UNIX file structure!
 
 1. Place **config.gateway.json** at the unifi controller (*sites/default*) via SCP
 
-   The config.gateway.json contains the main configuration with the different interfaces which are needed for internet (vlan 6) and IPTV (vlan 4). IPv4 is configured via PPPoE with the kpn/kpn username and password. KPN uses a TAG which is configured in the DSLAM to identify your connection and to give you your "permanent" public IPv4 address.
+   The config.gateway.json contains the main configuration with the different interfaces which are needed for internet (vlan 6) and IPTV (vlan 4). IPv4 is configured via PPPoE with the kpn/kpn username and password. XS4ALL uses a TAG which is configured in the DSLAM to identify your connection and to give you your "permanent" public IPv4 address.
 
 2. ~~Place **routes** in */etc/dhcp3/dhclient-exit-hooks.d/* via SCP~~
 3. ~~Execute `sudo chmod +x /etc/dhcp3/dhclient-exit-hooks.d/routes` on the USG~~
 
    Step 2 and 3 are optional and can be skipped because the file is put in place by the **setroutes.sh** file, which is configured in step 6.
 
-   KPN sends static routes via DHCP which the USG does not install by default. This script will install the DHCP routes when a DHCP lease is received. The chmod +x command allows the script to be executed. ([source](https://community.ubnt.com/t5/EdgeRouter/DHCP-CLIENT-OPTION-121-not-updates-routes-table/m-p/2506090/highlight/true#M223160))
+   XS4ALL sends static routes via DHCP which the USG does not install by default. This script will install the DHCP routes when a DHCP lease is received. The chmod +x command allows the script to be executed. ([source](https://community.ubnt.com/t5/EdgeRouter/DHCP-CLIENT-OPTION-121-not-updates-routes-table/m-p/2506090/highlight/true#M223160))
 
 4. Place **dhcp6.sh** in */config/scripts/post-config.d/* via SCP
 5. Execute `chmod +x /config/scripts/post-config.d/dhcp6.sh` on the USG
@@ -75,8 +69,6 @@ To prevent the IPTV from flooding other network interfaces it's best to explicit
 }
 ```
 
-XS4ALL (a Dutch ISP which uses the KPN platform has more information regarding the technical details), more info can be found [here](https://www.xs4all.nl/service/diensten/internet/installeren/modem-instellen/hoe-kan-ik-een-ander-modem-dan-fritzbox-instellen.htm)
-
 This config.gateway.json has been tested on the following versions:
 
 ```
@@ -86,7 +78,7 @@ Unifi Controller: 5.11.46 (Build: atag_5.11.46_12723) and above
 
 My Unifi WAN settings in the controller are as follows:
 
-![unifiwan](https://raw.githubusercontent.com/coolhva/usg-kpn-ftth/master/unifi_wan.png)
+![unifiwan](https://raw.githubusercontent.com/coolhva/usg-kpn-ftth/xs4all/unifi_wan.png)
 
 At GoT I explain a little bit more about the MTU and troubleshooting:
 
