@@ -39,6 +39,8 @@ In deze handleiding ga ik er vanuit dat we Windows 10 gebruiken waarbij we onder
 |[WinSCP Portable](https://winscp.net/eng/downloads.php){:target="_blank"}|WinSCP gebruiken we om via Secure Copy Protocol bestanden van onze computer naar de USG en eventueel de controller te krijgen.|
 |[usg-kpn-ftth zip](https://github.com/coolhva/usg-kpn-ftth/archive/master.zip){:target="_blank"}|De inhoud van mijn github repo in zip formaat zodat we alle bestanden in het juiste (UNIX) formaat hebben. Deze gaan we later naar de juiste locaties (USG/Controller) verplaatsen.|
 
+> ***Let op:*** Indien je XS4ALL hebt dien je [xs4all.zip](https://github.com/coolhva/usg-kpn-ftth/archive/xs4all.zip){target="_blank"} te downloaden!
+
 ### Gegevens
 
 Onderstaande informatie gaan we gebruiken in deze handleiding.
