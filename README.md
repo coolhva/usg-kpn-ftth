@@ -11,27 +11,17 @@ Please **[download a zip file](https://github.com/coolhva/usg-kpn-ftth/archive/m
 
    The config.gateway.json contains the main configuration with the different interfaces which are needed for internet (vlan 6) and IPTV (vlan 4). IPv4 is configured via PPPoE with the kpn/kpn username and password. KPN uses a TAG which is configured in the DSLAM to identify your connection and to give you your "permanent" public IPv4 address.
 
-2. ~~Place **routes** in */etc/dhcp3/dhclient-exit-hooks.d/* via SCP~~
-3. ~~Execute `sudo chmod +x /etc/dhcp3/dhclient-exit-hooks.d/routes` on the USG~~
+2. Place **setroutes.sh** in */config/scripts/post-config.d/* via SCP
+3. Execute `chmod +x /config/scripts/post-config.d/setroutes.sh` on the USG
 
-   Step 2 and 3 are optional and can be skipped because the file is put in place by the **setroutes.sh** file, which is configured in step 6.
+   After each firmware upgrade the routes file, used by the dhcp client at the exit hook (for the IPTV routes), is removed. To overcome this, after each upgrade the USG will execute this script which will create the routes file, renews the DHCP lease, restart the IGMP Proxy.
 
    KPN sends static routes via DHCP which the USG does not install by default. This script will install the DHCP routes when a DHCP lease is received. The chmod +x command allows the script to be executed. ([source](https://community.ubnt.com/t5/EdgeRouter/DHCP-CLIENT-OPTION-121-not-updates-routes-table/m-p/2506090/highlight/true#M223160))
 
-4. Place **dhcp6.sh** in */config/scripts/post-config.d/* via SCP
-5. Execute `chmod +x /config/scripts/post-config.d/dhcp6.sh` on the USG
+4. The lan network (and portfowarding if needed) needs to be configured in the Unifi controller
+5. Go to the USG in devices in the controller and force provisioning
 
-   IPv6 works natively in the USG, the problem with KPN is that the json nesting will go to deep (interface, vlan and pppoe) and the USG will hit a bug ([source](https://community.ubnt.com/t5/UniFi-Routing-Switching/Configuration-commit-errors-IPv6-PPPoE-invalid-prefix-ID-value/td-p/2461935)) when it tries to parse the json. To overcome this, after 2 minutes the USG will execute this script which will configure IPv6 on the PPPoE interface and will remove the task from the taskscheduler.
-
-6. Place **setroutes.sh** in */config/scripts/post-config.d/* via SCP
-7. Execute `chmod +x /config/scripts/post-config.d/setroutes.sh` on the USG
-
-   After each firmware upgrade the routes file, used by the dhcp client at the exit hook (for the IPTV routes), is removed. To overcome this, after 2 minutes the USG will execute this script which will create the routes file, renews the DHCP lease, restart the IGMP Proxy and remove the task from the taskscheduler.
-
-9. The lan network (and portfowarding if needed) needs to be configured in the Unifi controller
-9. Go to the USG in devices in the controller and force provisioning
-
-After provisioning please reboot the USG. After two minutes IPv6 will be enabled. This can be checked by executing `show interfaces` on the USG.
+After provisioning please reboot the USG. After two minutes IPv6 will be enabled. This can be checked by executing `show interfaces` on the USG. If IPTV does not work, please restart the USG again.
 
 The PPPOE interface has no "public" IPv6 address because it uses the link local IPv6 address to route traffic to KPN. To see the remote address execute the following command ([source](https://community.ubnt.com/t5/EdgeRouter/EdgeRouter-X-PPPoE-IPv6/td-p/1893221)):
 ```
@@ -76,8 +66,8 @@ XS4ALL (a Dutch ISP which uses the KPN platform has more information regarding t
 This config.gateway.json has been tested on the following versions:
 
 ```
-UniFi Security Gateway 3P: 4.4.44.5213844 and above
-Unifi Controller: 5.11.46 (Build: atag_5.11.46_12723) and above
+UniFi Security Gateway 3P: 4.4.51.5287926
+Unifi Controller: 6.0.23 (atag_6.0.23_14253)
 ```
 
 My Unifi WAN settings in the controller are as follows:
