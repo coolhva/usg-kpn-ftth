@@ -108,7 +108,8 @@
                                             "prefix-length": "/48"
                                         }
                                     },
-                                    "rapid-commit": "disable"
+                                    "rapid-commit": "disable",
+                                    "prefix-only": "''"
                                 },
                                 "firewall": {
                                     "in": {
