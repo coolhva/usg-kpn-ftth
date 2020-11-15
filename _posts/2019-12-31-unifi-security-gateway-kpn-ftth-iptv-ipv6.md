@@ -1,10 +1,10 @@
 ---
 title: Unifi Security Gateway (USG) installeren met KPN FTTH inclusief IPTV en IPv6
-date: 2019-12-31 15:00:00 +0100
+date: 2020-11-05 15:00:00 +0100
 categories: [Documentatie, Handleiding]
 tags: [usg, unifi]
 seo:
-  date_modified: 2020-01-05 00:20:44 +0100
+  date_modified: 2020-11-05 00:20:44 +0100
 ---
 
 ## Inleiding
@@ -27,7 +27,7 @@ De volgende hardware hebben we nodig om deze handleiding te kunnen voltooien.
 |IPTV Setupbox|Arcadyan / ZTE|Het kastje wat aan de ene kant met UTP op je switch zit aangesloten en aan de andere kant met HDMI (of SCART) aan je TV.|
 |Unifi controller|Ubiquiti / anders|Met de controller stel je de USG in, deze kan op een stuk hardware (cloudkey) draaien maar ook op je computer/server/NAS rechstreeks of bijvoorbeeld via docker.|
 
-> ***Let op:*** deze handleiding is bedoeld voor een Ubiquity Unifi Security Gateway 3. Indien je een USG 4 Pro hebt dien je in de gateway.config.json, dhcpv6.sh en setroutes.sh de interfaces aan te passen op de manier waarop je je USG 4 Pro hebt aangesloten. Bij de USG 3 is eth0 WAN en eth1 LAN.
+> ***Let op:*** deze handleiding is bedoeld voor een Ubiquity Unifi Security Gateway 3. Indien je een USG 4 Pro hebt dien je in de gateway.config.json en setroutes.sh de interfaces aan te passen op de manier waarop je je USG 4 Pro hebt aangesloten. Bij de USG 3 is eth0 WAN en eth1 LAN.
 
 ### Software
 
@@ -124,21 +124,21 @@ chown unifi:unifi /usr/lib/unifi/data/sites/default
 ```
 > Daarna is de map aangemaakt en kan je de gateway.config.json er in plaatsen.
 
-## setroutes.sh en dhcpv6.sh plaatsen
+## setroutes.sh plaatsen
 
-Nadat we de JSON op de controller hebben geplaatst, gaan we nu twee configuratie bestanden op de USG plaatsen. Hiervoor klik ik in WinSCP op de knop <kbd>New Session</kbd> en vul ik de gegevens in van de USG. De eventuele waarschuwing van unkown server beantwoord ik met <kbd>Yes</kbd>. Een popup met een welkomstboodschap verschijnt en hier mag je op <kbd>Continue</kbd> klikken.
+Nadat we de JSON op de controller hebben geplaatst, gaan we nu een configuratie bestand op de USG plaatsen. Hiervoor klik ik in WinSCP op de knop <kbd>New Session</kbd> en vul ik de gegevens in van de USG. De eventuele waarschuwing van unkown server beantwoord ik met <kbd>Yes</kbd>. Een popup met een welkomstboodschap verschijnt en hier mag je op <kbd>Continue</kbd> klikken.
 
 ![winscp_usg](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg.png)
 
-Nadat de verbinding tot stand is gekomen navigeren we in het rechter venster naar de locatie <code class="highlighter-rouge">/config/scripts/post-config.d</code>. In het linker scherm selecteren we dhcpv6.sh en setroutes.sh en klikken we weer op de knop <kbd>Upload</kbd>. Klik hierna op <kbd>Ok</kbd> en daarna zijn de twee bestanden op de USG geplaatst.
+Nadat de verbinding tot stand is gekomen navigeren we in het rechter venster naar de locatie <code class="highlighter-rouge">/config/scripts/post-config.d</code>. In het linker scherm selecteren we setroutes.sh en klikken we weer op de knop <kbd>Upload</kbd>. Klik hierna op <kbd>Ok</kbd> en daarna is het bestand op de USG geplaatst.
 
 ![winscp_usg_upload](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg_upload.png)
 
-Nu moeten we de bestanden uitvoerbaar maken. Dat doen we door de twee bestanden aan de rechterkant te selecteren en daarna met de rechtermuisknop op ze te klikken en voor <kbd>Properties</kbd> te kiezen.
+Nu moeten we het bestand uitvoerbaar maken. Dat doen we door de het bestand te selecteren en daarna met de rechtermuisknop er op te klikken en voor <kbd>Properties</kbd> te kiezen.
 
 ![winscp_usg_select](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg_select.png)
 
-In de eigenschappen van deze twee bestanden mag je een vinkje zetten bij elke <kbd>X</kbd> (bij Octal komt nu 0755 te staan) en daarna op <kbd>Ok</kbd> klikken.
+In de eigenschappen mag je een vinkje zetten bij elke <kbd>X</kbd> (bij Octal komt nu 0755 te staan) en daarna op <kbd>Ok</kbd> klikken.
 
 ![winscp_usg_chmod](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg_chmod.png)
 
