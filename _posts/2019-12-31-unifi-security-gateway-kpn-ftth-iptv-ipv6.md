@@ -49,13 +49,13 @@ Onderstaande informatie gaan we gebruiken in deze handleiding.
 |:--|:---|
 |URL Controller|Dit is het web adres waarop de unifi controller bereikbaar is, deze is bereikbaar op een IP adres en draait vaak op poort 8443 (HTTPS).|
 |Controller login|De gebruikersnaam en wachtwoord om in te kunnen loggen op de controller.|
-|IP adres USG|We maken met SSH verbinding naar dit IP adres om bestanden te plaatsen en commando's uit te voeren|
+|IP adres USG|We maken met SSH verbinding naar dit IP adres een bestand te plaatsen en commando's uit te voeren.|
 |SSH login gegevens USG|De gebruikersnaam en wachtwoord om via SSH in te kunnen loggen op de USG (zie kopje hieronder).|
 |Toegang tot bestanden controller|Er moet een configuratie geplaatst worden op de controller. Indien je een Unifi Cloud Key hebt kan dat via SSH, de inloggegevens heb je ingesteld tijdens de initiële configuratie van de Cloud Key. Als je een docker container gebruikt die je toegang te hebben tot de data map. In het geval van een server/computer dien je ook toegang te hebben tot de data map.|
 
 ### SSH toegang unifi apparaten
 
-Om toegang te krijgen tot de USG via SSH moet dit geconfigureerd zijn. In de webinterface van de controller ga je naar <kbd>settings</kbd> en dan naar <kbd>site</kbd> en scroll je naar beneden naar <kbd>device authentication</kbd>. Hier vink je <kbd>Enable SSH authentication</kbd> aan en kies je een gebruikersnaam en wachtwoord. Daarna klik je op <kbd>Apply Changes</kbd>. Vanaf nu kan je met deze gebruikersnaam en wachtwoord via SSH inloggen op de USG.
+Om toegang te krijgen tot de USG via SSH moet dit geconfigureerd zijn. In de webinterface van de controller ga je naar <kbd>settings</kbd> en dan naar <kbd>Controller Configuration</kbd> en scroll je naar beneden naar <kbd>Element SSH Authentication</kbd>. Hier vink je <kbd>Element SSH authentication</kbd> aan en kies je een gebruikersnaam en wachtwoord. Daarna klik je op <kbd>Apply Changes</kbd>. Vanaf nu kan je met deze gebruikersnaam en wachtwoord via SSH inloggen op de USG.
 
 ![unifi_controller_ssh](/usg-kpn-ftth/assets/img/usgkpn/unifi_controller_ssh.png)
 
@@ -124,7 +124,7 @@ chown unifi:unifi /usr/lib/unifi/data/sites/default
 ```
 > Daarna is de map aangemaakt en kan je de gateway.config.json er in plaatsen.
 
-## setroutes.sh plaatsen
+## Setroutes.sh plaatsen
 
 Nadat we de JSON op de controller hebben geplaatst, gaan we nu een configuratie bestand op de USG plaatsen. Hiervoor klik ik in WinSCP op de knop <kbd>New Session</kbd> en vul ik de gegevens in van de USG. De eventuele waarschuwing van unkown server beantwoord ik met <kbd>Yes</kbd>. Een popup met een welkomstboodschap verschijnt en hier mag je op <kbd>Continue</kbd> klikken.
 
@@ -155,10 +155,3 @@ Op de volgende links vindt je meer informatie over deze setup en hoe je probleme
 * [Tweakers.net forum problemen opsporen](https://gathering.tweakers.net/forum/list_message/60188454#60188454)
 * [Github Repo met configuratie bestanden](https://github.com/coolhva/usg-kpn-ftth)
 * [Tweakers.net forum MTU en KPN](https://gathering.tweakers.net/forum/list_message/57023231#57023231)
-
-
-
-
-
-
-
