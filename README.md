@@ -3,9 +3,7 @@ This repo contains the files you need to succesfully configure the USG with KPN 
 
 Klik [hier](https://coolhva.github.io/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/) voor een Nederlandse handleiding!
 
-If you have X4ALL please click [here](https://github.com/coolhva/usg-kpn-ftth/tree/xs4all) to download the specific configuration for XS4ALL.
-
-Please **[download a zip file](https://github.com/coolhva/usg-kpn-ftth/archive/master.zip)** with all the files and do not copy and paste the contents because of the UNIX file structure!
+Please **[download a zip file](https://github.com/coolhva/usg-kpn-ftth/archive/xs4all.zip)** with all the files and do not copy and paste the contents because of the UNIX file structure!
 
 1. Place **config.gateway.json** at the unifi controller (*sites/default*) via SCP
 
