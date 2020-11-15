@@ -1,21 +1,5 @@
 {
     "system": {
-        "task-scheduler": {
-            "task": {
-                "postprovision": {
-                	"executable": {
-                        "path": "/config/scripts/post-config.d/dhcp6.sh"
-                    },
-                    "interval": "2m"
-                },
-                "postprovisionroutes": {
-                	"executable": {
-                        "path": "/config/scripts/post-config.d/setroutes.sh"
-                    },
-                    "interval": "2m"
-                }
-            }
-        },
         "offload": {
             "ipv4": {
                      "forwarding": "enable",
@@ -111,7 +95,22 @@
                         },
                         "pppoe": {
                             "2": {
-                                "default-route": "auto",
+                                "dhcpv6-pd": {
+                                    "no-dns": "''",
+                                    "pd": {
+                                        "0": {
+                                            "interface": {
+                                                "eth1": {
+                                                    "prefix-id": ":1",
+                                                    "service": "slaac"
+                                                }
+                                            },
+                                            "prefix-length": "/48"
+                                        }
+                                    },
+                                    "rapid-commit": "disable",
+                                    "prefix-only": "''"
+                                },
                                 "firewall": {
                                     "in": {
                                         "ipv6-name": "WANv6_IN",
@@ -133,6 +132,7 @@
                                     "dup-addr-detect-transmits": "1",
                                     "enable": "''"
                                 },
+                                "default-route": "auto",                                
                                 "mtu": "1500",
                                 "name-server": "auto",
                                 "password": "kpn",

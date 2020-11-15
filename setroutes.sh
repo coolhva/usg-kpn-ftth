@@ -38,12 +38,3 @@ renew dhcp interface eth0.4
 restart igmp-proxy
 fi
 
-readonly logFile="/var/log/postprovisionroutes.log"
-
-source /opt/vyatta/etc/functions/script-template
-
-configure > ${logFile}
-
-delete system task-scheduler task postprovisionroutes >> ${logFile}
-commit
-exit
