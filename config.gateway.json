@@ -186,6 +186,10 @@
                     "threshold": "1"
                 },
                 "eth1": {
+                    "role": "disabled",
+                    "threshold": "1"
+                },
+                "eth1.661": {
                     "alt-subnet": [
                         "0.0.0.0/0"
                     ],
