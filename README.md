@@ -1,5 +1,5 @@
 # Ubiquiti USG with XS4ALL FTTH, IPTV and IPv6
-This repo contains the files you need to succesfully configure the USG with XS4ALL FTTH with IPTV and IPv6 enabled.
+This repo contains the files you need to succesfully configure the USG with XS4ALL FTTH with IPTV in its own VLAN and IPv6 enabled.
 
 Klik [hier](https://coolhva.github.io/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/) voor een Nederlandse handleiding!
 
