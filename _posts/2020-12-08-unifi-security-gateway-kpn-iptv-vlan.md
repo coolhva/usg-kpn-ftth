@@ -11,7 +11,7 @@ seo:
 
 Deze handleiding neem ik je mee hoe je de IPTV kastjes van KPN achter de USG in hun eigen netwerk (VLAN) zet zodat de kans op verstoring kleiner is. Deze handleiding borduurt verder op [deze](https://coolhva.github.io/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/) handleiding waarin we de USG rechtstreeks aansluiten op de FTTH verbinding van KPN.
 
-## Wat is een VLAN?
+### Wat is een VLAN?
 
 De meeste mensen hebben één netwerk thuis waarin alle apparaten zich bevinden. Hierdoor kan het soms gebeuren dat apparaten elkaar verstoren. Om dit probleem op te lossen is het mogelijk om verschillende netwerken over één fysieke kabel te laten lopen. Elk netwerk heeft bepaalde zaken nodig om te kunnen functioneren, denk aan het uitdelen van IP adressen en het doorsturen van verkeer naar andere netwerken. Deze taak neemt de USG op zich. We maken op de USG een nieuw netwerk (VLAN) aan, zorgen dat er ip adressen worden uitgedeeld en dat IPTV functioneert op dit netwerk.
 
@@ -29,12 +29,13 @@ De volgende hardware hebben we nodig om deze handleiding te kunnen voltooien.
 
 |Type|Merk|Omschrijving
 |:---|:--|:--|
+|Glasvezel NTU|Genexis/MC901|Dit is het kastje (vaak in de meterkast) waar aan de ene kant de glasvezel kabel in gaat en aan de andere kant een RJ45 aansluiting waar de UTP kabel naar de router in zit.|
 |USG Router|Ubiquiti|Dit is de Ubiquiti Unifi security gateway (USG) die internet en IPTV verzorgt.|
 |Switch|Ubiquiti / anders|De USG zit verbonden met een switch voor je lokale apparaten in je netwerk, deze switch moet wel IGMP ondersteunen vanwege IPTV maar voor deze handleiding moet deze ook ondersteuning voor VLANs bieden.|
 |IPTV Setupbox|Arcadyan / ZTE|Het kastje wat aan de ene kant met UTP op je switch zit aangesloten en aan de andere kant met HDMI (of SCART) aan je TV.|
 |Unifi controller|Ubiquiti / anders|Met de controller stel je de USG in, deze kan op een stuk hardware (cloudkey) draaien maar ook op je computer/server/NAS rechstreeks of bijvoorbeeld via docker.|
 
-> ***Let op:*** deze handleiding is bedoeld voor een Ubiquity Unifi Security Gateway 3. Indien je een USG 4 Pro hebt dien je in de gateway.config.json en setroutes.sh de interfaces aan te passen op de manier waarop je je USG 4 Pro hebt aangesloten. Bij de USG 3 is eth0 WAN en eth1 LAN.
+> ***Let op:*** deze handleiding is bedoeld voor een Ubiquity Unifi Security Gateway 3. Indien je een USG 4 Pro hebt dien je in de gateway.config.json de interfaces aan te passen op de manier waarop je je USG 4 Pro hebt aangesloten. Bij de USG 3 is eth0 WAN en eth1 LAN.
 
 ### Software
 
@@ -44,7 +45,7 @@ In deze handleiding ga ik er vanuit dat we Windows 10 gebruiken waarbij we onder
 |:---|:--|
 |[putty.exe (64-bit)](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html){:target="_blank"}|Met dit programma kunnen we via SSH inloggen op de USG en eventueel de controller om commando's uit te voeren.|
 |[WinSCP Portable](https://winscp.net/eng/downloads.php){:target="_blank"}|WinSCP gebruiken we om via Secure Copy Protocol bestanden van onze computer naar de USG en eventueel de controller te krijgen.|
-|[usg-kpn-ftth-vlan zip](https://github.com/coolhva/usg-kpn-ftth/archive/vlan.zip){:target="_blank"}|De inhoud van mijn github repo met IPTV VLAN ondersteuning in zip formaat zodat we alle bestanden in het juiste (UNIX) formaat hebben. Deze gaan we later naar de juiste locaties (USG/Controller) verplaatsen.|
+|[usg-kpn-ftth-vlan zip](https://github.com/coolhva/usg-kpn-ftth/archive/vlan.zip){:target="_blank"}|De inhoud van mijn github repo met IPTV VLAN ondersteuning in zip formaat zodat we alle bestanden in het juiste (UNIX) formaat hebben. Deze gaan we later naar de juiste locaties (Controller) verplaatsen.|
 
 > ***Let op:*** Indien je XS4ALL hebt dien je [xs4all vlan.zip](https://github.com/coolhva/usg-kpn-ftth/archive/vlan-xs4all.zip) te downloaden!
 
@@ -54,18 +55,9 @@ Onderstaande informatie gaan we gebruiken in deze handleiding.
 
 |Informatie|Omschrijving|
 |:--|:---|
-|Glasvezel NTU|Genexis/MC901|Dit is het kastje (vaak in de meterkast) waar aan de ene kant de glasvezel kabel in gaat en aan de andere kant een RJ45 aansluiting waar de UTP kabel naar de router in zit.|
 |URL Controller|Dit is het web adres waarop de unifi controller bereikbaar is, deze is bereikbaar op een IP adres en draait vaak op poort 8443 (HTTPS).|
 |Controller login|De gebruikersnaam en wachtwoord om in te kunnen loggen op de controller.|
-|IP adres USG|We maken met SSH verbinding naar dit IP adres een bestand te plaatsen en commando's uit te voeren.|
-|SSH login gegevens USG|De gebruikersnaam en wachtwoord om via SSH in te kunnen loggen op de USG (zie kopje hieronder).|
 |Toegang tot bestanden controller|Er moet een configuratie geplaatst worden op de controller. Indien je een Unifi Cloud Key hebt kan dat via SSH, de inloggegevens heb je ingesteld tijdens de initiële configuratie van de Cloud Key. Als je een docker container gebruikt die je toegang te hebben tot de data map. In het geval van een server/computer dien je ook toegang te hebben tot de data map.|
-
-### SSH toegang unifi apparaten
-
-Om toegang te krijgen tot de USG via SSH moet dit geconfigureerd zijn. In de webinterface van de controller ga je naar <kbd>settings</kbd> en dan naar <kbd>Controller Configuration</kbd> en scroll je naar beneden naar <kbd>Element SSH Authentication</kbd>. Hier vink je <kbd>Element SSH authentication</kbd> aan en kies je een gebruikersnaam en wachtwoord. Daarna klik je op <kbd>Apply Changes</kbd>. Vanaf nu kan je met deze gebruikersnaam en wachtwoord via SSH inloggen op de USG.
-
-![unifi_controller_ssh](/usg-kpn-ftth/assets/img/usgkpn/unifi_controller_ssh.png)
 
 ## Uitgangssituatie
 
@@ -76,7 +68,8 @@ Voordat we beginnen moeten we eerst weten waar we starten. In deze handleiding s
    Dat kan een unifi switch zijn maar mag ook een ander merk zijn, wel moet IGMP en VLAN ondersteund worden.
 3. Op de switch (direct of via een andere switch), zit de unifi controller verbonden.  
    Dit kan een unifi cloud key zijn maar ook een computer, server of een NAS.
-4. Ook zit de IPTV setupbox van KPN via een ethernet kabel verbonden aan een switch.
+4. Ook zit de IPTV setupbox van KPN via een ethernet kabel verbonden aan een switch met IGMP en VLAN ondersteuning.
+5. Deze handleiding ([link](https://coolhva.github.io/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/)) is uitgevoerd en TV en internet werkt op dit moment.
 
 Ubiquiti heeft zelf een afbeelding hoe de verschillende onderdelen met elkaar verbonden zijn:
 
@@ -90,10 +83,6 @@ Als we de bestanden hebben gedownload pakken we de twee zip bestanden (winscp en
 
 ![files_downloaded](/usg-kpn-ftth/assets/img/usgkpn/files_downloaded.png)
 
-### IGMP snooping aanzetten
-
-Het is belangrijk dat op de switch(es) IGMP snooping aan staat vanwege IPTV. In de unifi controller kan je dat vinden door naar <kbd>settings</kbd> en dan naar <kbd>networks</kbd> te gaan. In het overzicht van de netwerken klik je op <kbd>Edit</kbd> bij het LAN netwerk en vink je <kbd>Enable IGMP snooping</kbd> aan.
-
 ## VLAN 661 toevoegen
 
 Eerst gaan we VLAN 661 toevoegen op de controller zodat deze wordt toegevoegd op de USG.
@@ -104,7 +93,7 @@ Ga eerst naar<kbd>settings</kbd> en dan naar <kbd>networks</kbd>. In het overzic
 
 Kies als naam <kbd>IPTV</kbd>, klik op <kbd>Advanced</kbd> en vul <kbd>661</kbd> in bij <kbd>VLAN ID</kbd>.
 
-![usg_controller_add_network_settings_vlan](/usg-kpn-ftth/assets/img/usgkpnvlan/usg_controller_add_network_settings_vlan.png)
+![usg_controller_add_network_settings_vlanid](/usg-kpn-ftth/assets/img/usgkpnvlan/usg_controller_add_network_settings_vlanid.png)
 
 Scroll naar beneden en zet <kbd>IGMP snooping</kbd> aan.
 
@@ -114,7 +103,7 @@ Klik op <kbd>Apply changes</kbd> en in het overzicht zie je nu dat het IPTV netw
 
 ![usg_controller_networks_witih_iptv](/usg-kpn-ftth/assets/img/usgkpnvlan/usg_controller_networks_witih_iptv.png)
 
-> ***Let op:*** Wanneer je alleen unifi switches gebruikt tussen de USG en het IPTV kastje is het voldoende om nu de IPTV kastjes op VLAN 661 te plaatsen en kan je onderstaande stappen volgen. Als je andere merken switches gebruikt zorg dan dat VLAN 661 tagged naar de USG loopt en untagged naar het IPTV kastje loopt (en dat VLAN 661 de hele weg wordt doorgegeven als er meerdere switches worden gebruikt) en ga verder met de gateway.config.json plaatsen stap.
+> ***Let op:*** Wanneer je alleen unifi switches gebruikt tussen de USG en het IPTV kastje is het voldoende om nu de IPTV kastjes op VLAN 661 te plaatsen en kan je onderstaande stappen volgen. Als je andere merken switches gebruikt zorg dan dat VLAN 661 tagged naar de USG loopt en untagged naar het IPTV kastje loopt (en dat VLAN 661 de hele weg wordt doorgegeven als er meerdere switches worden gebruikt) en ga verder met de stap om de gateway.config.json op de controller te plaatsen.
 
 Nu gaan we in het menu links naar <kbd>Clients</kbd> en klikken op het IPTV kastje van KPN. Klik op de link naast <kbd>port</kbd>, je gaat nu naar de switch waarbij de poort al geselecteerd is.
 
