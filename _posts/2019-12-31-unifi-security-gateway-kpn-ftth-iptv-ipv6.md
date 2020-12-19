@@ -148,6 +148,10 @@ Nu mag je WinSCP sluiten en in de controller naar <kbd>Devices</kbd> gaan. Klik 
 
 De USG gaat nu herstarten. Na dat internet het doet kan je de IPTV kastjes uitzetten, 10 seconden wachten, en deze weer aanzetten. Als het goed is heb je nu internet, IPTV en IPv6.
 
+## IPTV op een apart netwerk
+
+Het is mogelijk om de IPTV kastjes op een eigen netwerk te plaatsen om te kans op verstoring te verkleinen. De gebruikte switches dienen wel VLAN ondersteuning te hebben. Kijk voor deze handleiding op deze [link](https://coolhva.github.io/usg-kpn-ftth/posts/unifi-security-gateway-kpn-iptv-vlan/)
+
 ## Meer informatie
 
 Op de volgende links vindt je meer informatie over deze setup en hoe je problemen kan opsporen en verhelpen.
