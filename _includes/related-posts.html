@@ -48,7 +48,7 @@
       {% assign index = data[1] | plus: 0 %}
       {% assign post = site.posts[index] %}
       <div class="card">
-        <a href="{{ post.url }}">
+        <a href="{{ site.baseurl }}{{ post.url }}">
           <div class="card-body">
             <span class="timeago small">
                 {{ post.date | date: POST_DATE }}
