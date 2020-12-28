@@ -15,11 +15,11 @@ In de handleidingen op deze site wordt er gevraagd om een json configuratie best
 
 Eerst gaan we via het map icoon aan de linkerkant naar de floorplan pagina.
 
-Ga naar <kbd>map</kbd> en dan, via <kbd>Topology</kbd>, naar <kbd>Floorplan</kbd>.
+Ga links in het menu naar <kbd>Map</kbd> en via <kbd>Topology</kbd> naar <kbd>Floorplan</kbd>.
 
 ![usg_controller_add_new_network](/usg-kpn-ftth/assets/img/usgkpnfolder/usg_map_floorplan.png)
 
-Klik op <kbd>Add new floorplan</kbd> en dan, via <kbd>Choose floorplan image</kbd>, kies je een willekeurige afbeelding van je computer.
+Klik op <kbd>Add new floorplan</kbd> en via <kbd>Choose floorplan image</kbd> kies je een willekeurige afbeelding van je computer.
 
 ![usg_controller_add_new_network](/usg-kpn-ftth/assets/img/usgkpnfolder/usg_floorplan_image.png)
 
@@ -27,7 +27,7 @@ Klik op <kbd>Save</kbd> waarna de afbeelding wordt geupload naar de controller. 
 
 ![usg_controller_add_new_network](/usg-kpn-ftth/assets/img/usgkpnfolder/usg_floorplan_save.png)
 
-Wanneer je de floorplan hebt bewaart kan je hem ook weer verwijderen door te kiezen voor <kbd>Edit Floorplans</kbd> en daarna te kiezen voor <kbd>Delete</kbd>
+Wanneer je de floorplan hebt opgeslagen kan je hem ook weer verwijderen door te kiezen voor <kbd>Edit Floorplans</kbd> en daarna te kiezen voor <kbd>Delete</kbd>
 
 ![usg_controller_add_new_network](/usg-kpn-ftth/assets/img/usgkpnfolder/usg_floorplan_delete.png)
 

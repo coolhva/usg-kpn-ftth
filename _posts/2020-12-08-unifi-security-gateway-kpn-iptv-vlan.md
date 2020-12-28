@@ -9,7 +9,7 @@ seo:
 
 ## Inleiding
 
-Deze handleiding neem ik je mee hoe je de IPTV kastjes van KPN achter de USG in hun eigen netwerk (VLAN) zet zodat de kans op verstoring kleiner is. Deze handleiding borduurt verder op [deze](https://coolhva.github.io/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/) handleiding waarin we de USG rechtstreeks aansluiten op de FTTH verbinding van KPN.
+Deze handleiding neem ik je mee hoe je de IPTV kastjes van KPN achter de USG in hun eigen netwerk (VLAN) zet zodat de kans op verstoring kleiner is. Deze handleiding borduurt verder op [deze](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/) handleiding waarin we de USG rechtstreeks aansluiten op de FTTH verbinding van KPN.
 
 ### Wat is een VLAN?
 
@@ -150,7 +150,11 @@ Ik start door WinSCP.exe te openen en de gegevens van mijn controller in te vull
 
 In het rechter venster navigeer ik naar de locatie <code class="highlighter-rouge">&lt;unifi_base&gt;/data/sites/site_ID</code>, in mijn geval is dat /volume1/docker/unifi/data/sites/default, ik heb namelijk de map /volume1/docker/unifi gekoppeld aan de unifi map in de docker container waardoor dit mijn <code class="highlighter-rouge">&lt;unifi_base&gt;</code> locatie is. In het linker venster navigeer ik naar de map waarin ik <kbd>usg-kpn-ftth-vlan.zip</kbd> heb uitgepakt, selecteer ik het bestand <kbd>gateway.config.json</kbd> en klik ik links boven op <kbd>Upload</kbd>. Hierna klik ik op <kbd>Ok</kbd> en is het bestand <kbd>gateway.config.json</kbd> naar de juiste locatie gekopieërd.
 
-> Indien je op een cloudkey naar de data map navigeert maar daarin geen map sites ziet kan je deze zelf aanmaken. Hiervoor moet je inloggen met putty op de cloudkey en daarna onderstaande commando's uitvoeren.
+> Indien je op een cloudkey naar de data map navigeert maar daarin geen map sites ziet kan je deze op twee manieren aanmaken.
+> Automatisch:
+> Via het aanmaken (en verwijderen) van een floorplan, klik (hier)[/usg-kpn-ftth/posts/unifi-security-gateway-sides-folder/] voor de handleiding.
+> Handmatig:
+> Hiervoor moet je inloggen met putty op de cloudkey en daarna onderstaande commando's uitvoeren.
 ```shell
 mkdir -p /usr/lib/unifi/data/sites/default
 chown unifi:unifi /usr/lib/unifi/data/sites/default
