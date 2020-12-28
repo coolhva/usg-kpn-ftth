@@ -150,16 +150,7 @@ Ik start door WinSCP.exe te openen en de gegevens van mijn controller in te vull
 
 In het rechter venster navigeer ik naar de locatie <code class="highlighter-rouge">&lt;unifi_base&gt;/data/sites/site_ID</code>, in mijn geval is dat /volume1/docker/unifi/data/sites/default, ik heb namelijk de map /volume1/docker/unifi gekoppeld aan de unifi map in de docker container waardoor dit mijn <code class="highlighter-rouge">&lt;unifi_base&gt;</code> locatie is. In het linker venster navigeer ik naar de map waarin ik <kbd>usg-kpn-ftth-vlan.zip</kbd> heb uitgepakt, selecteer ik het bestand <kbd>gateway.config.json</kbd> en klik ik links boven op <kbd>Upload</kbd>. Hierna klik ik op <kbd>Ok</kbd> en is het bestand <kbd>gateway.config.json</kbd> naar de juiste locatie gekopieërd.
 
-> Indien je op een cloudkey naar de data map navigeert maar daarin geen map sites ziet kan je deze op twee manieren aanmaken.
-> Automatisch:
-> Via het aanmaken (en verwijderen) van een floorplan, klik (hier)[/usg-kpn-ftth/posts/unifi-security-gateway-sides-folder/] voor de handleiding.
-> Handmatig:
-> Hiervoor moet je inloggen met putty op de cloudkey en daarna onderstaande commando's uitvoeren.
-```shell
-mkdir -p /usr/lib/unifi/data/sites/default
-chown unifi:unifi /usr/lib/unifi/data/sites/default
-```
-> Daarna is de map aangemaakt en kan je de gateway.config.json er in plaatsen.
+> Indien je op de controller naar de data map navigeert maar daarin geen map sites ziet kan je deze laten aanmaken, klik [hier](/usg-kpn-ftth/posts/unifi-security-gateway-sides-folder/) voor de handleiding.
 
 ## USG configuratie laten toepassen
 

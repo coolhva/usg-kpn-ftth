@@ -1,5 +1,5 @@
 ---
-title: De sites/default map aanmaken op Unifi controller
+title: De sites/default map aanmaken op de Unifi controller
 date: 2020-12-28 15:00:00 +0100
 categories: [Documentatie, Handleiding]
 tags: [usg, unifi]
@@ -9,7 +9,7 @@ seo:
 
 ## Inleiding
 
-In de handleidingen op deze site wordt er gevraagd om een json configuratie bestand in een bepaalde map (sites/default) neer te zetten. Mocht je een eigen site hebben aangemaakt dan zal daar, in plaats van default, de naam van je site verschijnen. Deze map bestaat soms niet. In deze handleiding neem ik je mee hoe je deze map kan laten aanmaken door een floorplan aan te maken.
+In de handleidingen op deze site wordt er gevraagd om een json configuratie bestand in een bepaalde map (```sites/default```) neer te zetten. Mocht je een eigen site hebben aangemaakt dan zal daar, in plaats van ```default```, de naam van je site verschijnen. Deze map bestaat soms niet. In deze handleiding neem ik je mee hoe je deze map kan laten aanmaken door een floorplan aan te maken.
 
 ## De sites/default map aanmaken
 
@@ -33,3 +33,12 @@ Wanneer je de floorplan hebt opgeslagen kan je hem ook weer verwijderen door te 
 
 Je kan nu verder met de andere handleiding om de gateway.config.json in de controller in de juiste map te plaatsen.
 
+## Handmatig de map aanmaken
+Mocht bovenstaande handelingen niet werken of wil je handmatig de map aanmaken op de cloudkey kan dat met de volgende commando's:
+
+Hiervoor moet je inloggen met putty op de cloudkey en daarna onderstaande commando's uitvoeren.
+```shell
+mkdir -p /usr/lib/unifi/data/sites/default
+chown unifi:unifi /usr/lib/unifi/data/sites/default
+```
+Daarna is de map aangemaakt en kan je de gateway.config.json er in plaatsen.
