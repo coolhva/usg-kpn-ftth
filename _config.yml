@@ -86,6 +86,10 @@ toc: true
 
 paginate: 10
 
+markdown: kramdown
+
+highlighter: rouge
+
 kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:   # Rouge Options › https://github.com/jneen/rouge#full-options
