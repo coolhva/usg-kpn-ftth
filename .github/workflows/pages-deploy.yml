@@ -44,7 +44,7 @@ jobs:
         run: |
           baseurl="$(grep '^baseurl:' _config.yml | sed "s/.*: *//;s/['\"]//g;s/#.*//")"
           if [[ -n $baseurl ]]; then
-            echo "SPEC_TEST=_site_no_baseurl" >> $GITHUB_ENV
+            echo "SPEC_TEST=_site$baseurl" >> $GITHUB_ENV
           fi
 
       - name: Build Site
