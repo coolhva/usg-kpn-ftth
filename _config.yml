@@ -1,59 +1,58 @@
 # The Site Settings
+# v2.0
+# https://github.com/cotes2020/jekyll-theme-chirpy
 # © 2017-2019 Cotes Chung
 # MIT licensed
 
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
-#--------------------------
+# --------------------------
+title: USG en KPN                          # the main title
 
-title: USG en KPN
-
-tagline: 'Een avontuur met KPN en de USG in de hoofdrol'
+tagline: Een avontuur met KPN en de USG in de hoofdrol  # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   Een stap voor stap handleiding hoe je een Unifi Security Gatewy
   (USG) kan laten werken op glasvezel van KPN met behoud van
   IPTV en IPv6.
 
-# Replace with your domain, e.g. 'https://username.github.io'
+# fill in the base hostname & protocol for your site, e.g., 'https://username.github.io'
 url: 'https://coolhva.github.io'
 
-author: Henk van Achterberg             # change to your full name
+author: Henk van Achterberg                  # change to your full name
 
-avatar: /assets/img/sample/avatar.jpg   # Support network resources.
+avatar: /assets/img/sample/avatar.jpg   # support internet resources
 
 github:
-  username: coolhva                     # change to your github username
+  username: coolhva             # change to your github username
 
 twitter:
-  username: coolhva                    # change to your twitter username
+  username: coolhva            # change to your twitter username
 
 social:
-  name: Henk van Achterberg             # it will shows as the copyright owner in Footer
-  email: henk@vanachterberg.org         # change to your email address
+  name: Henk van Achterberg                  # it will shows as the copyright owner in Footer
+  email: henk@vanachterberg.org             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/coolhva       # change to your twitter homepage
-    - https://github.com/coolhva        # change to your github homepage
+    - https://twitter.com/coolhva      # change to your twitter homepage
+    - https://github.com/coolhva       # change to your github homepage
     # Uncomment below to add more social links
     - https://www.facebook.com/coolhva
     - https://www.linkedin.com/in/henkva
 
 google_site_verification: wNFG3DLh0fhsZql0ooCpAUH8yhrA87d4RMHFrG9QNDs # change to your verification string
+# --------------------------
 
-#--------------------------
 
-# if your site type is Project Pages site, change below value to '/projectname'
+# Only if your site type is GitHub Project sites and doesn't have a custom domain,
+# change below value to '/projectname'.
 baseurl: '/usg-kpn-ftth'
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
 timezone: Europe/Amsterdam
 
 google_analytics:
-  # Fill with your Google Analytics ID
-  id: 'UA-4456753-2'
-  # The Google Analytics pageviews switch.
-  # DO NOT enable it unless you know how to deploy the Google Analytics superProxy.
+  id: 'UA-4456753-2'          # Fill with your Google Analytics ID
   pv:
     # The Google Analytics pageviews switch.
     # DO NOT enable it unless you know how to deploy the Google Analytics superProxy.
@@ -63,10 +62,9 @@ google_analytics:
     proxy_endpoint: ''
     cache: false  # pv data local cache, good for the users from GFW area.
 
-
 disqus:
-  shortname: 'coolhva-usg-kpn'   # Change to your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
-  comments: true        # boolean type, the global switch for posts comments.
+  comments: true  # boolean type, the global switch for posts comments.
+  shortname: 'coolhva-usg-kpn'    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
 
 # Prefer color scheme setting.
@@ -83,7 +81,7 @@ disqus:
 #
 theme_mode:   # <light|dark>
 
-# boolean type, global switch for ToC in posts.
+# boolean type, the global switch for ToC in posts.
 toc: true
 
 paginate: 10
@@ -107,6 +105,7 @@ collections:
   tabs:
     output: true
     sort_by: order
+
 
 defaults:
   -
