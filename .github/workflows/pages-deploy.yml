@@ -60,11 +60,7 @@ jobs:
 
       - name: Test Site
         run: |
-          if [[ -n $SPEC_TEST ]]; then
-            bash tools/test.sh -d "$SPEC_TEST"
-          else
-            bash tools/test.sh
-          fi
+        bash tools/test.sh
 
       - name: Deploy
         run: |
