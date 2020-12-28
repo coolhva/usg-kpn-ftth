@@ -17,7 +17,7 @@ description: >-                        # used by seo meta and the atom feed
   IPTV en IPv6.
 
 # fill in the base hostname & protocol for your site, e.g., 'https://username.github.io'
-url: 'https://coolhva.github.io'
+url: 'https://www.vanachterberg.org'
 
 author: Henk van Achterberg                  # change to your full name
 
@@ -85,10 +85,6 @@ theme_mode:   # <light|dark>
 toc: true
 
 paginate: 10
-
-markdown: kramdown
-
-highlighter: rouge
 
 kramdown:
   syntax_highlighter: rouge
