@@ -9,7 +9,7 @@ seo:
 
 ## Inleiding
 
-Deze handleiding neem ik je mee hoe je de IPTV kastjes van KPN achter de USG in hun eigen netwerk (VLAN) zet zodat de kans op verstoring kleiner is. Deze handleiding borduurt verder op [deze](./unifi-security-gateway-kpn-ftth-iptv-ipv6/) handleiding waarin we de USG rechtstreeks aansluiten op de FTTH verbinding van KPN.
+Deze handleiding neem ik je mee hoe je de IPTV kastjes van KPN achter de USG in hun eigen netwerk (VLAN) zet zodat de kans op verstoring kleiner is. Deze handleiding borduurt verder op [deze](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/index.html) handleiding waarin we de USG rechtstreeks aansluiten op de FTTH verbinding van KPN.
 
 ```
 LET OP! Deze handleiding werkt ALLEEN als de handleiding zonder VLAN EERST is gevolgd!
@@ -133,9 +133,9 @@ De unifi controller kan op verschillende manieren aanwezig zijn in je netwerk:
 2. Via een stuk software wat je op je computer/server installeert (Windows of Linux)
 3. Via een (docker)container kan de controller draaien op een server of bijvoorbeeld op een NAS
 
-De locatie van de <kbd>gateway.config.json</kbd> is altijd hetzelfde gezien vanuit de basis locatie, namelijk <code class="highlighter-rouge">&lt;unifi_base&gt;/data/sites/site_ID</code>. In de meeste gevallen is de <code class="highlighter-rouge">site_ID</code> gelijk aan <code class="highlighter-rouge">default</code> maar de waarde kan anders zijn indien je in de controller een site hebt toegevoegd en daar je apparaten in hebt geconfigureerd. In de adresbalk van je browser zie je in welke site je zit, in mijn geval is dat <code class="highlighter-rouge">default</code>.
+De locatie van de <kbd>gateway.config.json</kbd> is altijd hetzelfde gezien vanuit de basis locatie, namelijk ```&lt;unifi_base&gt;/data/sites/site_ID```. In de meeste gevallen is de ```site_ID``` gelijk aan ```default``` maar de waarde kan anders zijn indien je in de controller een site hebt toegevoegd en daar je apparaten in hebt geconfigureerd. In de adresbalk van je browser zie je in welke site je zit, in mijn geval is dat ```default```.
 
-De locatie van <code class="highlighter-rouge">&lt;unifi_base&gt;</code> hangt af waar de controller draait. Ubiquity heeft een [pagina](https://help.ubnt.com/hc/en-us/articles/115004872967) gemaakt waarop ze de verschillende locaties aangeven:
+De locatie van ```&lt;unifi_base&gt;``` hangt af waar de controller draait. Ubiquity heeft een [pagina](https://help.ubnt.com/hc/en-us/articles/115004872967) gemaakt waarop ze de verschillende locaties aangeven:
 
 |Type controller|Locatie|
 |:---|:---|
@@ -154,7 +154,7 @@ Ik start door WinSCP.exe te openen en de gegevens van mijn controller in te vull
 
 In het rechter venster navigeer ik naar de locatie ```&lt;unifi_base&gt;/data/sites/site_ID```, in mijn geval is dat /volume1/docker/unifi/data/sites/default, ik heb namelijk de map /volume1/docker/unifi gekoppeld aan de unifi map in de docker container waardoor dit mijn ```&lt;unifi_base&gt;``` locatie is. In het linker venster navigeer ik naar de map waarin ik <kbd>usg-kpn-ftth-vlan.zip</kbd> heb uitgepakt, selecteer ik het bestand <kbd>gateway.config.json</kbd> en klik ik links boven op <kbd>Upload</kbd>. Hierna klik ik op <kbd>Ok</kbd> en is het bestand <kbd>gateway.config.json</kbd> naar de juiste locatie gekopieërd.
 
-> Indien je op de controller naar de data map navigeert maar daarin geen map sites ziet kan je deze laten aanmaken, klik [hier](./unifi-security-gateway-sides-folder/) voor de handleiding.
+> Indien je op de controller naar de data map navigeert maar daarin geen map sites ziet kan je deze laten aanmaken, klik [hier](/usg-kpn-ftth/posts/unifi-security-gateway-sides-folder/index.html) voor de handleiding.
 
 ## USG configuratie laten toepassen
 

@@ -117,7 +117,7 @@ Ik start door WinSCP.exe te openen en de gegevens van mijn controller in te vull
 
 In het rechter venster navigeer ik naar de locatie ```&lt;unifi_base&gt;/data/sites/site_ID```, in mijn geval is dat /volume1/docker/unifi/data/sites/default, ik heb namelijk de map /volume1/docker/unifi gekoppeld aan de unifi map in de docker container waardoor dit mijn ```&lt;unifi_base&gt;``` locatie is. In het linker venster navigeer ik naar de map waarin ik <kbd>usg-kpn-ftth-master.zip</kbd> heb uitgepakt, selecteer ik het bestand <kbd>gateway.config.json</kbd> en klik ik links boven op <kbd>Upload</kbd>. Hierna klik ik op <kbd>Ok</kbd> en is het bestand <kbd>gateway.config.json</kbd> naar de juiste locatie gekopieërd.
 
-> Indien je op de controller naar de data map navigeert maar daarin geen map sites ziet kan je deze laten aanmaken, klik [hier](./unifi-security-gateway-sides-folder/) voor de handleiding.
+> Indien je op de controller naar de data map navigeert maar daarin geen map sites ziet kan je deze laten aanmaken, klik [hier](/usg-kpn-ftth/posts/unifi-security-gateway-sides-folder/index.html) voor de handleiding.
 
 ## Setroutes.sh plaatsen
 
@@ -145,7 +145,7 @@ De USG gaat nu herstarten. Na dat internet het doet kan je de IPTV kastjes uitze
 
 ## IPTV op een apart netwerk
 
-Het is mogelijk om de IPTV kastjes op een eigen netwerk te plaatsen om te kans op verstoring te verkleinen. De gebruikte switches dienen wel VLAN ondersteuning te hebben. Kijk voor deze handleiding op deze [link](./unifi-security-gateway-kpn-iptv-vlan/)
+Het is mogelijk om de IPTV kastjes op een eigen netwerk te plaatsen om te kans op verstoring te verkleinen. De gebruikte switches dienen wel VLAN ondersteuning te hebben. Kijk voor deze handleiding op deze [link](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-iptv-vlan/index.html)
 
 ## Meer informatie
 
