@@ -1,10 +1,13 @@
 ---
 title: About
-date: 2020-01-05 20:44:00 +0100
-categories: [About, Author]
-tags: [about, author]
-seo:
-  date_modified: 2020-01-03 00:17:54 +0100
+icon: fas fa-info
+order: 4
+
+# The About page
+# v2.0
+# https://github.com/cotes2020/jekyll-theme-chirpy
+# © 2017-2019 Cotes Chung
+# MIT License
 ---
 
 ## Over de auteur
