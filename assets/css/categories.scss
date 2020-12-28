@@ -1,40 +1,48 @@
 ---
+# Style for Tab Categories
+# v2.0
+# https://github.com/cotes2020/jekyll-theme-chirpy
+# © 2019 Cotes Chung
+# MIT License
 ---
-/*!
-  Style for Tab Categories
-  © 2019 Cotes Chung
-  MIT License
-*/
 
-.categories {
-  margin-bottom: 2rem;
-}
 
-.categories .card-header {
-  padding-right: 12px;
-}
+{% include_relative _addon/main.scss %}
 
-.categories .card-header>span>i:first-child,
-.categories .list-group-item>i {
+%category-icon-color {
   color: gray;
 }
 
-.categories .list-group-item {
-  border-left: none;
-  border-right: none;
-  padding-left: 2rem;
-}
+.categories {
+  margin-bottom: 2rem;
+  .card-header {
+    padding-right: 12px;
+  }
+  .list-group-item {
+    border-left: none;
+    border-right: none;
+    padding-left: 2rem;
+    > i {
+      @extend %category-icon-color;
+    }
+    &:first-child {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
 
-.categories .collapsing .list-group-item:first-child,
-.categories .collapse .list-group-item:first-child {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
+  }
 
-.categories i.far,
-.categories i.fas { // fontawesome icons
-  font-size: 86%;
-}
+  .card-header > span > i:first-child {
+    @extend %category-icon-color;
+  }
+
+  i {
+    &.far, &.fas {
+      font-size: 86%; // fontawesome icons
+    }
+  }
+
+} // .categories
 
 .category-trigger {
   width: 1.7rem;
@@ -42,19 +50,18 @@
   border-radius: 50%;
   text-align: center;
   color: #6c757d!important;
+  > i.fas {
+    position: relative;
+    height: 0.7rem;
+    width: 1rem;
+    transition: 300ms ease all;
+  }
 }
 
 @media (hover: hover) { // only works on desktop
   .category-trigger:hover {
-    background-color: #e9ecef;
+    background-color: var(--categories-hover-bg);
   }
-}
-
-.category-trigger>i.fas {
-  position: relative;
-  height: .7rem;
-  width: 1rem;
-  transition: 300ms ease all;
 }
 
 .rotate {

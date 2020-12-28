@@ -8,7 +8,12 @@
 
 title: USG en KPN
 
-description: 'Een avontuur met KPN en de USG in de hoofdrol'
+tagline: 'Een avontuur met KPN en de USG in de hoofdrol'
+
+description: >-                        # used by seo meta and the atom feed
+  Een stap voor stap handleiding hoe je een Unifi Security Gatewy
+  (USG) kan laten werken op glasvezel van KPN met behoud van
+  IPTV en IPv6.
 
 # Replace with your domain, e.g. 'https://username.github.io'
 url: 'https://coolhva.github.io'
@@ -38,6 +43,9 @@ google_site_verification: wNFG3DLh0fhsZql0ooCpAUH8yhrA87d4RMHFrG9QNDs # change t
 
 #--------------------------
 
+# if your site type is Project Pages site, change below value to '/projectname'
+baseurl: '/usg-kpn-ftth'
+
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
 timezone: Europe/Amsterdam
 
@@ -46,37 +54,44 @@ google_analytics:
   id: 'UA-4456753-2'
   # The Google Analytics pageviews switch.
   # DO NOT enable it unless you know how to deploy the Google Analytics superProxy.
-  pv: false
-  # superProxy baseURL and URL, only valid when `google_analytics.pv` is set to 'true'
-  proxy_baseurl: ''
-  proxy_url: ''
+  pv:
+    # The Google Analytics pageviews switch.
+    # DO NOT enable it unless you know how to deploy the Google Analytics superProxy.
+    enabled: false
+    # the next options only valid when `google_analytics.pv` is enabled.
+    proxy_url: ''
+    proxy_endpoint: ''
+    cache: false  # pv data local cache, good for the users from GFW area.
 
 
 disqus:
   shortname: 'coolhva-usg-kpn'   # Change to your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
   comments: true        # boolean type, the global switch for posts comments.
 
-# The year your website was first run.
-first_run: 2019
+
+# Prefer color scheme setting.
+#
+# Note: Keep empty will follow the system prefer color by default,
+# and there will be a toggle to switch the theme between dark and light
+# on the bottom left of the sidebar.
+#
+# Available options:
+#
+#     light  - Use the light color scheme
+#
+#     dark   - Use the dark color scheme
+#
+theme_mode:   # <light|dark>
 
 # boolean type, global switch for ToC in posts.
 toc: true
 
-
-# if your site type is Project Pages site, change below value to '/projectname'
-baseurl: '/usg-kpn-ftth'
-
 paginate: 10
 
-markdown: kramdown
-
-highlighter: rouge
-
 kramdown:
-  input: GFM
   syntax_highlighter: rouge
-  syntax_highlighter_opts: # Rouge Options › https://github.com/jneen/rouge#full-options
-    css_class: 'highlight'
+  syntax_highlighter_opts:   # Rouge Options › https://github.com/jneen/rouge#full-options
+    css_class: highlight
     # default_lang: console
     span:
       line_numbers: false
@@ -84,18 +99,24 @@ kramdown:
       line_numbers: true
       start_line: 1
 
+# DO NOT change this unless you're a Pro user on Jekyll and Web development,
+# or you think you're smart enough to change other relevant URLs within this template.
 permalink: /posts/:title/
+
+collections:
+  tabs:
+    output: true
+    sort_by: order
 
 defaults:
   -
     scope:
-      path: ""          # An empty string here means all files in the project
+      path: ''          # An empty string here means all files in the project
       type: posts
     values:
       layout: post
       comments: true    # Enable comments in posts.
       toc: true         # Display TOC column in posts.
-      location: Post
       breadcrumb:
         -
           label: Posts
@@ -107,9 +128,15 @@ defaults:
       comments: false
   -
     scope:
+      path: index.html
+    values:
+      breadcrumb:
+        -
+          label: Posts
+  -
+    scope:
       path: tags
     values:
-      location: Tag
       breadcrumb:
         -
           label: Home
@@ -121,7 +148,6 @@ defaults:
     scope:
       path: categories
     values:
-      location: Category
       breadcrumb:
         -
           label: Home
@@ -131,7 +157,8 @@ defaults:
           url: /tabs/categories/
   -
     scope:
-      path: tabs
+      path: ''
+      type: tabs             # see `site.collections`
     values:
       layout: page
       dynamic_title: true    # Hide title in mobile screens.
@@ -146,31 +173,27 @@ sass:
 
 compress_html:
   clippings: all
-  comments: ["<!-- ", " -->"]
-  endings: [html, head, body, dt, dd, rt, rp, optgroup, option, colgroup, caption, thead, tbody, tfoot, tr, td, th]
+  comments: all
+  endings: all
   profile: false
   blanklines: false
   ignore:
-    envs: []
+    envs: [development]
 
 exclude:
-  - vendor/       # Avoid Jekyll mistakenly read the vender directory on Travis-CI's VM .
+  - vendor
   - Gemfile.lock
   - Gemfile
-  - run.sh
-  - build.sh
-  - init.sh
-  - pv.sh
+  - tools
+  - docs
+  - README.md
+  - LICENSE
 
-sitemap_exclude:  # Sitemap will exclude the following items.
-  - /norobots/
-  - /assets/
-  - /tabs/
-  - /categories/
-  - /tags/
-  - /posts/
-  - /404.html
-  - /redirects.json
-  - /search.json
-
-#theme: jekyll-theme-midnight
+jekyll-archives:
+  enabled: [categories, tags]
+  layouts:
+    category: category
+    tag: tag
+  permalinks:
+    tag: /tags/:name/
+    category: /categories/:name/

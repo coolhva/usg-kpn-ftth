@@ -1,68 +1,91 @@
 <!--
   The Side Bar
+  v2.0
+  https://github.com/cotes2020/jekyll-theme-chirpy
   © 2017-2019 Cotes Chung
   MIT License
 -->
 
-<div id="nav-wrap">
-  <div id="profile-wrap" class="d-flex flex-column">
-    <div id="avatar" class="d-flex justify-content-center">
-      <a href="{{ site.baseurl }}/" alt="avatar">
-        {% assign avatar = site.avatar %}
-        {% if avatar | slice: 0 == '/' %}
-          {% assign avatar = avatar | prepend: site.baseurl %}
+<div id="sidebar" class="d-flex flex-column align-items-end">
+
+  <div class="profile-wrapper text-center">
+    <div id="avatar">
+      <a href="{{ site.baseurl }}/" alt="avatar" class="mx-auto">
+        {% assign avatar_url = site.avatar %}
+        {% capture start %}{{ site.avatar | slice: 0 }}{% endcapture %}
+        {% if start == '/' %}
+          {% assign avatar_url = avatar_url | prepend: site.baseurl %}
         {% endif %}
-        <img src="{{ avatar }}">
+        <img src="{{ avatar_url }}" alt="avatar" onerror="this.style.display='none'">
       </a>
     </div>
 
-    <div class="profile-text mt-3">
-      <div id="site-title">
-        <a href="{{ site.baseurl }}/">{{- site.title -}}</a>
-      </div>
-      <div id="site-subtitle" class="font-italic">{{ site.description }}</div>
+    <div class="site-title mt-3">
+      <a href="{{ '/' | relative_url }}">{{- site.title -}}</a>
     </div>
-  </div>
 
-  <ul class="nav flex-column">
-  {% assign page_urls = page.url | split: "/" %}
+    <div class="site-subtitle font-italic">{{- site.tagline -}}</div>
 
-  {% for item in site.data.label.tabs %}
-    {% assign ref = site.baseurl | append: "/" %}
+  </div><!-- .profile-wrapper -->
 
-    {% if item.path %}
-      {% assign ref = ref | append: item.path | append: "/" %}
-      {% if item.url %}
-        {% assign ref = ref | append: item.url | append: "/" %}
-      {% endif %}
-    {% endif %}
-
-    <li class="nav-item d-flex justify-content-center
-      {% if item.url == page_urls.last or
-        item.name == "Home" and page.layout == "home" %}active{% endif %}">
-      <a href="{{ ref }}" class="nav-link d-flex justify-content-center align-items-center w-100">
-        <i class="fa-fw {{ item.icon }} ml-3 mr-4 hidden"></i>
-        <span>{{ item.name | upcase }}</span>
+  <ul class="w-100">
+    <!-- home -->
+    <li class="nav-item{% if page.layout == 'home' %}{{ " active" }}{% endif %}">
+      <a href="{{ '/' | relative_url }}" class="nav-link">
+        <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i>
+        <span>{{ "HOME" }}</span>
+      </a>
+    </li>
+    <!-- the real tabs -->
+    {% for tab in site.tabs %}
+    <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
+      <a href="{{ tab.url | relative_url }}" class="nav-link">
+        <i class="fa-fw {{ tab.icon }} ml-xl-3 mr-xl-3 unloaded"></i>
+        <span>{{ tab.title | upcase }}</span>
       </a>
     </li> <!-- .nav-item -->
-  {% endfor %}
+    {% endfor %}
 
   </ul> <!-- ul.nav.flex-column -->
 
-</div><!-- #nav-wrap -->
+  <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center">
 
-<div class="contact d-flex justify-content-around mt-4">
-  <a href="https://github.com/{{ site.github.username }}" target="_blank">
-    <i class="fab fa-github-alt"></i>
-  </a>
-  <a href="https://twitter.com/{{ site.twitter.username }}" target="_blank">
-    <i class="fab fa-twitter"></i>
-  </a>
-  {% assign email = site.social.email | split: '@' %}
-  <a href="javascript:window.open('mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@'))">
-    <i class="fas fa-envelope"></i>
-  </a>
-  <a href="{{ site.baseurl }}/feed.xml" target="_blank">
-    <i class="fas fa-rss"></i>
-  </a>
-</div>
+    {% for entry in site.data.contact %}
+      {% capture url %}
+        {%- if entry.type == 'github' -%}
+          https://github.com/{{ site.github.username }}
+        {%- elsif entry.type == 'twitter' -%}
+          https://twitter.com/{{ site.twitter.username }}
+        {%- elsif entry.type == 'email' -%}
+          {% assign email = site.social.email | split: '@' %}
+          javascript:location.href = 'mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@')
+        {%- elsif entry.type == 'rss' -%}
+          {{ "/feed.xml" | relative_url }}
+        {%- else -%}
+          {{ entry.url }}
+        {%- endif -%}
+      {% endcapture %}
+
+      {% if url %}
+      <a href="{{ url }}" aria-label="{{ entry.type }}"
+        {% unless site.theme_mode %}class="order-{{ forloop.index | plus: 2 }}"{% endunless %}
+        {% unless entry.noblank %}target="_blank" rel="noopener"{% endunless %}>
+        <i class="{{ entry.icon }}"></i>
+      </a>
+      {% endif %}
+
+    {% endfor %}
+
+    {% unless site.theme_mode %}
+      {% if site.data.contact.size > 0 %}
+        <span class="icon-border order-2"></span>
+      {% endif %}
+
+      <span id="mode-toggle-wrapper" class="order-1">
+        {% include mode-toggle.html %}
+      </span>
+    {% endunless %}
+
+  </div> <!-- .sidebar-bottom -->
+
+</div><!-- #sidebar -->

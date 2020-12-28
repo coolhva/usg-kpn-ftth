@@ -1,15 +1,23 @@
 <!--
   The Search results
+  v2.0
+  https://github.com/cotes2020/jekyll-theme-chirpy
   © 2017-2019 Cotes Chung
   MIT License
 -->
-<div id="search-result-wrap">
-  <div class="row justify-content-center bg-white">
-    <div class="col-12 col-md-12 col-lg-11 col-xl-9 pl-xl-5 pr-xl-5 pb-5 mt-3 mb-3">
-      <h2 class="mt-3 pt-3 ml-3 ml-md-5 ml-lg-0" data-toc-skip>Search Results</h2>
-      <div class="post-content ml-1 ml-md-5 ml-lg-0">
-        <ul id="search-results" ></ul>
-      </div>
+<div id="search-result-wrapper" class="d-flex justify-content-center unloaded">
+  <div class="col-12 col-xl-11 post-content">
+    <div id="search-hints">
+      <h4 class="text-muted mb-4">{{ site.data.label.panel.trending_tags }}</h4>
+
+      {% include trending-tags.html %}
+
+      {% for tag in trending_tags %}
+        {% capture url %}/tags/{{ tag | slugify | url_encode }}/{% endcapture %}
+        <a class="post-tag" href="{{ url | relative_url }}">{{ tag | replace: '-', ' ' }}</a>
+      {% endfor %}
+
     </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
   </div>
 </div>
