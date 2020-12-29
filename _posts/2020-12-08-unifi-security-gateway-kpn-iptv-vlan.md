@@ -33,11 +33,11 @@ De volgende hardware hebben we nodig om deze handleiding te kunnen voltooien.
 
 |Type|Merk|Omschrijving
 |:---|:--|:--|
-|Glasvezel&nbsp;NTU|Genexis/MC901|Dit is het kastje (vaak in de meterkast) waar aan de ene kant de glasvezel kabel in gaat en aan de andere kant een RJ45 aansluiting waar de UTP kabel naar de router in zit.|
+|Glasvezel&nbsp;NTU|Genexis / MC901|Dit is het kastje (vaak in de meterkast) waar aan de ene kant de glasvezel kabel in gaat en aan de andere kant een RJ45 aansluiting waar de UTP kabel naar de router in zit.|
 |USG&nbsp;Router|Ubiquiti|Dit is de Ubiquiti Unifi security gateway (USG) die internet en IPTV verzorgt.|
-|Switch|Ubiquiti&nbsp;/&nbsp;anders|De USG zit verbonden met een switch voor je lokale apparaten in je netwerk, deze switch moet wel IGMP ondersteunen vanwege IPTV maar voor deze handleiding moet deze ook ondersteuning voor VLANs bieden.|
-|IPTV&nbsp;Setupbox|Arcadyan&nbsp;/&nbsp;ZTE|Het kastje wat aan de ene kant met UTP op je switch zit aangesloten en aan de andere kant met HDMI (of SCART) aan je TV.|
-|Unifi&nbsp;controller|Ubiquiti&nbsp;/&nbsp;anders|Met de controller stel je de USG in, deze kan op een stuk hardware (cloudkey) draaien maar ook op je computer/server/NAS rechstreeks of bijvoorbeeld via docker.|
+|Switch|Ubiquiti / anders|De USG zit verbonden met een switch voor je lokale apparaten in je netwerk, deze switch moet wel IGMP ondersteunen vanwege IPTV maar voor deze handleiding moet deze ook ondersteuning voor VLANs bieden.|
+|IPTV&nbsp;Setupbox|Arcadyan / ZTE|Het kastje wat aan de ene kant met UTP op je switch zit aangesloten en aan de andere kant met HDMI (of SCART) aan je TV.|
+|Unifi&nbsp;controller|Ubiquiti / anders|Met de controller stel je de USG in, deze kan op een stuk hardware (cloudkey) draaien maar ook op je computer/server/NAS rechstreeks of bijvoorbeeld via docker.|
 
 > ***Let op:*** deze handleiding is bedoeld voor een Ubiquity Unifi Security Gateway 3. Indien je een USG 4 Pro hebt dien je in de gateway.config.json de interfaces aan te passen op de manier waarop je je USG 4 Pro hebt aangesloten. Bij de USG 3 is eth0 WAN en eth1 LAN.
 
@@ -47,7 +47,7 @@ In deze handleiding ga ik er vanuit dat we Windows 10 gebruiken waarbij we onder
 
 |Software|Omschrijving|
 |:---|:--|
-|[putty.exe&nbsp;(64-bit)](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html){:target="_blank"}|Met dit programma kunnen we via SSH inloggen op de USG en eventueel de controller om commando's uit te voeren.|
+|[putty.exe&nbsp;(64&#x2011;bit)](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html){:target="_blank"}|Met dit programma kunnen we via SSH inloggen op de USG en eventueel de controller om commando's uit te voeren.|
 |[WinSCP&nbsp;Portable](https://winscp.net/eng/downloads.php){:target="_blank"}|WinSCP gebruiken we om via Secure Copy Protocol bestanden van onze computer naar de USG en eventueel de controller te krijgen.|
 |[usg-kpn-ftth-vlan zip](https://github.com/coolhva/usg-kpn-ftth/archive/vlan.zip){:target="_blank"}|De inhoud van mijn github repo met IPTV VLAN ondersteuning in zip formaat zodat we alle bestanden in het juiste (UNIX) formaat hebben. Deze gaan we later naar de juiste locaties (Controller) verplaatsen.|
 
