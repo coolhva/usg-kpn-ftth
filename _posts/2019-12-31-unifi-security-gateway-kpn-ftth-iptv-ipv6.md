@@ -21,11 +21,11 @@ De volgende hardware hebben we nodig om deze handleiding te kunnen voltooien.
 
 |Type|Merk|Omschrijving
 |:---|:--|:--|
-|Glasvezel NTU|Genexis/MC901|Dit is het kastje (vaak in de meterkast) waar aan de ene kant de glasvezel kabel in gaat en aan de andere kant een RJ45 aansluiting waar de UTP kabel naar de router in zit.|
-|USG Router|Ubiquiti|Dit is de Ubiquiti Unifi security gateway (USG) die internet en IPTV verzorgt.|
-|Switch|Ubiquiti / anders|De USG zit verbonden met een switch voor je lokale apparaten in je netwerk, deze switch moet wel IGMP ondersteunen vanwege IPTV.|
-|IPTV Setupbox|Arcadyan / ZTE|Het kastje wat aan de ene kant met UTP op je switch zit aangesloten en aan de andere kant met HDMI (of SCART) aan je TV.|
-|Unifi controller|Ubiquiti / anders|Met de controller stel je de USG in, deze kan op een stuk hardware (cloudkey) draaien maar ook op je computer/server/NAS rechstreeks of bijvoorbeeld via docker.|
+|Glasvezel&nbsp;NTU|Genexis/MC901|Dit is het kastje (vaak in de meterkast) waar aan de ene kant de glasvezel kabel in gaat en aan de andere kant een RJ45 aansluiting waar de UTP kabel naar de router in zit.|
+|USG&nbsp;Router|Ubiquiti|Dit is de Ubiquiti Unifi security gateway (USG) die internet en IPTV verzorgt.|
+|Switch|Ubiquiti&nbsp;/&nbsp;anders|De USG zit verbonden met een switch voor je lokale apparaten in je netwerk, deze switch moet wel IGMP ondersteunen vanwege IPTV.|
+|IPTV&nbsp;Setupbox|Arcadyan&nbsp;/&nbsp;ZTE|Het kastje wat aan de ene kant met UTP op je switch zit aangesloten en aan de andere kant met HDMI (of SCART) aan je TV.|
+|Unifi&nbsp;controller|Ubiquiti&nbsp;/&nbsp;anders|Met de controller stel je de USG in, deze kan op een stuk hardware (cloudkey) draaien maar ook op je computer/server/NAS rechstreeks of bijvoorbeeld via docker.|
 
 > ***Let op:*** deze handleiding is bedoeld voor een Ubiquity Unifi Security Gateway 3. Indien je een USG 4 Pro hebt dien je in de gateway.config.json en setroutes.sh de interfaces aan te passen op de manier waarop je je USG 4 Pro hebt aangesloten. Bij de USG 3 is eth0 WAN en eth1 LAN.
 
@@ -35,8 +35,8 @@ In deze handleiding ga ik er vanuit dat we Windows 10 gebruiken waarbij we onder
 
 |Software|Omschrijving|
 |:---|:--|
-|[putty.exe (64-bit)](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html){:target="_blank"}|Met dit programma kunnen we via SSH inloggen op de USG en eventueel de controller om commando's uit te voeren.|
-|[WinSCP Portable](https://winscp.net/eng/downloads.php){:target="_blank"}|WinSCP gebruiken we om via Secure Copy Protocol bestanden van onze computer naar de USG en eventueel de controller te krijgen.|
+|[putty.exe&nbsp;(64-bit)](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html){:target="_blank"}|Met dit programma kunnen we via SSH inloggen op de USG en eventueel de controller om commando's uit te voeren.|
+|[WinSCP&nbsp;Portable](https://winscp.net/eng/downloads.php){:target="_blank"}|WinSCP gebruiken we om via Secure Copy Protocol bestanden van onze computer naar de USG en eventueel de controller te krijgen.|
 |[usg-kpn-ftth zip](https://github.com/coolhva/usg-kpn-ftth/archive/master.zip){:target="_blank"}|De inhoud van mijn github repo in zip formaat zodat we alle bestanden in het juiste (UNIX) formaat hebben. Deze gaan we later naar de juiste locaties (USG/Controller) verplaatsen.|
 
 > ***Let op:*** Indien je XS4ALL hebt dien je [xs4all.zip](https://github.com/coolhva/usg-kpn-ftth/archive/xs4all.zip) te downloaden!
@@ -47,10 +47,10 @@ Onderstaande informatie gaan we gebruiken in deze handleiding.
 
 |Informatie|Omschrijving|
 |:--|:---|
-|URL Controller|Dit is het web adres waarop de unifi controller bereikbaar is, deze is bereikbaar op een IP adres en draait vaak op poort 8443 (HTTPS).|
-|Controller login|De gebruikersnaam en wachtwoord om in te kunnen loggen op de controller.|
-|IP adres USG|We maken met SSH verbinding naar dit IP adres een bestand te plaatsen en commando's uit te voeren.|
-|SSH login gegevens USG|De gebruikersnaam en wachtwoord om via SSH in te kunnen loggen op de USG (zie kopje hieronder).|
+|URL&nbsp;Controller|Dit is het web adres waarop de unifi controller bereikbaar is, deze is bereikbaar op een IP adres en draait vaak op poort 8443 (HTTPS).|
+|Controller&nbsp;login|De gebruikersnaam en wachtwoord om in te kunnen loggen op de controller.|
+|IP&nbsp;adres&nbsp;USG|We maken met SSH verbinding naar dit IP adres een bestand te plaatsen en commando's uit te voeren.|
+|SSH&nbsp;login&nbsp;gegevens USG|De gebruikersnaam en wachtwoord om via SSH in te kunnen loggen op de USG (zie kopje hieronder).|
 |Toegang tot bestanden controller|Er moet een configuratie geplaatst worden op de controller. Indien je een Unifi Cloud Key hebt kan dat via SSH, de inloggegevens heb je ingesteld tijdens de initiële configuratie van de Cloud Key. Als je een docker container gebruikt die je toegang te hebben tot de data map. In het geval van een server/computer dien je ook toegang te hebben tot de data map.|
 
 ### SSH toegang unifi apparaten
