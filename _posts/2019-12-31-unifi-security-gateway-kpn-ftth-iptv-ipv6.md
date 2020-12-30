@@ -145,7 +145,7 @@ De USG gaat nu herstarten. Na dat internet het doet kan je de IPTV kastjes uitze
 
 ## IPTV op een apart netwerk
 
-Het is mogelijk om de IPTV kastjes op een eigen netwerk te plaatsen om te kans op verstoring te verkleinen. De gebruikte switches dienen wel VLAN ondersteuning te hebben. Kijk voor deze handleiding op deze [link](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-iptv-vlan/index.html)
+Het is mogelijk om de IPTV kastjes op een eigen netwerk te plaatsen om te kans op verstoring te verkleinen. De gebruikte switches dienen wel VLAN ondersteuning te hebben. Kijk voor deze handleiding op deze [link](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-iptv-vlan/index.html).
 
 ## Meer informatie
 
@@ -154,3 +154,5 @@ Op de volgende links vindt je meer informatie over deze setup en hoe je probleme
 * [Tweakers.net forum problemen opsporen](https://gathering.tweakers.net/forum/list_message/60188454#60188454)
 * [Github Repo met configuratie bestanden](https://github.com/coolhva/usg-kpn-ftth)
 * [Tweakers.net forum MTU en KPN](https://gathering.tweakers.net/forum/list_message/57023231#57023231)
+
+> Indien je een donatie wilt doen (hoeft niet, mag wel) dan kan dat via [PayPal](https://paypal.me/pools/c/8vCgADkvDk).
