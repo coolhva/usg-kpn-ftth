@@ -169,4 +169,4 @@ De USG gaat nu herstarten. Na dat internet het doet kan je de IPTV kastjes uitze
 * [Tweakers.net forum topic](https://gathering.tweakers.net/forum/list_messages/1883441)
 * [Github Repo met configuratie bestanden](https://github.com/coolhva/usg-kpn-ftth/tree/vlan)
 
-> Indien je een donatie wilt doen (hoeft niet, mag wel) dan kan dat via [PayPal](https://paypal.me/pools/c/8vCgADkvDk).
+> Indien je me wilt bedanken (hoeft niet, mag wel) dan kan dat via [PayPal](https://paypal.me/pools/c/8vCgADkvDk) of [Buymeacoffee](https://www.buymeacoffee.com/coolhva).
