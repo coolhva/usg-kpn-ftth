@@ -145,7 +145,15 @@ De USG gaat nu herstarten. Na dat internet het doet kan je de IPTV kastjes uitze
 
 ## IPTV op een apart netwerk
 
-Het is mogelijk om de IPTV kastjes op een eigen netwerk te plaatsen om te kans op verstoring te verkleinen. De gebruikte switches dienen wel VLAN ondersteuning te hebben. Kijk voor deze handleiding op deze [link](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-iptv-vlan/index.html).
+Het is mogelijk om de IPTV kastjes op een eigen netwerk te plaatsen om te kans op verstoring te verkleinen. De gebruikte switches dienen wel VLAN ondersteuning te hebben. Kijk voor deze handleiding op deze [link](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-iptv-vlan/index.html). Mocht je IPTV ontvanger geen software kunnen ophalen dan is het raadzaam om deze in een apart VLAN te stoppen en de google DNS server toe te wijzen.
+
+## Afwijkend gedrag
+
+Omdat we een geavanceerde configuratie toepassen zijn er een aantal dingen die afwijken:
+
+* Het WAN IP adres in de controller zal altijd 0.0.0.0 aangeven. Dit komt (volgens mij) omdat er twee WAN interfaces zijn (drie, als je PPPoE mee telt) en hij niet de juiste kan vinden.
+* Wanneer je direct inlogt op de USG via de webbrowser zal hij aangeven dat hij geen internet verbinding heeft. Hij heeft dit in feite wel maar het mechanisme om dat de detecteren werkt (volgens mij) niet vanwege de meerdere WAN interfaces.
+* Je kan een (L2TP) VPN volledig instellen via de controller maar om het werkend te maken dien je een aanvullend bestand ([setvpn.sh](https://github.com/coolhva/usg-kpn-ftth/blob/vpn/setvpn.sh)) in de map ```/config/scripts/post-config.d``` op de USG te zetten om de correcte WAN interface te configureren voor de VPN.
 
 ## Meer informatie
 

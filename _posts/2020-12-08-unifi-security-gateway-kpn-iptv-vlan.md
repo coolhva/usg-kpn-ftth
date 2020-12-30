@@ -103,6 +103,15 @@ Scroll naar beneden en zet <kbd>IGMP snooping</kbd> aan.
 
 ![usg_controller_add_network_igmp_snooping](/usg-kpn-ftth/assets/img/usgkpnvlan/usg_controller_add_network_igmp_snooping.png)
 
+Scroll naar beneden en zet <kbd>DHCP Name Server</kbd> op <kbd>Manual</kbd>. Vul daarna de volgende KPN DNS gegevens in.
+
+|Instelling|Waarde|
+|:---|:--|
+|DNS Server 1|195.121.1.34|
+|DNS Server 2|195.121.1.66|
+
+![usg_controller_add_network_settings_dns](/usg-kpn-ftth/assets/img/usgkpnvlan/usg_controller_add_network_settings_dns.png)
+
 Klik op <kbd>Apply changes</kbd> en in het overzicht zie je nu dat het IPTV netwerk er bij is gekomen.
 
 ![usg_controller_networks_witih_iptv](/usg-kpn-ftth/assets/img/usgkpnvlan/usg_controller_networks_witih_iptv.png)
