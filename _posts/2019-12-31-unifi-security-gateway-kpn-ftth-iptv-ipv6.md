@@ -96,6 +96,8 @@ De unifi controller kan op verschillende manieren aanwezig zijn in je netwerk:
 2. Via een stuk software wat je op je computer/server installeert (Windows of Linux)
 3. Via een (docker)container kan de controller draaien op een server of bijvoorbeeld op een NAS
 
+> ***Let op:*** Indien de controller zich buiten het interne netwerk bevindt (internet of bij iemand anders thuis) werkt deze setup niet, dit is een [bug](https://github.com/coolhva/usg-kpn-ftth/issues/20) in de unifi software.
+
 De locatie van de <kbd>gateway.config.json</kbd> is altijd hetzelfde gezien vanuit de basis locatie, namelijk ```<unifi_base>/data/sites/site_ID```. In de meeste gevallen is de ```site_ID``` gelijk aan ```default``` maar de waarde kan anders zijn indien je in de controller een site hebt toegevoegd en daar je apparaten in hebt geconfigureerd. In de adresbalk van je browser zie je in welke site je zit, in mijn geval is dat ```default```.
 
 De locatie van ```<unifi_base>``` hangt af waar de controller draait. Ubiquity heeft een [pagina](https://help.ubnt.com/hc/en-us/articles/115004872967) gemaakt waarop ze de verschillende locaties aangeven:
