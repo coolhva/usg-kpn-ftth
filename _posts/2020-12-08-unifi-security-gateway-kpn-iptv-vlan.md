@@ -103,12 +103,12 @@ Scroll naar beneden en zet <kbd>IGMP snooping</kbd> aan.
 
 ![usg_controller_add_network_igmp_snooping](/usg-kpn-ftth/assets/img/usgkpnvlan/usg_controller_add_network_igmp_snooping.png)
 
-Scroll naar beneden en zet <kbd>DHCP Name Server</kbd> op <kbd>Manual</kbd>. Vul daarna de volgende KPN DNS gegevens in.
+Scroll naar beneden en zet <kbd>DHCP Name Server</kbd> op <kbd>Manual</kbd>. Vul daarna de volgende DNS gegevens in, afhankelijk of je KPN of XS4ALL hebt.
 
-|Instelling|Waarde|
+|Instelling|KPN|XS4ALL|
 |:---|:--|
-|DNS Server 1|195.121.1.34|
-|DNS Server 2|195.121.1.66|
+|DNS Server 1|195.121.1.34|194.109.6.66|
+|DNS Server 2|195.121.1.66|194.109.9.99|
 
 ![usg_controller_add_network_settings_dns](/usg-kpn-ftth/assets/img/usgkpnvlan/usg_controller_add_network_settings_dns.png)
 
