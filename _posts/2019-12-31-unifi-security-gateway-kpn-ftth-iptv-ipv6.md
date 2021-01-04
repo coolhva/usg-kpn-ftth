@@ -165,4 +165,7 @@ Op de volgende links vindt je meer informatie over deze setup en hoe je probleme
 * [Github Repo met configuratie bestanden](https://github.com/coolhva/usg-kpn-ftth)
 * [Tweakers.net forum MTU en KPN](https://gathering.tweakers.net/forum/list_message/57023231#57023231)
 
-> Indien je me wilt bedanken (hoeft niet, mag wel) kan dat via [PayPal](https://paypal.me/pools/c/8vCgADkvDk) of [Buymeacoffee](https://www.buymeacoffee.com/coolhva).
+> Indien je me wilt bedanken (hoeft niet, mag wel) kan dat via [Buymeacoffee](https://www.buymeacoffee.com/coolhva).
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTg1NTMyOTU5NV19
+-->
