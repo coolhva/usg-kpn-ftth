@@ -73,7 +73,7 @@ Voordat we beginnen moeten we eerst weten waar we starten. In deze handleiding s
 3. Op de switch (direct of via een andere switch), zit de unifi controller verbonden.  
    Dit kan een unifi cloud key zijn maar ook een computer, server of een NAS.
 4. Ook zit de IPTV setupbox van KPN via een ethernet kabel verbonden aan een switch met IGMP en VLAN ondersteuning.
-5. Deze handleiding ([link](https://coolhva.github.io/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/)) is uitgevoerd en TV en internet werkt op dit moment.
+5. Deze handleiding ([link](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/index.html)) is uitgevoerd en TV en internet werkt op dit moment.
 
 Ubiquiti heeft zelf een afbeelding hoe de verschillende onderdelen met elkaar verbonden zijn:
 
@@ -179,6 +179,3 @@ De USG gaat nu herstarten. Na dat internet het doet kan je de IPTV kastjes uitze
 * [Github Repo met configuratie bestanden](https://github.com/coolhva/usg-kpn-ftth/tree/vlan)
 
 > Indien je me wilt bedanken (hoeft niet, mag wel) dan kan dat via [Buymeacoffee](https://www.buymeacoffee.com/coolhva).
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbOTgwMjU2MDY3XX0=
--->
