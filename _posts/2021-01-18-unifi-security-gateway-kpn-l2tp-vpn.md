@@ -79,7 +79,7 @@ Als we de bestanden hebben gedownload pakken we de twee zip bestanden (winscp en
 
 ## Oude interface inschakelen
 
-Er is, helaas, een fout in de software van de Unifi controller geslopen waardoor je de VPN verbinding alleen succesvol kan instellen als je de oude interface gebruikt. Ga via <kbd>Settings</kdb> naar <kbd>System Settings</kbd> en schakel <kbd>New Settings</kbd> uit. Klik nu op <kbd>Apply Changes</kbd>.
+Er is, helaas, een fout in de software van de Unifi controller geslopen waardoor je de VPN verbinding alleen succesvol kan instellen als je de oude interface gebruikt. Ga via <kbd>Settings</kbd> naar <kbd>System Settings</kbd> en schakel <kbd>New Settings</kbd> uit. Klik nu op <kbd>Apply Changes</kbd>.
 
 ![old_interface](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_use_old_settings.png)
 
