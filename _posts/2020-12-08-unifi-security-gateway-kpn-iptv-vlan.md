@@ -39,7 +39,7 @@ De volgende hardware hebben we nodig om deze handleiding te kunnen voltooien.
 |IPTV&nbsp;Setupbox|Arcadyan / ZTE|Het kastje wat aan de ene kant met UTP op je switch zit aangesloten en aan de andere kant met HDMI (of SCART) aan je TV.|
 |Unifi&nbsp;controller|Ubiquiti / anders|Met de controller stel je de USG in, deze kan op een stuk hardware (cloudkey) draaien maar ook op je computer, server, NAS rechstreeks of bijvoorbeeld via docker.|
 
-> ***Let op:*** deze handleiding is bedoeld voor een Ubiquity Unifi Security Gateway 3. Indien je een USG 4 Pro hebt dien je in de gateway.config.json de interfaces aan te passen op de manier waarop je je USG 4 Pro hebt aangesloten. Bij de USG 3 is eth0 WAN en eth1 LAN.
+> ***Let op:*** deze handleiding is bedoeld voor een Ubiquity Unifi Security Gateway 3. Indien je een USG 4 Pro hebt dien je in de config.gateway.json de interfaces aan te passen op de manier waarop je je USG 4 Pro hebt aangesloten. Bij de USG 3 is eth0 WAN en eth1 LAN.
 
 ### Software
 
@@ -116,7 +116,7 @@ Klik op <kbd>Apply changes</kbd> en in het overzicht zie je nu dat het IPTV netw
 
 ![usg_controller_networks_witih_iptv](/usg-kpn-ftth/assets/img/usgkpnvlan/usg_controller_networks_witih_iptv.png)
 
-> ***Let op:*** Wanneer je alleen unifi switches gebruikt tussen de USG en het IPTV kastje is het voldoende om nu de IPTV kastjes op VLAN 661 te plaatsen en kan je onderstaande stappen volgen. Als je andere merken switches gebruikt zorg dan dat VLAN 661 tagged naar de USG loopt en untagged naar het IPTV kastje loopt (en dat VLAN 661 de hele weg wordt doorgegeven als er meerdere switches worden gebruikt) en ga verder met de stap om de gateway.config.json op de controller te plaatsen.
+> ***Let op:*** Wanneer je alleen unifi switches gebruikt tussen de USG en het IPTV kastje is het voldoende om nu de IPTV kastjes op VLAN 661 te plaatsen en kan je onderstaande stappen volgen. Als je andere merken switches gebruikt zorg dan dat VLAN 661 tagged naar de USG loopt en untagged naar het IPTV kastje loopt (en dat VLAN 661 de hele weg wordt doorgegeven als er meerdere switches worden gebruikt) en ga verder met de stap om de config.gateway.json op de controller te plaatsen.
 
 Nu gaan we in het menu links naar <kbd>Clients</kbd> en klikken op het IPTV kastje van KPN. Klik op de link naast <kbd>port</kbd>, je gaat nu naar de switch waarbij de poort al geselecteerd is.
 
@@ -130,9 +130,9 @@ Klik nu op <kbd>Switch Port Profile</kbd> en kies voor <kbd>IPTV (661)</kbd>. Kl
 
 ![usg_controller_set_switchport](/usg-kpn-ftth/assets/img/usgkpnvlan/usg_controller_set_switchport.png)
 
-Nu gaan we verder met de aangepaste gateway.config.json plaatsen.
+Nu gaan we verder met de aangepaste config.gateway.json plaatsen.
 
-## Gateway.config.json plaatsen
+## Config.gateway.json plaatsen
 
 Het configuratie bestand wat we gaan plaatsen is een json bestand waarin een geavanceerde configuratie staat beschreven. Vanwege de complexiteit is dit niet in de webinterface in te stellen. Dit configuratie bestand is bedoeld voor de USG maar we gaan dit bestand plaatsen op de unifi controller. Zodra de unifi controller de USG de configuratie stuurt zal de unifi controller de instellingen van de webinterface samenvoegen met de geavanceerde configuratie en zo de complete configuratie naar de USG sturen.
 
@@ -142,7 +142,7 @@ De unifi controller kan op verschillende manieren aanwezig zijn in je netwerk:
 2. Via een stuk software wat je op je computer/server installeert (Windows of Linux)
 3. Via een (docker)container kan de controller draaien op een server of bijvoorbeeld op een NAS
 
-De locatie van de <kbd>gateway.config.json</kbd> is altijd hetzelfde gezien vanuit de basis locatie, namelijk ```<unifi_base>/data/sites/site_ID```. In de meeste gevallen is de ```site_ID``` gelijk aan ```default``` maar de waarde kan anders zijn indien je in de controller een site hebt toegevoegd en daar je apparaten in hebt geconfigureerd. In de adresbalk van je browser zie je in welke site je zit, in mijn geval is dat ```default```.
+De locatie van de <kbd>config.gateway.json</kbd> is altijd hetzelfde gezien vanuit de basis locatie, namelijk ```<unifi_base>/data/sites/site_ID```. In de meeste gevallen is de ```site_ID``` gelijk aan ```default``` maar de waarde kan anders zijn indien je in de controller een site hebt toegevoegd en daar je apparaten in hebt geconfigureerd. In de adresbalk van je browser zie je in welke site je zit, in mijn geval is dat ```default```.
 
 De locatie van ```<unifi_base>``` hangt af waar de controller draait. Ubiquity heeft een [pagina](https://help.ubnt.com/hc/en-us/articles/115004872967) gemaakt waarop ze de verschillende locaties aangeven:
 
@@ -153,7 +153,7 @@ De locatie van ```<unifi_base>``` hangt af waar de controller draait. Ubiquity h
 |Windows|%userprofile%/Ubiquiti UniFi|
 |macOS|~/Library/Application Support/UniFi|
 
-In het geval van de cloudkey kan je navigeren naar /usr/lib/unifi/data/sites/default/ (vervang default als je een andere site_id gebruikt). Indien je de controller software lokaal draait (op Windows of Mac) dan kan je <kbd>gateway.config.json</kbd> naar de juiste locatie kopieëren door middel van de verkenner of finder. In mijn geval maak ik gebruik van een docker container op mijn Synology NAS en kan ik via SSH inloggen op de NAS en naar de juiste map navigeren die aan mijn docker container gekoppeld zit.
+In het geval van de cloudkey kan je navigeren naar /usr/lib/unifi/data/sites/default/ (vervang default als je een andere site_id gebruikt). Indien je de controller software lokaal draait (op Windows of Mac) dan kan je <kbd>config.gateway.json</kbd> naar de juiste locatie kopieëren door middel van de verkenner of finder. In mijn geval maak ik gebruik van een docker container op mijn Synology NAS en kan ik via SSH inloggen op de NAS en naar de juiste map navigeren die aan mijn docker container gekoppeld zit.
 
 ![winscp_controller](/usg-kpn-ftth/assets/img/usgkpn/winscp_controller.png)
 
@@ -161,7 +161,7 @@ Ik start door WinSCP.exe te openen en de gegevens van mijn controller in te vull
 
 ![winscp_controller_upload](/usg-kpn-ftth/assets/img/usgkpn/winscp_controller_upload.png)
 
-In het rechter venster navigeer ik naar de locatie ```<unifi_base>/data/sites/site_ID```, in mijn geval is dat /volume1/docker/unifi/data/sites/default, ik heb namelijk de map /volume1/docker/unifi gekoppeld aan de unifi map in de docker container waardoor dit mijn ```<unifi_base>``` locatie is. In het linker venster navigeer ik naar de map waarin ik <kbd>usg-kpn-ftth-vlan.zip</kbd> heb uitgepakt, selecteer ik het bestand <kbd>gateway.config.json</kbd> en klik ik links boven op <kbd>Upload</kbd>. Hierna klik ik op <kbd>Ok</kbd> en is het bestand <kbd>gateway.config.json</kbd> naar de juiste locatie gekopieërd.
+In het rechter venster navigeer ik naar de locatie ```<unifi_base>/data/sites/site_ID```, in mijn geval is dat /volume1/docker/unifi/data/sites/default, ik heb namelijk de map /volume1/docker/unifi gekoppeld aan de unifi map in de docker container waardoor dit mijn ```<unifi_base>``` locatie is. In het linker venster navigeer ik naar de map waarin ik <kbd>usg-kpn-ftth-vlan.zip</kbd> heb uitgepakt, selecteer ik het bestand <kbd>config.gateway.json</kbd> en klik ik links boven op <kbd>Upload</kbd>. Hierna klik ik op <kbd>Ok</kbd> en is het bestand <kbd>config.gateway.json</kbd> naar de juiste locatie gekopieërd.
 
 > Indien je op de controller naar de data map navigeert maar daarin geen map sites ziet kan je deze laten aanmaken, klik [hier](/usg-kpn-ftth/posts/unifi-security-gateway-sides-folder/index.html) voor de handleiding.
 

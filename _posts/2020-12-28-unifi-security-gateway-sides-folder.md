@@ -31,7 +31,7 @@ Wanneer je de floorplan hebt opgeslagen kan je hem ook weer verwijderen door te 
 
 ![usg_controller_add_new_network](/usg-kpn-ftth/assets/img/usgkpnfolder/usg_floorplan_delete.png)
 
-Je kan nu verder met de andere handleiding om de gateway.config.json in de controller in de juiste map te plaatsen.
+Je kan nu verder met de andere handleiding om de config.gateway.json in de controller in de juiste map te plaatsen.
 
 ## Handmatig de map aanmaken
 Mocht bovenstaande handelingen niet werken of wil je handmatig de map aanmaken op de cloudkey kan dat met de volgende commando's:
@@ -41,4 +41,4 @@ Hiervoor moet je inloggen met putty op de cloudkey en daarna onderstaande comman
 mkdir -p /usr/lib/unifi/data/sites/default
 chown unifi:unifi /usr/lib/unifi/data/sites/default
 ```
-Daarna is de map aangemaakt en kan je de gateway.config.json er in plaatsen.
+Daarna is de map aangemaakt en kan je de config.gateway.json er in plaatsen.
