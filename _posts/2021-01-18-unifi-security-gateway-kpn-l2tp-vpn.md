@@ -121,16 +121,16 @@ Herstart nu de USG zodat de VPN instellingen worden geactiveerd en ook om te con
 
 <..>
 
-![ios_settings_vpn](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_settings_vpn.png)
+![ios_settings_vpn](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_settings_vpn.png){: width="500"}
 
-![ios_vpn_create](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_settings_vpn_create.png)
+![ios_vpn_create](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_settings_vpn_create.png){: width="500"}
 
-![ios_vpn_created](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_settings_vpn_created.png)
+![ios_vpn_created](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_settings_vpn_created.png){: width="500"}
 
-![ios_vpn_connected](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_settings_vpn_connected.png)
+![ios_vpn_connected](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_settings_vpn_connected.png){: width="500"}
 
-![ios_vpn_external_ip](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_vpn_external_ip.png)
+![ios_vpn_external_ip](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_vpn_external_ip.png){: width="500"}
 
-![ios_vpn_interal_server](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_vpn_internal_server.png)
+![ios_vpn_interal_server](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_vpn_internal_server.png){: width="500"}
 
 > Indien je me wilt bedanken (hoeft niet, mag wel) dan kan dat via [Buymeacoffee](https://www.buymeacoffee.com/coolhva).
