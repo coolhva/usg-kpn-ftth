@@ -128,6 +128,12 @@ In de lijst met netwerken moet het nieuw aangemaakte VPN netwerk er nu bij staan
 
 ![networks_with_vpn](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_networks_with_vpn.png)
 
+## WAN Netwerk controleren
+
+Het is belangrijk om te zorgen dat het WAN netwerk niet is geconfigureerd en dat <kbd>Use VLAN ID</kbd> is uitgevinkt. Het WAN netwerk wordt namelijk via de config.gateway.json geconfigureerd en ook setvpn.sh gaat er vanuit dat het WAN netwerk als volgt is ingesteld. Je kan deze instellingen bereiken door via <kbd>Settings</kbd> naar <kbd>Networks</kbd> te gaan en dan te kiezen voor <kbd>Edit</kbd> bij het <kbd>WAN</kbd> netwerk.
+
+![networks_wan](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_wan.png)
+
 ## Setvpn.sh plaatsen
 
 Start WinSCP en klik in WinSCP op de knop <kbd>New Session</kbd> en vul de gegevens in van de USG. De eventuele waarschuwing van unkown server beantwoordt je met <kbd>Yes</kbd>. Een popup met een welkomstboodschap verschijnt en hier mag je op <kbd>Continue</kbd> klikken.
