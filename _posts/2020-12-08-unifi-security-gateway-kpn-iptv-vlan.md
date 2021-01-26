@@ -11,9 +11,7 @@ seo:
 
 Deze handleiding neem ik je mee hoe je de IPTV kastjes van KPN achter de USG in hun eigen netwerk (VLAN) zet zodat de kans op verstoring kleiner is. Deze handleiding borduurt verder op [deze](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/index.html) handleiding waarin we de USG rechtstreeks aansluiten op de FTTH verbinding van KPN.
 
-```
-LET OP! Deze handleiding werkt ALLEEN als de handleiding zonder VLAN EERST is gevolgd!
-```
+> ***Let op:*** Deze handleiding werkt ALLEEN als de handleiding zonder VLAN EERST is gevolgd!
 
 ### Wat is een VLAN?
 

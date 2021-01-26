@@ -135,7 +135,7 @@ Nu moeten we het bestand uitvoerbaar maken. Dat doen we door de het bestand te s
 
 ![winscp_usg_select](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg_select.png)
 
-In de eigenschappen mag je een vinkje zetten bij elke <kbd>X</kbd> (bij Octal komt nu 0755 te staan) en daarna op <kbd>Ok</kbd> klikken.
+In de eigenschappen mag je een vinkje zetten bij elke <kbd>X</kbd> (bij <kbd>Octal</kbd> komt nu <kbd>0755</kbd> te staan) en daarna op <kbd>Ok</kbd> klikken.
 
 ![winscp_usg_chmod](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg_chmod.png)
 

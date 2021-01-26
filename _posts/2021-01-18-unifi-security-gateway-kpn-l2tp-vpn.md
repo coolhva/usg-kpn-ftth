@@ -7,17 +7,14 @@ seo:
   date_modified: 2021-01-18 19:54:03 +0100
 ---
 
-```
-LET OP! Deze handleiding is NOG NIET klaar, alle stappen zijn benoemd maar er mist uitleg en een schermafbeelding van de setvpn.sh plaatsen. Desondanks kan je, als je alles hebt doorgenomen, er voor kiezen om nu al hier mee aan de slag te gaan.
-```
+
+> LET OP! Deze handleiding is NOG NIET klaar, alle stappen zijn benoemd maar er mist uitleg en een schermafbeelding van de setvpn.sh plaatsen. Desondanks kan je, als je alles hebt doorgenomen, er voor kiezen om nu al hier mee aan de slag te gaan.
 
 ## Inleiding
 
 Deze handleiding neem ik je mee hoe je met een L2TP VPN van buitenaf verbinding kan maken met de USG op je KPN FttH aansluiting. Deze handleiding is alleen van toepassing indien je ook IPTV hebt geconfigureerd via [deze](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/index.html) handleiding waarin we de USG rechtstreeks aansluiten op de FTTH verbinding van KPN.
 
-```
-LET OP! Deze handleiding werkt ALLEEN in combinatie met de handleiding waarin we de USG direct aansluiten op de FttH verbinding!
-```
+> LET OP! Deze handleiding werkt ALLEEN in combinatie met de handleiding waarin we de USG direct aansluiten op de FttH verbinding!
 
 ### Wat is een L2TP VPN?
 
@@ -35,7 +32,7 @@ De volgende hardware hebben we nodig om deze handleiding te kunnen voltooien.
 |:---|:--|:--|
 |USG&nbsp;Router|Ubiquiti|Dit is de Ubiquiti Unifi security gateway (USG) die internet en IPTV verzorgt.|
 |Unifi&nbsp;controller|Ubiquiti / anders|Met de controller stel je de USG in, deze kan op een stuk hardware (cloudkey) draaien maar ook op je computer, server, NAS rechstreeks of bijvoorbeeld via docker.|
-|VPN Client|Telefoon/Laptop|Een apparaat wat L2TP VPN ondersteuning heeft (Andriod, IOS, Mac (OSX) of Windows) en de mogelijkheid om dit te testen buiten je eigen internet verbinding om, bijvoorbeeld via 4G of wifi van de buren.|
+|VPN Client|Telefoon/Laptop|Een apparaat wat L2TP VPN ondersteuning heeft (Andriod, IOS, Mac (OSX) of Windows) en de mogelijkheid om dit te testen buiten je eigen internet verbinding om, bijvoorbeeld via 4G of WiFi van de buren.|
 
 ### Software
 
@@ -53,12 +50,16 @@ Onderstaande informatie gaan we gebruiken in deze handleiding.
 
 |Informatie|Omschrijving|
 |:--|:---|
-|Extern IP adres|Dit is het IPv4 adres van je KPN aansluiting, dit kan je achterhalen om via de KPN verbinding naar [Test-IPv6.com](https://test-ipv6.com/) te gaan.|
+|Extern IPv4 adres|Dit is het IPv4 adres van je KPN aansluiting, dit kan je achterhalen om via je KPN verbinding naar bijvoorbeeld [test-ipv6.com](https://test-ipv6.com/) te gaan. ![get_ip_address](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_get_remote_ip.png)|
 |URL&nbsp;Controller|Dit is het web adres waarop de unifi controller bereikbaar is, deze is bereikbaar op een IP adres en draait vaak op poort 8443 (HTTPS).|
 |Controller&nbsp;login|De gebruikersnaam en wachtwoord om in te kunnen loggen op de controller.|
 |SSH&nbsp;login&nbsp;gegevens USG|De gebruikersnaam en wachtwoord om via SSH in te kunnen loggen op de USG (zie kopje hieronder).|
 
-![get_ip_address](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_get_remote_ip.png)
+### SSH toegang unifi apparaten
+
+Om toegang te krijgen tot de USG via SSH moet dit geconfigureerd zijn. In de webinterface van de controller ga je naar <kbd>settings</kbd> en dan naar <kbd>Controller Configuration</kbd> en scroll je naar beneden naar <kbd>Element SSH Authentication</kbd>. Hier vink je <kbd>Element SSH authentication</kbd> aan en kies je een gebruikersnaam en wachtwoord. Daarna klik je op <kbd>Apply Changes</kbd>. Vanaf nu kan je met deze gebruikersnaam en wachtwoord via SSH inloggen op de USG.
+
+![unifi_controller_ssh](/usg-kpn-ftth/assets/img/usgkpn/unifi_controller_ssh.png)
 
 ## Uitgangssituatie
 
@@ -71,11 +72,11 @@ Voordat we beginnen moeten we eerst weten waar we starten. In deze handleiding s
    Dit kan een unifi cloud key zijn maar ook een computer, server of een NAS.
 4. Ook zit de IPTV setupbox van KPN via een ethernet kabel verbonden aan een switch met IGMP en VLAN ondersteuning.
 5. Deze handleiding ([link](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/index.html)) is uitgevoerd en TV en internet werkt op dit moment.
-6. [Optioneel] De IPTV kastjes zitten in hun eigen VLAN door middel van deze handleiding [link](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-iptv-vlan/index.html).
+6. `[Optioneel]` De IPTV kastjes zitten in hun eigen VLAN door middel van deze handleiding [link](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-iptv-vlan/index.html).
 
 Als we de bestanden hebben gedownload pakken we de twee zip bestanden (winscp en usg-kpn-ftth vpn.zip) uit zodat we een map met WinSCP, een map met de configuratie bestanden en als laatst putty.exe hebben.
 
-![files_downloaded](/usg-kpn-ftth/assets/img/usgkpn/files_downloaded.png)
+![files_downloaded](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_files.png)
 
 ## Oude interface inschakelen
 
@@ -89,48 +90,110 @@ We gaan de radius server inschakelen, welke verantwoordelijk is voor het control
 
 ![enable_radius](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_services_enable_radius.png)
 
+Klik nu op de <kbd>Users</kbd> tab en klik op <kbd>+ Create New User</kbd>.
+
 ![radius_users](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_users.png)
+
+Vul bij <kbd>Name</kbd> een gebruikersnaam en bij <kbd>Password</kbd> een wachtwoord in. Deze gegevens zal je ook moeten invullen in de VPN client om verbinding te maken met de USG. Laat <kbd>VLAN</kbd> leeg, kies bij <kbd>Tunnel Type</kbd> voor <kbd>3&nbsp;-&nbsp;Layer&nbsp;Two&nbsp;Tunneling&nbsp;Protocol&nbsp;(L2TP)</kbd> en bij <kbd>Tunnel Medium Type</kbd> voor <kbd>1&nbsp;-&nbsp;IPv4&nbsp;(IP&nbsp;version&nbsp;4)</kbd>. Klik nu op <kbd>Save</kbd>.
 
 ![radius_create_user](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_create_user.png)
 
-ref: https://help.ui.com/hc/en-us/articles/115005445768-UniFi-USG-UDM-Configuring-L2TP-Remote-Access-VPN
-
-<..>
-
 ## VPN Netwerk aanmaken
 
-<..>
+Nadat we de Radius server hebben ingeschakeld en een gebruiker hebben aangemaakt gaan we nu een VPN Netwerk toevoegen waar VPN gebruikers onderdeel van worden zodra ze via VPN verbinding maken met de USG.
+
+Ga via <kbd>Settings</kbd> naar <kbd>Networks</kbd> en klik op <kbd>+ Create New Network</kbd>.
 
 ![networks_without_vpn](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_networks_without_vpn.png)
 
+Maak een nieuw VPN netwerk met de volgende gegevens:
+
+|Omschrijving|Keuze|
+|:--|:---|
+|Name|Kies een naam voor het VPN netwerk, bijvoorbeeld VPN.|
+|Purpose|Remote User VPN|
+|VPN Type|L2TP Server|
+|Pre-Shared Key|Kies een wachtwoord, dit wachtwoord moet je straks ook invullen in je VPN client.|
+|Gateway&nbsp;IP/Subnet|Vul hier 100.64.64.64/24 in, deze ip reeks is speciaal[^fn-ip100-64] en wordt niet intern gebruikt en zorgt dat je geen IP conflict krijgt.|
+|Name Server|Auto|
+|WINS Server|Uitgevinkt|
+|Site-to-Site VPN|Uitgevinkt|
+|RADIUS Profile|Default|
+|MS-CHAP v2|Uitgevinkt|
+
+Klik nu op <kbd>Save</kbd>.
+
 ![create_vpn_network](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_create_network.png)
+
+In de lijst met netwerken moet het nieuw aangemaakte VPN netwerk er nu bij staan.
 
 ![networks_with_vpn](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_networks_with_vpn.png)
 
 ## Setvpn.sh plaatsen
 
-<..>
+Start WinSCP en klik in WinSCP op de knop <kbd>New Session</kbd> en vul de gegevens in van de USG. De eventuele waarschuwing van unkown server beantwoordt je met <kbd>Yes</kbd>. Een popup met een welkomstboodschap verschijnt en hier mag je op <kbd>Continue</kbd> klikken.
 
-setvpn.sh in /config/scripts/post-config.d/ plaatsen en CHMOD 755 uitvoeren.
+![winscp_usg](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg.png)
 
-## USG herstarten
+Nadat de verbinding tot stand is gekomen navigeren we in het rechter venster naar de locatie ```/config/scripts/post-config.d```. In het linker scherm selecteren we setvpn.sh en klikken we weer op de knop <kbd>Upload</kbd>. Klik hierna op <kbd>Ok</kbd> en daarna is het bestand op de USG geplaatst.
 
-Herstart nu de USG zodat de VPN instellingen worden geactiveerd en ook om te controleren dat na een herstart de VPN verbinding het zal doen.
+![winscp_usg_upload](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_transfer_file.png)
 
-## VPN Testen (iPhone)
+Nu moeten we het bestand uitvoerbaar maken. Dat doen we door de het bestand te selecteren en daarna met de rechtermuisknop er op te klikken en voor <kbd>Properties</kbd> te kiezen.
 
-<..>
+![winscp_usg_select](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_setvpn_properties.png)
+
+In de eigenschappen mag je een vinkje zetten bij elke <kbd>X</kbd> (bij <kbd>Octal</kbd> komt nu <kbd>0755</kbd> te staan) en daarna op <kbd>Ok</kbd> klikken.
+
+![winscp_usg_chmod](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_setvpn_chmod_755.png)
+
+Nu mag je WinSCP sluiten en in de controller naar <kbd>Devices</kbd> gaan. Ga met de muis op de regel van de USG staan, rechts verschijnt de herstart optie en dan klik je op <kbd>Restart</kbd>.
+
+![unifi_controller_usg_restart](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_restart.png)
+
+Na de herstart worden de VPN instellingen geactiveerd en kunnen we nu de VPN gaan testen.
+
+## VPN Testen
+In dit voorbeeld pak ik een iPhone maar dezelfde logica kan worden gebruikt op een Android telefoon of laptop.
+
+Ga op de iPhone naar <kbd>Settings</kbd> en daarna naar <kbd>VPN</kbd>. Kies voor <kbd>Add VPN Configuration...</kbd>.
 
 ![ios_settings_vpn](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_settings_vpn.png){: width="500"}
 
+Vul de volgende gegevens in:
+
+|Omschrijving|Keuze|
+|:--|:---|
+|Type|L2TP|
+|Description|Kies een naam voor het VPN verbinding, bijvoorbeeld Thuis.|
+|Server|Het externe IPv4 adres van je KPN internet verbinding.|
+|Account|De gebruikersnaam die je in de Radius configuratie hebt aangemaakt.|
+|RSA SecurID|Uitgeschakeld|
+|Password|Het wachtwoord die je hebt gebruikt bij het aanmaken van de gebruiker in de Radius configuratie.|
+|Secret|Vul hier de <kbd>Pre-Shared Key</kbd> in die je bij het aanmaken van het VPN netwerk hebt gekozen.|
+|Send All Traffic|Ja -> Stuur al het verkeer vanuit je telefoon naar je USG en dan naar het internet.<br />Nee -> Stuur alleen het verkeer bestemd voor je interne netwerk(en) achter de USG.|
+|Proxy|Off|
+
+Kies daarna op <kbd>Done</kbd>.
+
 ![ios_vpn_create](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_settings_vpn_create.png){: width="500"}
+
+In het overzicht is de VPN verbinding er nu bijgekomen. Selecteer deze verbinding en zorg dat je verbonden bent via een ander netwerk dan je eigen KPN internet verbinding (bijvoorbeeld via 4G of WiFi van je buren).
 
 ![ios_vpn_created](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_settings_vpn_created.png){: width="500"}
 
+Zet nu de VPN verbinding aan door de knop om te zetten in de <kbd>Status</kbd> regel. Als alles goed gaat zal je nu zien dat je verbonden bent.
+
 ![ios_vpn_connected](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_settings_vpn_connected.png){: width="500"}
+
+Je kan nu naar je webbrowser gaan en in google vragen naar <kbd>what is my ip</kbd>. Als resultaat zie je het IPv4 adres waar Google ziet waar je vandaan komt. Dit is, als je al het verkeer doorstuurt naar de USG, het IPv4 adres van je KPN Internet verbinding.
 
 ![ios_vpn_external_ip](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_vpn_external_ip.png){: width="500"}
 
+Ook kan je nu verbinding maken met apparaten in je eigen netwerk, hieronder een voorbeeld van de login pagina van de unifi controller op mijn interne netwerk.
+
 ![ios_vpn_interal_server](/usg-kpn-ftth/assets/img/usgkpnvpn/ios_vpn_internal_server.png){: width="500"}
+
+[^fn-ip100-64]: 100.64.0.0/10 Reserved IP Space, CGN: [Wikipedia](https://en.wikipedia.org/wiki/IPv4_shared_address_space)
 
 > Indien je me wilt bedanken (hoeft niet, mag wel) dan kan dat via [Buymeacoffee](https://www.buymeacoffee.com/coolhva).
