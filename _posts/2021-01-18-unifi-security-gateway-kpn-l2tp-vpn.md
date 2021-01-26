@@ -11,8 +11,6 @@ seo:
 
 Deze handleiding neem ik je mee hoe je met een L2TP VPN van buitenaf verbinding kan maken met de USG op je KPN FttH aansluiting. Deze handleiding is alleen van toepassing indien je ook IPTV hebt geconfigureerd via [deze](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/index.html) handleiding waarin we de USG rechtstreeks aansluiten op de FTTH verbinding van KPN.
 
-> LET OP! Deze handleiding werkt ALLEEN in combinatie met de handleiding waarin we de USG direct aansluiten op de FttH verbinding!
-
 ### Wat is een L2TP VPN?
 
 Met een VPN (Virtual Private Network) maak je een verbinding vanaf, bijvoorbeeld, je telefoon of laptop via het internet met je USG. Nadat je inloggegevens zijn gecontroleerd is je telefoon of laptop onderdeel van het VPN Netwerk op de USG. Vanuit dit VPN netwerk kan je telefoon of laptop apparaten bereiken op je andere interne netwerk(en) of het internet bereiken via de USG waardoor het lijkt alsof je vanaf je thuis netwerk het internet op gaat.
