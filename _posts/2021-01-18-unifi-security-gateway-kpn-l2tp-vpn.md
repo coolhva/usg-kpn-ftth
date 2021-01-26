@@ -13,7 +13,7 @@ Deze handleiding neem ik je mee hoe je met een L2TP VPN van buitenaf verbinding 
 
 ### Wat is een L2TP VPN?
 
-Met een VPN (Virtual Private Network) maak je een verbinding vanaf, bijvoorbeeld, je telefoon of laptop via het internet met je USG. Nadat je inloggegevens zijn gecontroleerd is je telefoon of laptop onderdeel van het VPN Netwerk op de USG. Vanuit dit VPN netwerk kan je telefoon of laptop apparaten bereiken op je andere interne netwerk(en) of het internet bereiken via de USG waardoor het lijkt alsof je vanaf je thuis netwerk het internet op gaat.
+Met een VPN (Virtual Private Network) maak je een verbinding vanaf, bijvoorbeeld, je telefoon of laptop via het internet met je USG. Nadat je inloggegevens zijn gecontroleerd is je telefoon of laptop onderdeel van het VPN netwerk op de USG. Vanuit dit VPN netwerk kan je telefoon of laptop apparaten bereiken op je andere interne netwerk(en) of het internet bereiken via de USG waardoor het lijkt alsof je vanaf je thuis netwerk het internet op gaat.
 
 ## Voorbereiding
 
