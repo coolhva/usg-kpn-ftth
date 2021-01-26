@@ -7,9 +7,6 @@ seo:
   date_modified: 2021-01-18 19:54:03 +0100
 ---
 
-
-> LET OP! Deze handleiding is NOG NIET klaar, alle stappen zijn benoemd maar er mist uitleg en een schermafbeelding van de setvpn.sh plaatsen. Desondanks kan je, als je alles hebt doorgenomen, er voor kiezen om nu al hier mee aan de slag te gaan.
-
 ## Inleiding
 
 Deze handleiding neem ik je mee hoe je met een L2TP VPN van buitenaf verbinding kan maken met de USG op je KPN FttH aansluiting. Deze handleiding is alleen van toepassing indien je ook IPTV hebt geconfigureerd via [deze](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/index.html) handleiding waarin we de USG rechtstreeks aansluiten op de FTTH verbinding van KPN.
