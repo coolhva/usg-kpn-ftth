@@ -174,7 +174,7 @@ Vul de volgende gegevens in:
 |RSA SecurID|Uitgeschakeld|
 |Password|Het wachtwoord die je hebt gebruikt bij het aanmaken van de gebruiker in de Radius configuratie.|
 |Secret|Vul hier de <kbd>Pre-Shared Key</kbd> in die je bij het aanmaken van het VPN netwerk hebt gekozen.|
-|Send All Traffic|Ja -> Stuur al het verkeer vanuit je telefoon naar je USG en dan naar het internet.<br />Nee -> Stuur alleen het verkeer bestemd voor je interne netwerk(en) achter de USG.|
+|Send All Traffic|Ja. Aangezien het L2TP protocol geen voorziening heeft om aan te geven welke netwerken via de VPN moeten lopen moet al het verkeer via de VPN lopen wil je toegang krijgen tot apparaten in je eigen netwerk(en).|
 |Proxy|Off|
 
 Kies daarna op <kbd>Done</kbd>.
