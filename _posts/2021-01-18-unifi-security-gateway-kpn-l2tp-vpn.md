@@ -29,7 +29,7 @@ De volgende hardware hebben we nodig om deze handleiding te kunnen voltooien.
 |Unifi&nbsp;controller|Ubiquiti / anders|Met de controller stel je de USG in, deze kan op een stuk hardware (cloudkey) draaien maar ook op je computer, server, NAS rechstreeks of bijvoorbeeld via docker.|
 |VPN Client|Telefoon/Laptop|Een apparaat wat L2TP VPN ondersteuning heeft (Andriod, IOS, Mac (OSX) of Windows) en de mogelijkheid om dit te testen buiten je eigen internet verbinding om, bijvoorbeeld via 4G of WiFi van de buren.|
 
-> ***Let op:*** deze handleiding is bedoeld voor een Ubiquity Unifi Security Gateway 3. Indien je een USG 4 Pro hebt dien je in de vpn.sh de interfaces aan te passen op de manier waarop je je USG 4 Pro hebt aangesloten. Bij de USG 3 is eth0 WAN en eth1 LAN.
+> ***Let op:*** deze handleiding is bedoeld voor een Ubiquity Unifi Security Gateway 3. Indien je een USG 4 Pro hebt dien je in de setvpn.sh de interfaces aan te passen op de manier waarop je je USG 4 Pro hebt aangesloten. Bij de USG 3 is eth0 WAN en eth1 LAN.
 
 ### Software
 
