@@ -114,7 +114,7 @@ Klik op <kbd>Apply changes</kbd> en in het overzicht zie je nu dat het IPTV netw
 
 ![usg_controller_networks_witih_iptv](/usg-kpn-ftth/assets/img/usgkpnvlan/usg_controller_networks_witih_iptv.png)
 
-> ***Let op:*** Wanneer je alleen unifi switches gebruikt tussen de USG en het IPTV kastje is het voldoende om nu de IPTV kastjes op VLAN 661 te plaatsen en kan je onderstaande stappen volgen. Als je andere merken switches gebruikt zorg dan dat VLAN 661 tagged naar de USG loopt en untagged naar het IPTV kastje loopt (en dat VLAN 661 de hele weg wordt doorgegeven als er meerdere switches worden gebruikt) en ga verder met de stap om de config.gateway.json op de controller te plaatsen.
+> ***Let op:*** Wanneer je alleen unifi switches gebruikt tussen de USG en het IPTV kastje is het voldoende om nu de IPTV kastjes op VLAN 661 te plaatsen en kan je onderstaande stappen volgen. Als je andere merken switches gebruikt zorg dan dat VLAN 661 tagged naar de USG loopt en untagged naar het IPTV kastje loopt (en dat VLAN 661 de hele weg wordt doorgegeven als er meerdere switches worden gebruikt. Indien je eerst een unifi switch gebruikt en daarna een ander merk moet je een nieuw Port Profile aanmaken in Advanced Settings met als Native Network je LAN en Tagged Networks het IPTV (661) VLAN. Dit Port Profile stel je in op de poort die vanaf je unifi switch naar je andere merk switch gaat.) en ga verder met de stap om de config.gateway.json op de controller te plaatsen.
 
 Nu gaan we in het menu links naar <kbd>Clients</kbd> en klikken op het IPTV kastje van KPN. Klik op de link naast <kbd>port</kbd>, je gaat nu naar de switch waarbij de poort al geselecteerd is.
 
