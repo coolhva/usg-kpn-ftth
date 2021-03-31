@@ -155,7 +155,7 @@ Omdat we een geavanceerde configuratie toepassen zijn er een aantal dingen die a
 
 * Het WAN IP adres in de controller zal altijd 0.0.0.0 aangeven. Dit komt (volgens mij) omdat er twee WAN interfaces zijn (drie, als je PPPoE mee telt) en hij niet de juiste kan vinden.
 * Wanneer je direct inlogt op de USG via de webbrowser zal hij aangeven dat hij geen internet verbinding heeft. Hij heeft dit in feite wel maar het mechanisme om dat de detecteren werkt (volgens mij) niet vanwege de meerdere WAN interfaces.
-* Je kan een (L2TP) VPN volledig instellen via de controller maar om het werkend te maken dien je een aanvullend bestand ([setvpn.sh](https://github.com/coolhva/usg-kpn-ftth/blob/vpn/setvpn.sh)) in de map ```/config/scripts/post-config.d``` op de USG te zetten om de correcte WAN interface te configureren voor de VPN.
+* Je kan een (L2TP) VPN volledig instellen via de controller maar om het werkend te maken dien je een aanvullend bestand ([setvpn.sh](https://github.com/coolhva/usg-kpn-ftth/blob/vpn/setvpn.sh)) in de map ```/config/scripts/post-config.d``` op de USG te zetten om de correcte WAN interface te configureren voor de VPN. Hier is ook een aparte [handleiding](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-l2tp-vpn/index.html) voor gemaakt. 
 
 ## Meer informatie
 
