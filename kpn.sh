@@ -12,7 +12,7 @@
 #############################################################################
 # Author      : Henk van Achterberg (coolhva)                               #
 # GitHub      : https://github.com/coolhva/usg-kpn-ftth/                    #
-# Version     : 0.1 (ALPHA)                                                 #
+# Version     : 0.2 (ALPHA)                                                 #
 #---------------------------------------------------------------------------#
 # Description :                                                             #
 #                                                                           #
@@ -32,6 +32,16 @@
 readonly logFile="/var/log/kpn.log"
 
 echo "[kpn.sh] Executed at $(date)" >> ${logFile}
+
+# Check for lock file and exit if it is present
+if [ -f "/config/scripts/post-config.d/kpn.lock" ]; then
+echo "[kpn.sh] lock file /config/scripts/post-config.d/kpn.lock exists, stopping execution" >> ${logFile}
+exit
+fi
+
+# Create lock file so kpn.sh will not execute simultaniously
+echo "[kpn.sh] creating lock file at /config/scripts/post-config.d/kpn.lock" >> ${logFile}
+touch /config/scripts/post-config.d/kpn.lock
 
 # Check if the dhcp hook exists, this will run after retrieving a dhcp lease
 if [ ! -f "/etc/dhcp3/dhclient-exit-hooks.d/routes" ]; then
@@ -128,7 +138,9 @@ if [ ! $(cli-shell-api returnActiveValue interfaces ethernet eth0 mtu) ]; then
     commit
     echo "[kpn.sh] Connecting pppoe2 after changing MTU" >> ${logFile}
     /opt/vyatta/bin/vyatta-op-cmd-wrapper connect interface pppoe2 >> ${logFile}
-    # This will exit the bash script, and via the commit hook will run this script again.
+    # This will remove the lock file and exit the bash script, and via the commit hook will run this script again.
+    echo "[kpn.sh] removing lock file at /config/scripts/post-config.d/kpn.lock" >> ${logFile}
+    rm /config/scripts/post-config.d/kpn.lock
     exit
 fi
 
@@ -144,8 +156,13 @@ if [ $(cli-shell-api returnActiveValue vpn l2tp remote-access dhcp-interface) ];
     set vpn l2tp remote-access outside-address 0.0.0.0 >> ${logFile}
     echo "[kpn.sh] Commiting" >> ${logFile}
     commit
-    # This will exit the bash script, and via the commit hook will run this script again.
+    # This will remove the lock file and exit the bash script, and via the commit hook will run this script again.
+    echo "[kpn.sh] removing lock file at /config/scripts/post-config.d/kpn.lock" >> ${logFile}
+    rm /config/scripts/post-config.d/kpn.lock
     exit
 fi
 
+# removing lock file and finish execution
+echo "[kpn.sh] removing lock file at /config/scripts/post-config.d/kpn.lock" >> ${logFile}
+rm /config/scripts/post-config.d/kpn.lock
 echo "[kpn.sh] Finished" >> ${logFile}
