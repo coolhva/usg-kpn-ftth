@@ -11,8 +11,8 @@ Please **[download a zip file](https://github.com/coolhva/usg-kpn-ftth/archive/m
 
    The config.gateway.json contains the main configuration with the different interfaces which are needed for internet (vlan 6) and IPTV (vlan 4). IPv4 is configured via PPPoE with the kpn/kpn username and password. KPN uses a TAG which is configured in the DSLAM to identify your connection and to give you your "permanent" public IPv4 address.
 
-2. Place **setroutes.sh** in */config/scripts/post-config.d/* via SCP
-3. Execute `chmod +x /config/scripts/post-config.d/setroutes.sh` on the USG
+2. Place **kpn.sh** in */config/scripts/post-config.d/* via SCP
+3. Execute `chmod +x /config/scripts/post-config.d/kpn.sh` on the USG
 
    After each firmware upgrade the routes file, used by the dhcp client at the exit hook (for the IPTV routes), is removed. To overcome this, after each upgrade the USG will execute this script which will create the routes file, renews the DHCP lease, restart the IGMP Proxy.
 
