@@ -159,7 +159,7 @@ Ik start door WinSCP.exe te openen en de gegevens van mijn controller in te vull
 
 ![winscp_controller_upload](/usg-kpn-ftth/assets/img/usgkpn/winscp_controller_upload.png)
 
-In het rechter venster navigeer ik naar de locatie ```<unifi_base>/data/sites/site_ID```, in mijn geval is dat /volume1/docker/unifi/data/sites/default, ik heb namelijk de map /volume1/docker/unifi gekoppeld aan de unifi map in de docker container waardoor dit mijn ```<unifi_base>``` locatie is. In het linker venster navigeer ik naar de map waarin ik <kbd>usg-kpn-ftth-vlan.zip</kbd> heb uitgepakt, selecteer ik het bestand <kbd>config.gateway.json</kbd> en klik ik links boven op <kbd>Upload</kbd>. Hierna klik ik op <kbd>Ok</kbd> en is het bestand <kbd>config.gateway.json</kbd> naar de juiste locatie gekopieërd.
+In het rechter venster navigeer ik naar de locatie ```<unifi_base>/data/sites/site_ID```, in mijn geval is dat /volume1/docker/unifi-6/data/sites/default, ik heb namelijk de map /volume1/docker/unifi-6/ gekoppeld aan de unifi map in de docker container waardoor dit mijn ```<unifi_base>``` locatie is. In het linker venster navigeer ik naar de map waarin ik <kbd>usg-kpn-ftth-vlan.zip</kbd> heb uitgepakt, selecteer ik het bestand <kbd>config.gateway.json</kbd> en klik ik links boven op <kbd>Upload</kbd>. Hierna klik ik op <kbd>Ok</kbd> en is het bestand <kbd>config.gateway.json</kbd> naar de juiste locatie gekopieërd.
 
 > Indien je op de controller naar de data map navigeert maar daarin geen map sites ziet kan je deze laten aanmaken, klik [hier](/usg-kpn-ftth/posts/unifi-security-gateway-sides-folder/index.html) voor de handleiding.
 

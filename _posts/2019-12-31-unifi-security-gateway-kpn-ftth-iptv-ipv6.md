@@ -117,17 +117,17 @@ Ik start door WinSCP.exe te openen en de gegevens van mijn controller in te vull
 
 ![winscp_controller_upload](/usg-kpn-ftth/assets/img/usgkpn/winscp_controller_upload.png)
 
-In het rechter venster navigeer ik naar de locatie ```<unifi_base>/data/sites/site_ID```, in mijn geval is dat /volume1/docker/unifi/data/sites/default, ik heb namelijk de map /volume1/docker/unifi gekoppeld aan de unifi map in de docker container waardoor dit mijn ```<unifi_base>``` locatie is. In het linker venster navigeer ik naar de map waarin ik <kbd>usg-kpn-ftth-master.zip</kbd> heb uitgepakt, selecteer ik het bestand <kbd>config.gateway.json</kbd> en klik ik links boven op <kbd>Upload</kbd>. Hierna klik ik op <kbd>Ok</kbd> en is het bestand <kbd>config.gateway.json</kbd> naar de juiste locatie gekopieërd.
+In het rechter venster navigeer ik naar de locatie ```<unifi_base>/data/sites/site_ID```, in mijn geval is dat /volume1/docker/unifi-6/data/sites/default, ik heb namelijk de map /volume1/docker/unifi-6/ gekoppeld aan de unifi map in de docker container waardoor dit mijn ```<unifi_base>``` locatie is. In het linker venster navigeer ik naar de map waarin ik <kbd>usg-kpn-ftth-master.zip</kbd> heb uitgepakt, selecteer ik het bestand <kbd>config.gateway.json</kbd> en klik ik links boven op <kbd>Upload</kbd>. Hierna klik ik op <kbd>Ok</kbd> en is het bestand <kbd>config.gateway.json</kbd> naar de juiste locatie gekopieërd.
 
 > Indien je op de controller naar de data map navigeert maar daarin geen map sites ziet kan je deze laten aanmaken, klik [hier](/usg-kpn-ftth/posts/unifi-security-gateway-sides-folder/index.html) voor de handleiding.
 
-## Setroutes.sh plaatsen
+## kpn.sh plaatsen
 
 Nadat we de JSON op de controller hebben geplaatst, gaan we nu een configuratie bestand op de USG plaatsen. Hiervoor klik ik in WinSCP op de knop <kbd>New Session</kbd> en vul ik de gegevens in van de USG. De eventuele waarschuwing van unkown server beantwoord ik met <kbd>Yes</kbd>. Een popup met een welkomstboodschap verschijnt en hier mag je op <kbd>Continue</kbd> klikken.
 
 ![winscp_usg](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg.png)
 
-Nadat de verbinding tot stand is gekomen navigeren we in het rechter venster naar de locatie ```/config/scripts/post-config.d```. In het linker scherm selecteren we setroutes.sh en klikken we weer op de knop <kbd>Upload</kbd>. Klik hierna op <kbd>Ok</kbd> en daarna is het bestand op de USG geplaatst.
+Nadat de verbinding tot stand is gekomen navigeren we in het rechter venster naar de locatie ```/config/scripts/post-config.d```. In het linker scherm selecteren we kpn.sh en klikken we weer op de knop <kbd>Upload</kbd>. Klik hierna op <kbd>Ok</kbd> en daarna is het bestand op de USG geplaatst.
 
 ![winscp_usg_upload](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg_upload.png)
 
@@ -155,7 +155,7 @@ Omdat we een geavanceerde configuratie toepassen zijn er een aantal dingen die a
 
 * Het WAN IP adres in de controller zal altijd 0.0.0.0 aangeven. Dit komt (volgens mij) omdat er twee WAN interfaces zijn (drie, als je PPPoE mee telt) en hij niet de juiste kan vinden.
 * Wanneer je direct inlogt op de USG via de webbrowser zal hij aangeven dat hij geen internet verbinding heeft. Hij heeft dit in feite wel maar het mechanisme om dat de detecteren werkt (volgens mij) niet vanwege de meerdere WAN interfaces.
-* Je kan een (L2TP) VPN volledig instellen via de controller maar om het werkend te maken dien je een aanvullend bestand ([setvpn.sh](https://github.com/coolhva/usg-kpn-ftth/blob/vpn/setvpn.sh)) in de map ```/config/scripts/post-config.d``` op de USG te zetten om de correcte WAN interface te configureren voor de VPN. Hier is ook een aparte [handleiding](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-l2tp-vpn/index.html) voor gemaakt. 
+* Je kan een (L2TP) VPN volledig instellen via de controller, ik heb hier een aparte [handleiding](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-l2tp-vpn/index.html) voor gemaakt. 
 
 ## Meer informatie
 

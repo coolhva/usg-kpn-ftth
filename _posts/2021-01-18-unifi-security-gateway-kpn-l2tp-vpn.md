@@ -29,18 +29,6 @@ De volgende hardware hebben we nodig om deze handleiding te kunnen voltooien.
 |Unifi&nbsp;controller|Ubiquiti / anders|Met de controller stel je de USG in, deze kan op een stuk hardware (cloudkey) draaien maar ook op je computer, server, NAS rechstreeks of bijvoorbeeld via docker.|
 |VPN Client|Telefoon/Laptop|Een apparaat wat L2TP VPN ondersteuning heeft (Andriod, IOS, Mac (OSX) of Windows) en de mogelijkheid om dit te testen buiten je eigen internet verbinding om, bijvoorbeeld via 4G of WiFi van de buren.|
 
-> ***Let op:*** deze handleiding is bedoeld voor een Ubiquity Unifi Security Gateway 3. Indien je een USG 4 Pro hebt dien je in de setvpn.sh de interfaces aan te passen op de manier waarop je je USG 4 Pro hebt aangesloten. Bij de USG 3 is eth0 WAN en eth1 LAN.
-
-### Software
-
-In deze handleiding ga ik er vanuit dat we Windows 10 gebruiken waarbij we onderstaande software gaan gebruiken. Graag deze bestanden downloaden zodat ze klaar staan als we gaan beginnen.
-
-|Software|Omschrijving|
-|:---|:--|
-|[putty.exe&nbsp;(64&#x2011;bit)](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html){:target="_blank"}|Met dit programma kunnen we via SSH inloggen op de USG en eventueel de controller om commando's uit te voeren.|
-|[WinSCP&nbsp;Portable](https://winscp.net/eng/downloads.php){:target="_blank"}|WinSCP gebruiken we om via Secure Copy Protocol bestanden van onze computer naar de USG en eventueel de controller te krijgen.|
-|[usg-kpn-ftth-vpn zip](https://github.com/coolhva/usg-kpn-ftth/archive/vpn.zip){:target="_blank"}|De inhoud van mijn github repo met VPN ondersteuning in zip formaat zodat we alle bestanden in het juiste (UNIX) formaat hebben. Deze gaan we later naar de juiste locaties (Controller) verplaatsen.|
-
 ### Gegevens
 
 Onderstaande informatie gaan we gebruiken in deze handleiding.
@@ -50,13 +38,6 @@ Onderstaande informatie gaan we gebruiken in deze handleiding.
 |Extern IPv4 adres|Dit is het IPv4 adres van je KPN aansluiting, dit kan je achterhalen om via je KPN verbinding naar bijvoorbeeld [test-ipv6.com](https://test-ipv6.com/) te gaan. ![get_ip_address](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_get_remote_ip.png)|
 |URL&nbsp;Controller|Dit is het web adres waarop de unifi controller bereikbaar is, deze is bereikbaar op een IP adres en draait vaak op poort 8443 (HTTPS).|
 |Controller&nbsp;login|De gebruikersnaam en wachtwoord om in te kunnen loggen op de controller.|
-|SSH&nbsp;login&nbsp;gegevens USG|De gebruikersnaam en wachtwoord om via SSH in te kunnen loggen op de USG (zie kopje hieronder).|
-
-### SSH toegang unifi apparaten
-
-Om toegang te krijgen tot de USG via SSH moet dit geconfigureerd zijn. In de webinterface van de controller ga je naar <kbd>settings</kbd> en dan naar <kbd>Controller Configuration</kbd> en scroll je naar beneden naar <kbd>Element SSH Authentication</kbd>. Hier vink je <kbd>Element SSH authentication</kbd> aan en kies je een gebruikersnaam en wachtwoord. Daarna klik je op <kbd>Apply Changes</kbd>. Vanaf nu kan je met deze gebruikersnaam en wachtwoord via SSH inloggen op de USG.
-
-![unifi_controller_ssh](/usg-kpn-ftth/assets/img/usgkpn/unifi_controller_ssh.png)
 
 ## Uitgangssituatie
 
@@ -70,10 +51,6 @@ Voordat we beginnen moeten we eerst weten waar we starten. In deze handleiding s
 4. Ook zit de IPTV setupbox van KPN via een ethernet kabel verbonden aan een switch met IGMP en VLAN ondersteuning.
 5. Deze handleiding ([link](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/index.html)) is uitgevoerd en TV en internet werkt op dit moment.
 6. `[Optioneel]` De IPTV kastjes zitten in hun eigen VLAN door middel van deze handleiding [link](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-iptv-vlan/index.html).
-
-Als we de bestanden hebben gedownload pakken we de twee zip bestanden (winscp en usg-kpn-ftth vpn.zip) uit zodat we een map met WinSCP, een map met de configuratie bestanden en als laatst putty.exe hebben.
-
-![files_downloaded](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_files.png)
 
 ## Oude interface inschakelen
 
@@ -128,33 +105,9 @@ In de lijst met netwerken moet het nieuw aangemaakte VPN netwerk er nu bij staan
 
 ## WAN Netwerk controleren
 
-Het is belangrijk om te zorgen dat het WAN netwerk niet is geconfigureerd en dat <kbd>Use VLAN ID</kbd> is uitgevinkt. Het WAN netwerk wordt namelijk via de config.gateway.json geconfigureerd en ook setvpn.sh gaat er vanuit dat het WAN netwerk als volgt is ingesteld. Je kan deze instellingen bereiken door via <kbd>Settings</kbd> naar <kbd>Networks</kbd> te gaan en dan te kiezen voor <kbd>Edit</kbd> bij het <kbd>WAN</kbd> netwerk.
+Het is belangrijk om te zorgen dat het WAN netwerk niet is geconfigureerd en dat <kbd>Use VLAN ID</kbd> is uitgevinkt. Het WAN netwerk wordt namelijk via de config.gateway.json geconfigureerd en ook kpn.sh gaat er vanuit dat het WAN netwerk als volgt is ingesteld. Je kan deze instellingen bereiken door via <kbd>Settings</kbd> naar <kbd>Networks</kbd> te gaan en dan te kiezen voor <kbd>Edit</kbd> bij het <kbd>WAN</kbd> netwerk.
 
 ![networks_wan](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_wan.png)
-
-## Setvpn.sh plaatsen
-
-Start WinSCP en klik in WinSCP op de knop <kbd>New Session</kbd> en vul de gegevens in van de USG. De eventuele waarschuwing van unkown server beantwoordt je met <kbd>Yes</kbd>. Een popup met een welkomstboodschap verschijnt en hier mag je op <kbd>Continue</kbd> klikken.
-
-![winscp_usg](/usg-kpn-ftth/assets/img/usgkpn/winscp_usg.png)
-
-Nadat de verbinding tot stand is gekomen navigeren we in het rechter venster naar de locatie ```/config/scripts/post-config.d```. In het linker scherm selecteren we setvpn.sh en klikken we weer op de knop <kbd>Upload</kbd>. Klik hierna op <kbd>Ok</kbd> en daarna is het bestand op de USG geplaatst.
-
-![winscp_usg_upload](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_transfer_file.png)
-
-Nu moeten we het bestand uitvoerbaar maken. Dat doen we door de het bestand te selecteren en daarna met de rechtermuisknop er op te klikken en voor <kbd>Properties</kbd> te kiezen.
-
-![winscp_usg_select](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_setvpn_properties.png)
-
-In de eigenschappen mag je een vinkje zetten bij elke <kbd>X</kbd> (bij <kbd>Octal</kbd> komt nu <kbd>0755</kbd> te staan) en daarna op <kbd>Ok</kbd> klikken.
-
-![winscp_usg_chmod](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_setvpn_chmod_755.png)
-
-Nu mag je WinSCP sluiten en in de controller naar <kbd>Devices</kbd> gaan. Ga met de muis op de regel van de USG staan, rechts verschijnt de herstart optie en dan klik je op <kbd>Restart</kbd>.
-
-![unifi_controller_usg_restart](/usg-kpn-ftth/assets/img/usgkpnvpn/usg_vpn_restart.png)
-
-Na de herstart worden de VPN instellingen geactiveerd en kunnen we nu de VPN gaan testen.
 
 ## VPN Testen
 In dit voorbeeld pak ik een iPhone maar dezelfde logica kan worden gebruikt op een Android telefoon of laptop.
