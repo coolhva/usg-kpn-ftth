@@ -31,21 +31,21 @@
 
 readonly logFile="/var/log/kpn.log"
 
-echo "[kpn.sh] Executed at $(date)" >> ${logFile}
+echo "[$(date)] [kpn.sh] Executed at $(date)" >> ${logFile}
 
 # Check for lock file and exit if it is present
 if [ -f "/config/scripts/post-config.d/kpn.lock" ]; then
-echo "[kpn.sh] lock file /config/scripts/post-config.d/kpn.lock exists, stopping execution" >> ${logFile}
+echo "[$(date)] [kpn.sh] lock file /config/scripts/post-config.d/kpn.lock exists, stopping execution" >> ${logFile}
 exit
 fi
 
 # Create lock file so kpn.sh will not execute simultaniously
-echo "[kpn.sh] creating lock file at /config/scripts/post-config.d/kpn.lock" >> ${logFile}
+echo "[$(date)] kpn.sh] creating lock file at /config/scripts/post-config.d/kpn.lock" >> ${logFile}
 touch /config/scripts/post-config.d/kpn.lock
 
 # Check if the dhcp hook exists, this will run after retrieving a dhcp lease
 if [ ! -f "/etc/dhcp3/dhclient-exit-hooks.d/routes" ]; then
-echo "[kpn.sh] routes dhcp hook does not exist" >> ${logFile}
+echo "[$(date)] [kpn.sh] routes dhcp hook does not exist" >> ${logFile}
 
 # Read the routes file (base64 encoded) in to the ROUTES variable
 read -r -d '' ROUTES <<- EndOfFile
@@ -78,35 +78,35 @@ ZCAiJHtuZXRfYWRkcmVzc30vJHtuZXRfbGVuZ3RofSIgJHt2aWFfYXJnfSBkZXYgIiR7aW50ZXJm
 YWNlfSIgPi9kZXYvbnVsbCAyPiYxCgkJCWRvbmUKCQlmaQoJZmkKZmk=
 EndOfFile
 
-echo "[kpn.sh] Creating dhcp hook at /etc/dhcp3/dhclient-exit-hooks.d/routes" >> ${logFile}
+echo "[$(date)] [kpn.sh] Creating dhcp hook at /etc/dhcp3/dhclient-exit-hooks.d/routes" >> ${logFile}
 # Decode the base64 ROUTES HOOK variable and post the output to routes
 echo "$ROUTES" | base64 -d > /etc/dhcp3/dhclient-exit-hooks.d/routes
 # Make set-kpn-hook.sh executable
 chmod +x /etc/dhcp3/dhclient-exit-hooks.d/routes
 # Release the dhcp lease on the IPTV interface
-echo "[kpn.sh] Release dhcp interface eth0.4" >> ${logFile}
+echo "[$(date)] [kpn.sh] Release dhcp interface eth0.4" >> ${logFile}
 /opt/vyatta/bin/vyatta-op-cmd-wrapper release dhcp interface eth0.4 >> ${logFile}
 # Request a new lease on the IPTV interface (routes hook wil run)
-echo "[kpn.sh] Renew dhcp interface eth0.4" >> ${logFile}
+echo "[$(date)] [kpn.sh] Renew dhcp interface eth0.4" >> ${logFile}
 /opt/vyatta/bin/vyatta-op-cmd-wrapper renew dhcp interface eth0.4 >> ${logFile}
 # Upstream routes are now in place, restarting igmp proxy to pick up the changes
-echo "[kpn.sh] Restarting IGMP proxy" >> ${logFile}
+echo "[$(date)] [kpn.sh] Restarting IGMP proxy" >> ${logFile}
 /opt/vyatta/bin/vyatta-op-cmd-wrapper restart igmp-proxy >> ${logFile}
 fi
 
 # Check if the post-config hook exists, this will run after a succesful commit
 if [ ! -f "/etc/commit/post-hooks.d/set-kpn-hook.sh" ]; then
-echo "[kpn.sh] The file /etc/commit/post-hooks.d/set-kpn-hook.sh does not exists, creating hook now" >> ${logFile}
+echo "[$(date)] [kpn.sh] The file /etc/commit/post-hooks.d/set-kpn-hook.sh does not exists, creating hook now" >> ${logFile}
 
 # Read the set-kpn-hook.sh file (base64 encoded) in to the HOOK variable
 read -r -d '' HOOK <<- EndOfFile
 IyEvYmluL3ZiYXNoCnJlYWRvbmx5IGxvZ0ZpbGU9Ii92YXIvbG9nL2twbi5sb2ci
-CgplY2hvICJbc2V0LWtwbi1ob29rLnNoXSBFeGVjdXRlZCBhdCAkKGRhdGUpIiA+
-PiAke2xvZ0ZpbGV9CmVjaG8gIltzZXQta3BuLWhvb2suc2hdIENvbmZpZ3VyYXRp
-b24gY2hhbmdlcyBoYXZlIGJlZW4gY29tbWl0ZWQsIGFkZGluZyBjcm9udGFiIGZv
-ciBrcG4uc2giID4+ICR7bG9nRmlsZX0KZWNobyAiKiAgICAqICAgICogICAgKiAg
-ICAqICAgIHJvb3QgICAgL2NvbmZpZy9zY3JpcHRzL3Bvc3QtY29uZmlnLmQva3Bu
-LnNoIiA+IC9ldGMvY3Jvbi5kL2twbg==
+CgplY2hvICJbJChkYXRlKV0gW3NldC1rcG4taG9vay5zaF0gRXhlY3V0ZWQgYXQg
+JChkYXRlKSIgPj4gJHtsb2dGaWxlfQplY2hvICJbJChkYXRlKV0gW3NldC1rcG4t
+aG9vay5zaF0gQ29uZmlndXJhdGlvbiBjaGFuZ2VzIGhhdmUgYmVlbiBjb21taXRl
+ZCwgYWRkaW5nIGNyb250YWIgZm9yIGtwbi5zaCIgPj4gJHtsb2dGaWxlfQplY2hv
+ICIqICAgICogICAgKiAgICAqICAgICogICAgcm9vdCAgICAvY29uZmlnL3Njcmlw
+dHMvcG9zdC1jb25maWcuZC9rcG4uc2giID4gL2V0Yy9jcm9uLmQva3Bu
 EndOfFile
 
 # Decode the base64 encoded HOOK variable and post the output to set-kpn-hook.sh
@@ -117,7 +117,7 @@ fi
 
 # Delete the kpn crontab file, if exists, to avoid runnig this file every minute
 if [ -f "/etc/cron.d/kpn" ]; then
-echo "[kpn.sh] KPN found in crontab, removing /etc/cron.d/kpn" >> ${logFile}
+echo "[$(date)] [kpn.sh] KPN found in crontab, removing /etc/cron.d/kpn" >> ${logFile}
     rm /etc/cron.d/kpn
 fi
 
@@ -126,43 +126,43 @@ source /opt/vyatta/etc/functions/script-template
 
 # Check if the mtu is set for eth0, if not, set the value for eth0 and vif 6
 if [ ! $(cli-shell-api returnActiveValue interfaces ethernet eth0 mtu) ]; then
-    echo "[kpn.sh] MTU for eth0 not configured, adjusting config" >> ${logFile}
-    echo "[kpn.sh] Disconnecting pppoe2 before changing MTU" >> ${logFile}
+    echo "[$(date)] [kpn.sh] MTU for eth0 not configured, adjusting config" >> ${logFile}
+    echo "[$(date)] [kpn.sh] Disconnecting pppoe2 before changing MTU" >> ${logFile}
     /opt/vyatta/bin/vyatta-op-cmd-wrapper disconnect interface pppoe2 >> ${logFile}
     configure >> ${logFile}
-    echo "[kpn.sh] Setting mtu for eth0 to 1512" >> ${logFile}
+    echo "[$(date)] [kpn.sh] Setting mtu for eth0 to 1512" >> ${logFile}
     set interfaces ethernet eth0 mtu 1512 >> ${logFile}
-    echo "[kpn.sh] Setting mtu for eth0 vif 6 to 1508" >> ${logFile}
+    echo "[$(date)] [kpn.sh] Setting mtu for eth0 vif 6 to 1508" >> ${logFile}
     set interfaces ethernet eth0 vif 6 mtu 1508 >> ${logFile}
-    echo "[kpn.sh] Commiting" >> ${logFile}
+    echo "[$(date)] [kpn.sh] Commiting" >> ${logFile}
     commit
-    echo "[kpn.sh] Connecting pppoe2 after changing MTU" >> ${logFile}
+    echo "[$(date)] [kpn.sh] Connecting pppoe2 after changing MTU" >> ${logFile}
     /opt/vyatta/bin/vyatta-op-cmd-wrapper connect interface pppoe2 >> ${logFile}
     # This will remove the lock file and exit the bash script, and via the commit hook will run this script again.
-    echo "[kpn.sh] removing lock file at /config/scripts/post-config.d/kpn.lock" >> ${logFile}
+    echo "[$(date)] [kpn.sh] removing lock file at /config/scripts/post-config.d/kpn.lock" >> ${logFile}
     rm /config/scripts/post-config.d/kpn.lock
     exit
 fi
 
 # Check if the dhcp-interface is set for the l2tp vpn, if so remove it and add outside-address
 if [ $(cli-shell-api returnActiveValue vpn l2tp remote-access dhcp-interface) ]; then
-    echo "[kpn.sh] Config value for vpn l2tp remote-access dhcp-interface found, adjusting config" >> ${logFile}
+    echo "[$(date)] [kpn.sh] Config value for vpn l2tp remote-access dhcp-interface found, adjusting config" >> ${logFile}
     configure >> ${logFile}
-    echo "[kpn.sh] Setting ipsec-interface to pppoe2" >> ${logFile}
+    echo "[$(date)] [kpn.sh] Setting ipsec-interface to pppoe2" >> ${logFile}
     set vpn ipsec ipsec-interfaces interface pppoe2 >> ${logFile}
-    echo "[kpn.sh] Deleting dhcp interface" >> ${logFile}
+    echo "[$(date)] [kpn.sh] Deleting dhcp interface" >> ${logFile}
     delete vpn l2tp remote-access dhcp-interface eth0 >> ${logFile}
-    echo "[kpn.sh] Setting outside-address to 0.0.0.0" >> ${logFile}
+    echo "[$(date)] [kpn.sh] Setting outside-address to 0.0.0.0" >> ${logFile}
     set vpn l2tp remote-access outside-address 0.0.0.0 >> ${logFile}
-    echo "[kpn.sh] Commiting" >> ${logFile}
+    echo "[$(date)] [kpn.sh] Commiting" >> ${logFile}
     commit
     # This will remove the lock file and exit the bash script, and via the commit hook will run this script again.
-    echo "[kpn.sh] removing lock file at /config/scripts/post-config.d/kpn.lock" >> ${logFile}
+    echo "[$(date)] [kpn.sh] removing lock file at /config/scripts/post-config.d/kpn.lock" >> ${logFile}
     rm /config/scripts/post-config.d/kpn.lock
     exit
 fi
 
 # removing lock file and finish execution
-echo "[kpn.sh] removing lock file at /config/scripts/post-config.d/kpn.lock" >> ${logFile}
+echo "[$(date)] [kpn.sh] removing lock file at /config/scripts/post-config.d/kpn.lock" >> ${logFile}
 rm /config/scripts/post-config.d/kpn.lock
-echo "[kpn.sh] Finished" >> ${logFile}
+echo "[$(date)] [kpn.sh] Finished" >> ${logFile}
