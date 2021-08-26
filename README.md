@@ -1,5 +1,5 @@
 # Ubiquiti USG with KPN FTTH, IPTV and IPv6
-**USG PRO VERSION, WAN is ETH2 and LAN is ETH0**
+**USG PRO VERSION, WAN is ETH2 and LAN is ETH0, IPTV VLAN -> LAN is 661**
 
 This repo contains the files you need to succesfully configure the USG with KPN FTTH with IPTV and IPv6 enabled.
 
