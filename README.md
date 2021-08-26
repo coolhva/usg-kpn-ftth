@@ -1,4 +1,6 @@
 # Ubiquiti USG with KPN FTTH, IPTV and IPv6
+**USG PRO VERSION, WAN is ETH2 and LAN is ETH0**
+
 This repo contains the files you need to succesfully configure the USG with KPN FTTH with IPTV and IPv6 enabled.
 
 Klik [hier](https://coolhva.github.io/usg-kpn-ftth/posts/unifi-security-gateway-kpn-ftth-iptv-ipv6/) voor een Nederlandse handleiding!

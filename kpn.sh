@@ -20,7 +20,7 @@
 #   1. Creates the dhcp exit hook, needed to install the kernel route to    #
 #      the IPTV platform of KPN.                                            #
 #   2. Creates a post-config hook to run this file after a config commit    #
-#   3. Checks and fixes the correct MTU on interface eth0 and eth0 vif 6    #
+#   3. Checks and fixes the correct MTU on interface eth2 and eth2 vif 6    #
 #   4. Checks and fixes the correct L2TP VPN configuration, if applicable   #
 #---------------------------------------------------------------------------#
 # Installation :                                                            #
@@ -84,11 +84,11 @@ echo "$ROUTES" | base64 -d > /etc/dhcp3/dhclient-exit-hooks.d/routes
 # Make set-kpn-hook.sh executable
 chmod +x /etc/dhcp3/dhclient-exit-hooks.d/routes
 # Release the dhcp lease on the IPTV interface
-echo "[$(date)] [kpn.sh] Release dhcp interface eth0.4" >> ${logFile}
-/opt/vyatta/bin/vyatta-op-cmd-wrapper release dhcp interface eth0.4 >> ${logFile}
+echo "[$(date)] [kpn.sh] Release dhcp interface eth2.4" >> ${logFile}
+/opt/vyatta/bin/vyatta-op-cmd-wrapper release dhcp interface eth2.4 >> ${logFile}
 # Request a new lease on the IPTV interface (routes hook wil run)
-echo "[$(date)] [kpn.sh] Renew dhcp interface eth0.4" >> ${logFile}
-/opt/vyatta/bin/vyatta-op-cmd-wrapper renew dhcp interface eth0.4 >> ${logFile}
+echo "[$(date)] [kpn.sh] Renew dhcp interface eth2.4" >> ${logFile}
+/opt/vyatta/bin/vyatta-op-cmd-wrapper renew dhcp interface eth2.4 >> ${logFile}
 # Upstream routes are now in place, restarting igmp proxy to pick up the changes
 echo "[$(date)] [kpn.sh] Restarting IGMP proxy" >> ${logFile}
 /opt/vyatta/bin/vyatta-op-cmd-wrapper restart igmp-proxy >> ${logFile}
@@ -124,16 +124,16 @@ fi
 # Load environment variables to be able to configure the USG via this script
 source /opt/vyatta/etc/functions/script-template
 
-# Check if the mtu is set for eth0, if not, set the value for eth0 and vif 6
-if [ ! $(cli-shell-api returnActiveValue interfaces ethernet eth0 mtu) ]; then
-    echo "[$(date)] [kpn.sh] MTU for eth0 not configured, adjusting config" >> ${logFile}
+# Check if the mtu is set for eth2, if not, set the value for eth2 and vif 6
+if [ ! $(cli-shell-api returnActiveValue interfaces ethernet eth2 mtu) ]; then
+    echo "[$(date)] [kpn.sh] MTU for eth2 not configured, adjusting config" >> ${logFile}
     echo "[$(date)] [kpn.sh] Disconnecting pppoe2 before changing MTU" >> ${logFile}
     /opt/vyatta/bin/vyatta-op-cmd-wrapper disconnect interface pppoe2 >> ${logFile}
     configure >> ${logFile}
-    echo "[$(date)] [kpn.sh] Setting mtu for eth0 to 1512" >> ${logFile}
-    set interfaces ethernet eth0 mtu 1512 >> ${logFile}
-    echo "[$(date)] [kpn.sh] Setting mtu for eth0 vif 6 to 1508" >> ${logFile}
-    set interfaces ethernet eth0 vif 6 mtu 1508 >> ${logFile}
+    echo "[$(date)] [kpn.sh] Setting mtu for eth2 to 1512" >> ${logFile}
+    set interfaces ethernet eth2 mtu 1512 >> ${logFile}
+    echo "[$(date)] [kpn.sh] Setting mtu for eth2 vif 6 to 1508" >> ${logFile}
+    set interfaces ethernet eth2 vif 6 mtu 1508 >> ${logFile}
     echo "[$(date)] [kpn.sh] Commiting" >> ${logFile}
     commit
     echo "[$(date)] [kpn.sh] Connecting pppoe2 after changing MTU" >> ${logFile}
@@ -151,7 +151,7 @@ if [ $(cli-shell-api returnActiveValue vpn l2tp remote-access dhcp-interface) ];
     echo "[$(date)] [kpn.sh] Setting ipsec-interface to pppoe2" >> ${logFile}
     set vpn ipsec ipsec-interfaces interface pppoe2 >> ${logFile}
     echo "[$(date)] [kpn.sh] Deleting dhcp interface" >> ${logFile}
-    delete vpn l2tp remote-access dhcp-interface eth0 >> ${logFile}
+    delete vpn l2tp remote-access dhcp-interface eth2 >> ${logFile}
     echo "[$(date)] [kpn.sh] Setting outside-address to 0.0.0.0" >> ${logFile}
     set vpn l2tp remote-access outside-address 0.0.0.0 >> ${logFile}
     echo "[$(date)] [kpn.sh] Commiting" >> ${logFile}

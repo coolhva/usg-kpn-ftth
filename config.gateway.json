@@ -51,7 +51,7 @@
     },
     "interfaces": {
         "ethernet": {
-            "eth0": {
+            "eth2": {
                 "dhcp-options": {
                     "default-route": "no-update",
                     "default-route-distance": "1",
@@ -100,7 +100,7 @@
                                     "pd": {
                                         "0": {
                                             "interface": {
-                                                "eth1": {
+                                                "eth0": {
                                                     "prefix-id": ":1",
                                                     "service": "slaac"
                                                 }
@@ -141,7 +141,7 @@
                     }
                 }
             },
-            "eth1": {
+            "eth0": {
                 "description": "LAN",
                 "ipv6": {
                     "address": {
@@ -177,14 +177,14 @@
     "protocols": {
         "igmp-proxy": {
             "interface": {
-                "eth0.4": {
+                "eth2.4": {
                     "alt-subnet": [
                         "0.0.0.0/0"
                     ],
                     "role": "upstream",
                     "threshold": "1"
                 },
-                "eth1": {
+                "eth0": {
                     "alt-subnet": [
                         "0.0.0.0/0"
                     ],
@@ -222,7 +222,7 @@
                         "address": "0.0.0.0/0"
                     },
                     "log": "disable",
-                    "outbound-interface": "eth0.4",
+                    "outbound-interface": "eth2.4",
                     "protocol": "all",
                     "type": "masquerade"
                 },
