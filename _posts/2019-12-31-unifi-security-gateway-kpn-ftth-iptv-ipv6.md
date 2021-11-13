@@ -145,6 +145,44 @@ Nu mag je WinSCP sluiten en in de controller naar <kbd>Devices</kbd> gaan. Klik 
 
 De USG gaat nu herstarten. Na dat internet het doet kan je de IPTV kastjes uitzetten, 10 seconden wachten, en deze weer aanzetten. Als het goed is heb je nu internet, IPTV en IPv6.
 
+## Log controleren
+
+Als je met SSH inlogt op de USG kan je het log controleren met het commando ```cat /var/log/kpn.log``` om te zien of alles naar behoren is uitgevoerd:
+
+```shell
+unifiadmin@HVA-USG-GW:~$ cat /var/log/kpn.log
+[Sat Nov 13 11:24:24 CET 2021] [kpn.sh] Executed at Sat Nov 13 11:24:24 CET 2021
+[Sat Nov 13 11:24:24 CET 2021] kpn.sh] creating lock file at /config/scripts/post-config.d/kpn.lock
+[Sat Nov 13 11:24:24 CET 2021] [kpn.sh] routes dhcp hook does not exist
+[Sat Nov 13 11:24:24 CET 2021] [kpn.sh] Creating dhcp hook at /etc/dhcp3/dhclient-exit-hooks.d/routes
+[Sat Nov 13 11:24:24 CET 2021] [kpn.sh] Release dhcp interface eth0.4
+Releasing DHCP lease on eth0.4 ...
+[Sat Nov 13 11:24:31 CET 2021] [kpn.sh] Renew dhcp interface eth0.4
+Renewing DHCP lease on eth0.4 ...
+[Sat Nov 13 11:24:33 CET 2021] [kpn.sh] Restarting IGMP proxy
+Warning: igmpproxy not running.
+The IGMP proxy service will be started after commit. Check /var/log/messages.
+[Sat Nov 13 11:24:35 CET 2021] [kpn.sh] The file /etc/commit/post-hooks.d/set-kpn-hook.sh does not exists, creating hook now
+[Sat Nov 13 11:24:35 CET 2021] [kpn.sh] MTU for eth0 not configured, adjusting config
+[Sat Nov 13 11:24:35 CET 2021] [kpn.sh] Disconnecting pppoe2 before changing MTU
+Bringing interface pppoe2 down...
+[Sat Nov 13 11:24:42 CET 2021] [kpn.sh] Setting mtu for eth0 to 1512
+[Sat Nov 13 11:24:42 CET 2021] [kpn.sh] Setting mtu for eth0 vif 6 to 1508
+[Sat Nov 13 11:24:42 CET 2021] [kpn.sh] Commiting
+[Sat Nov 13 11:24:53 CET 2021] [set-kpn-hook.sh] Executed at Sat Nov 13 11:24:53 CET 2021
+[Sat Nov 13 11:24:53 CET 2021] [set-kpn-hook.sh] Configuration changes have been commited, adding crontab for kpn.sh
+[Sat Nov 13 11:24:53 CET 2021] [kpn.sh] Connecting pppoe2 after changing MTU
+Bringing interface pppoe2 up...
+[Sat Nov 13 11:24:54 CET 2021] [kpn.sh] removing lock file at /config/scripts/post-config.d/kpn.lock
+[Sat Nov 13 11:25:01 CET 2021] [kpn.sh] Executed at Sat Nov 13 11:25:01 CET 2021
+[Sat Nov 13 11:25:01 CET 2021] kpn.sh] creating lock file at /config/scripts/post-config.d/kpn.lock
+[Sat Nov 13 11:25:01 CET 2021] [kpn.sh] KPN found in crontab, removing /etc/cron.d/kpn
+[Sat Nov 13 11:25:03 CET 2021] [kpn.sh] removing lock file at /config/scripts/post-config.d/kpn.lock
+[Sat Nov 13 11:25:03 CET 2021] [kpn.sh] Finished
+```
+
+Zie voor meer controle stappen deze [handleiding](/usg-kpn-ftth/posts/unifi-security-gateway-problemen-oplossen/index.html).
+
 ## IPTV op een apart netwerk
 
 Het is mogelijk om de IPTV kastjes op een eigen netwerk te plaatsen om te kans op verstoring te verkleinen. De gebruikte switches dienen wel VLAN ondersteuning te hebben. Kijk voor deze handleiding op deze [link](/usg-kpn-ftth/posts/unifi-security-gateway-kpn-iptv-vlan/index.html). Mocht je IPTV ontvanger geen software kunnen ophalen dan is het raadzaam om deze in een apart VLAN te stoppen en de google DNS server toe te wijzen.
@@ -161,7 +199,7 @@ Omdat we een geavanceerde configuratie toepassen zijn er een aantal dingen die a
 
 Op de volgende links vindt je meer informatie over deze setup en hoe je problemen kan opsporen en verhelpen.
 
-* [Tweakers.net forum problemen opsporen](https://gathering.tweakers.net/forum/list_message/60188454#60188454)
+* [Configuratie controleren en problemen opsporen](usg-kpn-ftth/posts/unifi-security-gateway-problemen-oplossen/index.html)
 * [Github Repo met configuratie bestanden](https://github.com/coolhva/usg-kpn-ftth)
 * [Tweakers.net forum MTU en KPN](https://gathering.tweakers.net/forum/list_message/57023231#57023231)
 
