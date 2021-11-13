@@ -12,7 +12,7 @@
 #############################################################################
 # Author      : Henk van Achterberg (coolhva)                               #
 # GitHub      : https://github.com/coolhva/usg-kpn-ftth/                    #
-# Version     : 0.2 (ALPHA)                                                 #
+# Version     : 0.3 (BETA)                                                  #
 #---------------------------------------------------------------------------#
 # Description :                                                             #
 #                                                                           #
@@ -33,10 +33,21 @@ readonly logFile="/var/log/kpn.log"
 
 echo "[$(date)] [kpn.sh] Executed at $(date)" >> ${logFile}
 
-# Check for lock file and exit if it is present
-if [ -f "/config/scripts/post-config.d/kpn.lock" ]; then
-echo "[$(date)] [kpn.sh] lock file /config/scripts/post-config.d/kpn.lock exists, stopping execution" >> ${logFile}
-exit
+  # Check for lock file and exit if it is present
+  if [ -f "/config/scripts/post-config.d/kpn.lock" ]; then
+  
+  # Calculate seconds between creation of the kpn.lock file and now
+  timeDelta=$(expr $(date +%s) - $(stat -c %Y /config/scripts/post-config.d/kpn.lock))
+  
+  # Check if lock file is old enough to remove and continue the script
+  if [ $timeDelta -gt 120 ]; then
+    echo "[$(date)] [kpn.sh] lock file exists but is older then 120 seconds, removing lock file" >> ${logFile}
+    rm /config/scripts/post-config.d/kpn.lock
+  else
+    echo "[$(date)] [kpn.sh] lock file /config/scripts/post-config.d/kpn.lock exists, stopping execution" >> ${logFile}
+    exit
+  fi
+
 fi
 
 # Create lock file so kpn.sh will not execute simultaniously
