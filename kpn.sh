@@ -157,12 +157,13 @@ fi
 
 # Check if the dhcp-interface is set for the l2tp vpn, if so remove it and add outside-address
 if [ $(cli-shell-api returnActiveValue vpn l2tp remote-access dhcp-interface) ]; then
-  echo "[$(date)] [kpn.sh] Config value for vpn l2tp remote-access dhcp-interface found, adjusting config" >> ${logFile}
+  readonly dhcpint=$(cli-shell-api returnActiveValue vpn l2tp remote-access dhcp-interface)
+  echo "[$(date)] [kpn.sh] Config value $dhcpint for vpn l2tp remote-access dhcp-interface found, adjusting config" >> ${logFile}
   configure >> ${logFile}
   echo "[$(date)] [kpn.sh] Setting ipsec-interface to pppoe2" >> ${logFile}
   set vpn ipsec ipsec-interfaces interface pppoe2 >> ${logFile}
-  echo "[$(date)] [kpn.sh] Deleting dhcp interface" >> ${logFile}
-  delete vpn l2tp remote-access dhcp-interface eth0 >> ${logFile}
+  echo "[$(date)] [kpn.sh] Deleting dhcp interface $dhcpint" >> ${logFile}
+  delete vpn l2tp remote-access dhcp-interface $dhcpint >> ${logFile}
   echo "[$(date)] [kpn.sh] Setting outside-address to 0.0.0.0" >> ${logFile}
   set vpn l2tp remote-access outside-address 0.0.0.0 >> ${logFile}
   echo "[$(date)] [kpn.sh] Commiting" >> ${logFile}
