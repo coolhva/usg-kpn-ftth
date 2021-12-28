@@ -12,7 +12,7 @@
 #############################################################################
 # Author      : Henk van Achterberg (coolhva)                               #
 # GitHub      : https://github.com/coolhva/usg-kpn-ftth/                    #
-# Version     : 0.3 (BETA)                                                  #
+# Version     : 0.4 (BETA)                                                  #
 #---------------------------------------------------------------------------#
 # Description :                                                             #
 #                                                                           #
