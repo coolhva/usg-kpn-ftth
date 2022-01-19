@@ -101,6 +101,7 @@
                                         "0": {
                                             "interface": {
                                                 "eth1": {
+                                                    "host-address": "::1",
                                                     "prefix-id": ":1",
                                                     "service": "slaac"
                                                 }
