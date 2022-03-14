@@ -145,6 +145,8 @@ Nu mag je WinSCP sluiten en in de controller naar <kbd>Devices</kbd> gaan. Klik 
 
 De USG gaat nu herstarten. Na dat internet het doet kan je de IPTV kastjes uitzetten, 10 seconden wachten, en deze weer aanzetten. Als het goed is heb je nu internet, IPTV en IPv6.
 
+Op het moment dat internet en IPTV nog niet werken, herstart de USG dan nog een keer. Soms heeft de USG namelijk nog een herstart nodig om alle instellingen goed te kunnen zetten.
+
 ## Log controleren
 
 Als je met SSH inlogt op de USG kan je het log controleren met het commando ```cat /var/log/kpn.log``` om te zien of alles naar behoren is uitgevoerd:
