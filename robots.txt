@@ -1,0 +1,5 @@
+User-agent: *
+
+Disallow: /norobots/
+
+Sitemap: https://www.vanachterberg.org/usg-kpn-ftth/sitemap.xml
