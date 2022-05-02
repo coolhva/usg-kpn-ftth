@@ -52,6 +52,7 @@
     "interfaces": {
         "ethernet": {
             "eth0": {
+                "mtu": "1512",
                 "dhcp-options": {
                     "default-route": "no-update",
                     "default-route-distance": "1",
@@ -79,6 +80,7 @@
                         "mtu": "1500"
                     },
                     "6": {
+                        "mtu": "1508",
                         "firewall": {
                             "in": {
                                 "ipv6-name": "WANv6_IN",
